@@ -1,5 +1,5 @@
 import React from 'react';
-import Logo from '../assets/Logo-fnest.svg';
+import Logo from '../assets/logo.svg';
 import { BsCart3, BsMoonFill, BsSunFill } from 'react-icons/bs';
 import { NavLink } from 'react-router-dom';
 import { NavLinks } from '../components';
@@ -20,10 +20,12 @@ const Navbar = () => {
                             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-200 rounded-box w-52"
                         ></ul>
                     </div>
-                    <img src={Logo} alt="" className="h-[100px]" />
+                    <NavLink to="/">
+                        <img src={Logo} alt="" />
+                    </NavLink>
                 </div>
                 <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal">
+                    <ul className="flex align-center justify-center">
                         <NavLinks />
                     </ul>
                 </div>
@@ -49,6 +51,7 @@ const Navbar = () => {
                     </NavLink>
                 </div>
             </div>
+            <div className="border-[0.5px]"></div>
         </nav>
     );
 };

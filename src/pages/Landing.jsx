@@ -1,5 +1,11 @@
+import { Sliders } from '../components';
+
 const Landing = () => {
-    return <div>Landing</div>;
+    return (
+        <>
+            <Sliders />
+        </>
+    );
 };
 
 export default Landing;

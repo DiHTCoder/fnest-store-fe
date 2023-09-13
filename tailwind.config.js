@@ -6,23 +6,22 @@ export default {
             sans: ['Nunito', 'sans-serif'],
             fontFamily: {},
         },
-        colors: {
-            primary: '#2563EB',
-            secondary: '#f15915',
-        },
     },
     plugins: [require('@tailwindcss/typography'), require('daisyui')],
     daisyui: {
+        extend: {
+            sans: ['Nunito', 'sans-serif'],
+        },
         themes: [
             {
                 mytheme: {
-                    primary: '#358E9D',
+                    primary: '#F55555',
 
-                    secondary: '#f000b8',
+                    secondary: '#EF683A',
 
                     accent: '#1dcdbc',
 
-                    neutral: '#2b3440',
+                    neutral: '#F6F9FC',
 
                     'base-100': '#ffffff',
 
@@ -33,6 +32,7 @@ export default {
                     warning: '#fbbd23',
 
                     error: '#f87272',
+                    hot: '#f94C10',
                 },
             },
         ],
