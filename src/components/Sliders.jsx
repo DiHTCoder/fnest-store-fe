@@ -48,7 +48,7 @@ function App() {
                                 <img
                                     src={image}
                                     alt={name}
-                                    className="mb-[10px] w-full h-[350px] object-cover border-[4px] border-solid"
+                                    className="mb-[10px] w-full h-[650px] object-cover border-[4px] border-solid"
                                 />
                             </article>
                         );

@@ -8,7 +8,6 @@ import { useSidebarContext } from '../context/sidebar_context';
 
 const Menubar = () => {
     const { openSidebar } = useSidebarContext();
-    console.log(openSidebar);
     const itemsPerPage = 6;
     const [startIndex, setStartIndex] = useState(0);
     const endIndex = startIndex + itemsPerPage;

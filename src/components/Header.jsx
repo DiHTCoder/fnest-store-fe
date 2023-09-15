@@ -3,7 +3,7 @@ import { BsFillHouseHeartFill, BsPersonFill } from 'react-icons/bs';
 import { NavLink } from 'react-router-dom';
 export const Header = () => {
     return (
-        <header className="grid grid-cols-2 align-element">
+        <header className="grid grid-cols-2 align-element mt-1">
             <div className="flex space-x-5">
                 <NavLink>
                     <span className="">Khuyến mãi</span>

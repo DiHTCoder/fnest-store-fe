@@ -3,11 +3,6 @@ import { useSidebarContext } from '../context/sidebar_context';
 import logo from '../assets/logo.svg';
 import { FaTimes } from 'react-icons/fa';
 import {
-    FaBehance,
-    FaFacebook,
-    FaLinkedin,
-    FaTwitter,
-    FaSketch,
     FaHome,
     FaUserFriends,
     FaFolderOpen,
