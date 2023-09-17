@@ -11,7 +11,7 @@ const Landing = () => {
     return (
         <main>
             <Sliders />
-            <div className="h-[11500px]">
+            <div className="">
                 <Title text="Ưu đãi tốt" />
                 <TopProduct />
                 <Title text="Đánh giá thực tế" />
