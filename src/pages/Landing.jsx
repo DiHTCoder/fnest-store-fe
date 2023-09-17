@@ -4,18 +4,20 @@ import {
     TopProduct,
     Title,
     Stylist,
+    Services,
 } from '../components';
 
 const Landing = () => {
     return (
         <main>
             <Sliders />
-            <div className="h-[11500px]">
+            <div className="">
                 <Title text="Ưu đãi tốt" />
                 <TopProduct />
                 <Title text="Đánh giá thực tế" />
                 <EvaluateSlider />
                 <Title text="Dịch vụ" />
+                <Services />
                 <Title text=" Gợi ý phong cách thiết kế đẹp" />
                 <Stylist />
             </div>

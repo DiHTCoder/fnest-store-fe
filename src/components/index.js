@@ -11,3 +11,5 @@ export { default as EvaluateSlider } from './EvaluateSlider';
 export { default as TopProduct } from './TopProduct';
 export { default as Stylist } from './Stylist';
 export { default as SingleStylist } from './SingleStylist';
+export { default as Services } from './Services';
+export { default as Footer } from './Footer';

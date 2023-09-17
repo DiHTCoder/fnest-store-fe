@@ -11,12 +11,12 @@ const SingleStylist = ({ id, image, info, name, price }) => {
             <span className="absolute  top-0 right-0 p-1 text-white tracking-wide bg-primary rounded-tr-sm">
                 ${price}
             </span>
-            <div className="leading-6 mb-1 font-think tracking-wide px-5">
-                <h5 className="text-center mb-1 font-semibold leading-6 text-xl">
+            <div className="leading-6 m-2 font-think tracking-wide px-5">
+                <h5 className="text-center m-2  font-semibold leading-6 text-xl">
                     {name}
                 </h5>
 
-                <p className="tracking-wide mb-2">
+                <p className="tracking-wide mb-2 text-justify">
                     {readMore ? info : `${info.substring(0, 200)}...`}
                     <button
                         className=" text-primary uppercase cursor-pointer"
