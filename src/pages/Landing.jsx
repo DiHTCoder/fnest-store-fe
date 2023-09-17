@@ -4,6 +4,7 @@ import {
     TopProduct,
     Title,
     Stylist,
+    Services,
 } from '../components';
 
 const Landing = () => {
@@ -16,6 +17,7 @@ const Landing = () => {
                 <Title text="Đánh giá thực tế" />
                 <EvaluateSlider />
                 <Title text="Dịch vụ" />
+                <Services />
                 <Title text=" Gợi ý phong cách thiết kế đẹp" />
                 <Stylist />
             </div>
