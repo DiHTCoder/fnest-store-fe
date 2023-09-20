@@ -1,9 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
 import menu from '../utils/menu.js';
+import { ProductsGrid } from '../components';
 
 const allCategories = ['all', ...new Set(menu.map((item) => item.category))];
-const TopProduct = () => {
+const FeaturedProducts = () => {
     const [categories, setCategories] = useState(allCategories);
     const [menuItems, setMenuItems] = useState(menu);
 
@@ -22,6 +23,7 @@ const TopProduct = () => {
                         </button>
                     );
                 })}
+                <ProductsGrid />
             </div>
 
             {/* {menuItems.map((menuItem) => {
@@ -43,4 +45,4 @@ const TopProduct = () => {
     );
 };
 
-export default TopProduct;
+export default FeaturedProducts;

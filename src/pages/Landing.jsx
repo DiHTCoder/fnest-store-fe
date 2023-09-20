@@ -1,11 +1,19 @@
 import {
     Sliders,
     EvaluateSlider,
-    TopProduct,
+    FeaturedProducts,
     Title,
     Stylist,
     Services,
 } from '../components';
+import { customFetch } from '../apis';
+const url = '/products?featured=true';
+
+export const loader = async () => {
+    const response = await customFetch(url);
+    const products = response.data.data;
+    return { products };
+};
 
 const Landing = () => {
     return (
@@ -13,7 +21,7 @@ const Landing = () => {
             <Sliders />
             <div className="">
                 <Title text="Ưu đãi tốt" />
-                <TopProduct />
+                <FeaturedProducts />
                 <Title text="Đánh giá thực tế" />
                 <EvaluateSlider />
                 <Title text="Dịch vụ" />
