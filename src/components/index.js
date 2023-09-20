@@ -18,3 +18,4 @@ export { default as ProductsGrid } from './ProductsGrid';
 export { default as Product } from './Product';
 export { default as Stars } from './Stars';
 export { default as ProductsTab } from './ProductsTab';
+export { default as Loading } from './Loading';
