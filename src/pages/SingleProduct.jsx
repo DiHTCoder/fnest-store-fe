@@ -1,10 +1,9 @@
 import { useLoaderData } from 'react-router-dom';
 import { formatPrice } from '../utils/helpers';
-import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { customFetch } from '../apis';
 import { AiOutlineHeart } from 'react-icons/ai';
-import { Stars, ProductsTab } from '../components';
+import { Stars, ProductsTab, Breadcrumb } from '../components';
 import { HiMiniMinus } from 'react-icons/hi2';
 import { HiMiniPlus } from 'react-icons/hi2';
 
@@ -39,16 +38,7 @@ const SingleProduct = () => {
     };
     return (
         <>
-            <div className="text-md pb-6 breadcrumbs">
-                <ul>
-                    <li>
-                        <Link to="/">Trang chủ</Link>
-                    </li>
-                    <li>
-                        <Link to="/products">Chi tiết sản phẩm</Link>
-                    </li>
-                </ul>
-            </div>
+            <Breadcrumb url="products" page="Chi tiết sản phẩm" />
             <div className="grid grid-cols-2 gap-10">
                 <div>
                     <img src={image} alt="" />

@@ -19,3 +19,7 @@ export { default as Product } from './Product';
 export { default as Stars } from './Stars';
 export { default as ProductsTab } from './ProductsTab';
 export { default as Loading } from './Loading';
+export { default as Pagination } from './Pagination';
+export { default as ProductsContainer } from './ProductsContainer';
+export { default as Filters } from './Filters';
+export { default as Breadcrumb } from './Breadcrumb';
