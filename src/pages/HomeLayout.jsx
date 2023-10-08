@@ -5,9 +5,11 @@ const HomeLayout = () => {
     const isPageLoading = navigation.state === 'loading';
     return (
         <>
-            <Header />
-            <Navbar />
-            <Menubar />
+            <div className="bg-white">
+                <Header />
+                <Navbar />
+                <Menubar />
+            </div>
             {isPageLoading ? (
                 <Loading />
             ) : (

@@ -1,4 +1,5 @@
 import React from 'react';
+import { ProductsGrid, ProductsList } from '../components/';
 import { BsFillGridFill, BsList } from 'react-icons/bs';
 
 const ProductsContainer = () => {
@@ -33,6 +34,7 @@ const ProductsContainer = () => {
                     </select>
                 </div>
             </div>
+            <ProductsList />
         </>
     );
 };

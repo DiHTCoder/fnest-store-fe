@@ -25,7 +25,7 @@ export default {
 
                     'base-100': '#ffffff',
 
-                    info: '#3abff8',
+                    info: '#AB7B60',
 
                     background: '#f6f9fC',
 

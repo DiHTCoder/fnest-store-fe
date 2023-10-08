@@ -1,42 +1,30 @@
 import { FormInput, SubmitButton } from '../components';
 import { Form, Link } from 'react-router-dom';
 import Logo from '../assets/Logo-fnest.svg';
+import login from '../assets/images/login.jpg';
 const Register = () => {
     return (
-        <section className="h-screen grid place-items-center">
+        <section className="my-10 grid grid-cols-2 place-items-center">
+            <div className="">
+                <img src={login} alt="Ảnh login" />
+            </div>
             <Form method="post" className="card w-96 p-8 bg-base-100 shadow-xl">
-                <img src={Logo} alt="" className="h-[150px]" />
-                <p className="text-lg font-bold text-center">
-                    Đăng ký tài khoản
-                </p>
+                <p className="text-lg font-bold text-center">Đăng ký tài khoản</p>
                 <FormInput
                     type="name"
                     label="Tên đăng nhập"
                     name="usename"
                     placeholder="Email/Số điện thoại/Tên đăng nhập"
                 />
-                <FormInput
-                    type="email"
-                    label="Email"
-                    name="password"
-                    placeholder="Email"
-                />
-                <FormInput
-                    type="password"
-                    label="Mật khẩu"
-                    name="password"
-                    placeholder="Mật khẩu"
-                />
+                <FormInput type="email" label="Email" name="password" placeholder="Email" />
+                <FormInput type="password" label="Mật khẩu" name="password" placeholder="Mật khẩu" />
                 <div className="mt-4">
                     <SubmitButton text="đăng ký" color="primary" />
                 </div>
 
                 <p className="text-center p-2">
                     Bạn đã có tài khoản?{''}
-                    <Link
-                        to="/login"
-                        className="ml-2 link link-hover link-primary capitalize"
-                    >
+                    <Link to="/login" className="ml-2 link link-hover link-primary capitalize">
                         Đăng nhập
                     </Link>
                 </p>

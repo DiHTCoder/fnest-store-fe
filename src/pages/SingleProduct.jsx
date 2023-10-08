@@ -1,7 +1,7 @@
 import { useLoaderData } from 'react-router-dom';
 import { formatPrice } from '../utils/helpers';
 import { useState } from 'react';
-import { customFetch } from '../apis';
+import { customFetch } from '../services';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { Stars, ProductsTab, Breadcrumb } from '../components';
 import { HiMiniMinus } from 'react-icons/hi2';
@@ -14,8 +14,7 @@ export const loader = async ({ params }) => {
 
 const SingleProduct = () => {
     const { product } = useLoaderData();
-    const { image, title, price, description, colors, company } =
-        product.attributes;
+    const { image, title, price, description, colors, company } = product.attributes;
     const vndPrice = formatPrice(price);
     const [amount, setAmount] = useState(1);
     const increase = () => {
@@ -60,15 +59,11 @@ const SingleProduct = () => {
                         </span>
                     </div>
                     <div className="text-lg  ">
-                        <span className="text-primary text-2xl font-bold pr-4">
-                            {vndPrice}
-                        </span>
+                        <span className="text-primary text-2xl font-bold pr-4">{vndPrice}</span>
                         <span className="line-through">11111000 đ</span>
                     </div>
                     <div className="pb-2 border-b-2">
-                        <span className="text-sm tex-base-300">
-                            SKU:{product.id}
-                        </span>
+                        <span className="text-sm tex-base-300">SKU:{product.id}</span>
                     </div>
                     <p className="py-2">
                         <b>Chất liệu: </b>
@@ -91,10 +86,7 @@ const SingleProduct = () => {
                         {company}
                     </p>
                     <div className="mt-3">
-                        <label
-                            htmlFor="count"
-                            className="text-paragraph font-semibold text-base-content-300"
-                        >
+                        <label htmlFor="count" className="text-paragraph font-semibold text-base-content-300">
                             Số lượng
                         </label>
                         <div className="my-2">
@@ -112,12 +104,8 @@ const SingleProduct = () => {
                             </button>
                         </div>
                         <div className="flex gap-5">
-                            <button className="btn btn-ghost bg-primary text-white">
-                                Thêm vào giỏ hàng
-                            </button>
-                            <button className="btn btn-ghost bg-accent-focus text-white">
-                                Mua ngay
-                            </button>
+                            <button className="btn btn-ghost bg-primary text-white">Thêm vào giỏ hàng</button>
+                            <button className="btn btn-ghost bg-accent-focus text-white">Mua ngay</button>
                         </div>
                     </div>
                 </div>
