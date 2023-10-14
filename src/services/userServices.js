@@ -5,6 +5,10 @@ const userServices = {
         const url = '/auth/login';
         return axiosClient.post(url, { username, password });
     },
+    register(username, password, fullname, email, gender, birthday) {
+        const url = '/auth/register';
+        return axiosClient.post(url, { username, password, fullname, email, gender, birthday });
+    },
 };
 
 export default userServices;

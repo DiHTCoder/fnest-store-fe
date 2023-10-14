@@ -1,21 +1,29 @@
 import { FormInput, SubmitButton } from '../components';
-import { useState, useEffect } from 'react';
 import login from '../assets/images/login.jpg';
 import { FaFacebook } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { Form, Link } from 'react-router-dom';
-import Logo from '../assets/Logo-fnest.svg';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import userServices from '../services/userServices';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
+import { loginSuccess } from '../features/user/userSlice';
+import { useDispatch } from 'react-redux';
 
 const Login = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     const handleSubmit = async (values) => {
         try {
             const resp = await userServices.login(values.email, values.password);
-            console.log('Phản hồi đăng nhập:', resp);
+            dispatch(loginSuccess(resp.data));
+            toast.success('Dang nhap thanh cong');
+            navigate('/');
         } catch (error) {
-            console.error('Lỗi đăng nhập:', error);
+            toast.error('Sai ten dang nhap/mat khau');
         }
     };
 
@@ -36,13 +44,14 @@ const Login = () => {
             <div className="">
                 <img src={login} alt="Ảnh login" />
             </div>
-            <Form method="post" className="card w-96 p-8 bg-base-100 shadow-xl" onSubmit={formik.handleSubmit}>
+            <Form method="post" className="card w-[500px] p-8 bg-base-100 shadow-xl" onSubmit={formik.handleSubmit}>
                 <h3 className="text-2xl pb-2 font-semibold text-center text-primary">
                     Chào mừng bạn đến với <br /> Nội thất Fnest!
                 </h3>
+
                 <p className="text-lg font-bold text-center">Đăng nhập bằng tài khoản của bạn</p>
                 <FormInput
-                    type="email"
+                    type="text"
                     label="Tên đăng nhập(*)"
                     name="email"
                     value={formik.values.email}
@@ -86,6 +95,18 @@ const Login = () => {
                     </Link>
                 </p>
             </Form>
+            <ToastContainer
+                position="bottom-right"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </section>
     );
 };
