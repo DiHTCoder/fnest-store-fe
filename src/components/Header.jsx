@@ -1,9 +1,17 @@
 import { FaLocationDot } from 'react-icons/fa6';
 import { BsFillHouseHeartFill, BsPersonFill, BsHeadset } from 'react-icons/bs';
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { logOutSuccess } from '../features/user/userSlice';
+import { useNavigate } from 'react-router-dom';
 
 export const Header = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        dispatch(logOutSuccess());
+    };
     const user = useSelector((state) => state.auth.login?.currentUser);
     return (
         <header className="grid grid-cols-2 align-element pt-1">
@@ -46,7 +54,7 @@ export const Header = () => {
                                 <a>Đơn mua</a>
                             </li>
                             <li>
-                                <a>Đăng xuất</a>
+                                <p onClick={handleLogout}>Đăng xuất</p>
                             </li>
                         </ul>
                     </div>
