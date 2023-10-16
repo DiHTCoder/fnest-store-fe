@@ -4,7 +4,7 @@ import { Form, Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import userServices from '../services/userServices';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
@@ -29,9 +29,7 @@ const UpdateProfile = () => {
             dispatch(updateProfileSuccess(resp.data));
             dispatch(updateCurrentUser(resp.data));
             toast.success('Thay doi thành công!');
-            setTimeout(() => {
-                navigate('/profile');
-            }, 2500);
+            navigate('/profile');
         } catch (error) {
             if (error.response && error.response.data && error.response.data.messages) {
                 const errorMessages = error.response.data.messages;
@@ -104,18 +102,6 @@ const UpdateProfile = () => {
                             </div>
                         </Form>
                     </div>
-                    <ToastContainer
-                        position="bottom-right"
-                        autoClose={2000}
-                        hideProgressBar={false}
-                        newestOnTop={false}
-                        closeOnClick
-                        rtl={false}
-                        pauseOnFocusLoss
-                        draggable
-                        pauseOnHover
-                        theme="light"
-                    />
                 </div>
             </div>
         </div>

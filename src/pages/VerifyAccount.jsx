@@ -5,7 +5,7 @@ import { SubmitButton } from '../components';
 import { NavProfile } from '../components';
 import { Form } from 'react-router-dom';
 import userServices from '../services/userServices';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const VerifyAccount = () => {
@@ -15,9 +15,7 @@ const VerifyAccount = () => {
         e.preventDefault();
         try {
             const resp = await userServices.getOTP(userLogin.accessToken, userLogin.user?.email);
-            setTimeout(() => {
-                navigate('/validate-otp');
-            }, 2000);
+            navigate('/validate-otp');
             toast.success(resp.messages[0]);
         } catch (error) {
             if (error.response && error.response.data && error.response.data.messages) {
@@ -56,18 +54,6 @@ const VerifyAccount = () => {
                     </div>
                 </div>
             </div>
-            <ToastContainer
-                position="bottom-right"
-                autoClose={2000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="light"
-            />
         </div>
     );
 };

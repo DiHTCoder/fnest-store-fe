@@ -4,7 +4,7 @@ import { Form, Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import userServices from '../services/userServices';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { registerSuccess } from '../features/user/userSlice';
 import { useDispatch } from 'react-redux';
@@ -26,9 +26,7 @@ const Register = () => {
             dispatch(registerSuccess(resp));
             if (resp.messages && resp.messages.length > 0) {
                 toast.success(resp.messages[0]);
-                setTimeout(() => {
-                    navigate('/login');
-                }, 3000);
+                navigate('/login');
             }
         } catch (error) {
             if (error.response && error.response.data && error.response.data.messages) {
@@ -127,18 +125,6 @@ const Register = () => {
                     </Link>
                 </p>
             </Form>
-            <ToastContainer
-                position="bottom-right"
-                autoClose={2000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="light"
-            />
         </section>
     );
 };

@@ -1,12 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { FormInput, SubmitButton } from '../components';
 import { NavProfile } from '../components';
-import { Form, Link } from 'react-router-dom';
+import { Form } from 'react-router-dom';
 import userServices from '../services/userServices';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
@@ -17,9 +16,7 @@ const ValidateOTP = () => {
     const handleSubmit = async (values) => {
         try {
             const resp = await userServices.verifyOTP(userLogin.accessToken, values.otp);
-            setTimeout(() => {
-                navigate('/profile');
-            }, 2500);
+            navigate('/profile');
             toast.success(resp.messages[0]);
         } catch (error) {
             if (error.response && error.response.data && error.response.data.messages) {
@@ -76,18 +73,6 @@ const ValidateOTP = () => {
                     </div>
                 </div>
             </div>
-            <ToastContainer
-                position="bottom-right"
-                autoClose={2000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="light"
-            />
         </div>
     );
 };
