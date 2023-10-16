@@ -11,6 +11,11 @@ import {
     Products,
     Register,
     SingleProduct,
+    Profile,
+    UpdateProfile,
+    VerifyAccount,
+    ChangePassword,
+    ValidateOTP,
 } from './pages/index';
 import { loader as landingLoader } from './pages/Landing';
 import { loader as singleProductLoader } from './pages/SingleProduct';
@@ -38,6 +43,31 @@ const router = createBrowserRouter([
                 element: <SingleProduct />,
                 errorElement: <ErrorElement />,
                 loader: singleProductLoader,
+            },
+            {
+                path: 'profile',
+                element: <Profile />,
+                errorElement: <ErrorElement />,
+            },
+            {
+                path: '/update-profile',
+                element: <UpdateProfile />,
+                errorElement: <Error />,
+            },
+            {
+                path: '/change-password',
+                element: <ChangePassword />,
+                errorElement: <Error />,
+            },
+            {
+                path: '/verify-email',
+                element: <VerifyAccount />,
+                errorElement: <Error />,
+            },
+            {
+                path: '/validate-otp',
+                element: <ValidateOTP />,
+                errorElement: <Error />,
             },
             {
                 path: '/cart',

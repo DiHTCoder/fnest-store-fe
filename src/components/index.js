@@ -24,3 +24,4 @@ export { default as ProductsContainer } from './ProductsContainer';
 export { default as Filters } from './Filters';
 export { default as Breadcrumb } from './Breadcrumb';
 export { default as ProductsList } from './ProductsList';
+export { default as NavProfile } from './NavProfile';

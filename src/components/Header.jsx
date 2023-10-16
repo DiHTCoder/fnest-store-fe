@@ -38,26 +38,26 @@ export const Header = () => {
                             </div>
                             <h1 className="font-bold">Hi, {user.user.username}</h1>
                         </label>
-                        <ul tabIndex={0} className="dropdown-content z-[1] menu shadow bg-base-100 rounded-box w-52">
+                        <ul tabIndex={0} className="dropdown-content z-[2] menu shadow bg-base-100 rounded-box w-52">
                             <li>
-                                <a>Tai khoan cua toi</a>
+                                <NavLink to="/profile">Quản lý tài khoản</NavLink>
                             </li>
                             <li>
-                                <a>Don mua</a>
+                                <a>Đơn mua</a>
                             </li>
                             <li>
-                                <a>Dang xuat</a>
+                                <a>Đăng xuất</a>
                             </li>
                         </ul>
                     </div>
                 ) : (
                     <div className="flex space-x-1 text-info font-bold">
                         <NavLink to="/login" className="flex space-x-1">
-                            <span>Dang nhap</span>
+                            <span>Đăng nhâp</span>
                         </NavLink>
                         <div>|</div>
                         <NavLink to="/register" className="flex space-x-1">
-                            <span>Dang ky</span>
+                            <span>Tạo tài khoản</span>
                         </NavLink>
                     </div>
                 )}

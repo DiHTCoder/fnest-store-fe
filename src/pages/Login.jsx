@@ -20,10 +20,19 @@ const Login = () => {
         try {
             const resp = await userServices.login(values.email, values.password);
             dispatch(loginSuccess(resp.data));
-            toast.success('Dang nhap thanh cong');
-            navigate('/');
+            if (resp.messages && resp.messages.length > 0) {
+                toast.success(resp.messages[0]);
+                setTimeout(() => {
+                    navigate('/');
+                }, 2000);
+            }
         } catch (error) {
-            toast.error('Sai ten dang nhap/mat khau');
+            if (error.response && error.response.data && error.response.data.messages) {
+                const errorMessages = error.response.data.messages;
+                toast.error(errorMessages.join(', ')); // Display error messages from the response
+            } else {
+                toast.error('Có lỗi xảy ra.'); // Fallback error message
+            }
         }
     };
 

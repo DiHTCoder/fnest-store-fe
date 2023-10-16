@@ -8,31 +8,43 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { registerSuccess } from '../features/user/userSlice';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const handleSubmit = async (values) => {
         try {
             const resp = await userServices.register(
                 values.username,
                 values.password,
-                values.fullname,
+                values.fullName,
                 values.email,
-                'MALE',
+                'FEMALE',
                 values.birthday,
             );
             dispatch(registerSuccess(resp));
-            toast.success('Đăng ký thành công!');
+            if (resp.messages && resp.messages.length > 0) {
+                toast.success(resp.messages[0]);
+                setTimeout(() => {
+                    navigate('/login');
+                }, 3000);
+            }
         } catch (error) {
-            toast.error('sai');
+            if (error.response && error.response.data && error.response.data.messages) {
+                const errorMessages = error.response.data.messages;
+                toast.error(errorMessages.join(', ')); // Display error messages from the response
+            } else {
+                toast.error('Có lỗi xảy ra.'); // Fallback error message
+            }
         }
     };
 
     const formik = useFormik({
         initialValues: {
             username: '',
-            fullname: '',
             email: '',
+            fullName: '',
             password: '',
             gender: 'FEMALE',
             birthday: '',
@@ -41,6 +53,7 @@ const Register = () => {
             username: Yup.string().required('Vui lòng nhập thông tin!'),
             email: Yup.string().required('Vui lòng nhập thông tin!'),
             password: Yup.string().required('Vui lòng nhập thông tin!'),
+            fullName: Yup.string().required('Vui lòng nhập thông tin!'),
         }),
         onSubmit: handleSubmit,
     });
@@ -51,7 +64,7 @@ const Register = () => {
                 <img src={login} alt="Ảnh login" />
             </div>
             <Form method="post" className="card w-[500px] p-8 bg-base-100 shadow-xl" onSubmit={formik.handleSubmit}>
-                <h3 className="text-2xl pb-2 font-semibold text-center text-primary">Đăng ky tai khoan</h3>
+                <h3 className="text-2xl pb-2 font-semibold text-center text-primary">Đăng ký tài khoản</h3>
                 <FormInput
                     type="text"
                     label="Tên đăng nhập(*)"
@@ -72,12 +85,13 @@ const Register = () => {
                 {formik.errors.email && <p className="text-error text-sm p-1"> {formik.errors.email}</p>}
                 <FormInput
                     type="text"
-                    label="Full name"
-                    name="fullname"
-                    value={formik.values.fullname}
-                    placeholder="Full name"
+                    label="Tên(*)"
+                    name="fullName"
+                    value={formik.values.fullName}
+                    placeholder="Tên"
                     onchange={formik.handleChange}
                 />
+                {formik.errors.fullName && <p className="text-error text-sm p-1"> {formik.errors.fullName}</p>}
                 <FormInput
                     type="password"
                     label="Mật khẩu(*)"
@@ -98,7 +112,7 @@ const Register = () => {
                 />
                 {formik.errors.birthday && <p className="text-error text-sm p-1"> {formik.errors.birthday}</p>}
                 <div className="mt-4">
-                    <SubmitButton text="đăng ky" color="primary" />
+                    <SubmitButton text="Đăng ký" color="primary" />
                 </div>
                 <p className="text-left text-sm text-primary p-2">
                     <Link to="/reset" className="">
@@ -107,9 +121,9 @@ const Register = () => {
                 </p>
                 <p className="text-center p-2 opacity-75">HOẶC</p>
                 <p className="text-center p-2">
-                    Da co tai khoan?{''}
+                    Đã có tài khoản?{''}
                     <Link to="/login" className="ml-2 link link-hover link-primary capitalize">
-                        Đăng nhap
+                        Đăng nhập
                     </Link>
                 </p>
             </Form>

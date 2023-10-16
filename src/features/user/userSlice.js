@@ -13,6 +13,15 @@ const userSlice = createSlice({
             error: false,
             success: false,
         },
+        profile: {
+            user: null,
+            error: false,
+        },
+        update: {
+            user: null,
+            updated: false,
+            error: false,
+        },
     },
     reducers: {
         loginSuccess: (state, action) => {
@@ -26,14 +35,32 @@ const userSlice = createSlice({
             state.register.error = false;
             state.register.success = true;
         },
-
+        getProfileSuccess: (state, action) => {
+            state.profile.user = action.payload;
+            state.profile.error = false;
+        },
+        updateProfileSuccess: (state, action) => {
+            state.update.user = action.payload;
+            state.update.updated = true;
+            state.update.error = false;
+        },
         logOutSuccess: (state) => {
             state.login.isFetching = false;
             state.login.currentUser = null;
             state.login.error = false;
         },
+        updateCurrentUser: (state, action) => {
+            state.login.currentUser = action.payload;
+        },
     },
 });
 
-export const { loginSuccess, registerSuccess, logOutSuccess } = userSlice.actions;
+export const {
+    loginSuccess,
+    registerSuccess,
+    updateCurrentUser,
+    updateProfileSuccess,
+    logOutSuccess,
+    getProfileSuccess,
+} = userSlice.actions;
 export default userSlice.reducer;
