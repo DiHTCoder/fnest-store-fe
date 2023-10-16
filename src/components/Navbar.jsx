@@ -38,15 +38,10 @@ const Navbar = () => {
                         {/* moon icon*/}
                         <BsMoonFill className="swap-off h-4 w-4" />
                     </label>
-                    <NavLink
-                        to="/cart"
-                        className="btn btn-ghost btn-circle btn-md ml-4"
-                    >
+                    <NavLink to="/cart" className="btn btn-ghost btn-circle btn-md ml-4">
                         <div className="indicator">
                             <BsCart3 className="h-6 w-6" />
-                            <span className="badge badge-sm badge-primary indicator-item">
-                                0
-                            </span>
+                            <span className="badge badge-sm badge-primary indicator-item text-white">0</span>
                         </div>
                     </NavLink>
                 </div>

@@ -9,3 +9,8 @@ export { default as Orders } from './Orders';
 export { default as Products } from './Products';
 export { default as Register } from './Register';
 export { default as SingleProduct } from './SingleProduct';
+export { default as Profile } from './Profile';
+export { default as VerifyAccount } from './VerifyAccount';
+export { default as ChangePassword } from './ChangePassword';
+export { default as UpdateProfile } from './UpdateProfile';
+export { default as ValidateOTP } from './ValidateOTP';
