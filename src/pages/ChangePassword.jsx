@@ -1,10 +1,10 @@
 import React from 'react';
 import { FormInput, SubmitButton } from '../components';
-import { Form, Link } from 'react-router-dom';
+import { Form } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import userServices from '../services/userServices';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -18,9 +18,7 @@ const ChangePassword = () => {
         try {
             const resp = await userServices.changePassword(user.accessToken, values.oldpassword, values.newpassword);
             toast.success('Thay đổi thành công!');
-            setTimeout(() => {
-                navigate('/profile');
-            }, 2500);
+            navigate('/profile');
         } catch (error) {
             if (error.response && error.response.data && error.response.data.messages) {
                 const errorMessages = error.response.data.messages;
@@ -99,18 +97,6 @@ const ChangePassword = () => {
                             </div>
                         </Form>
                     </div>
-                    <ToastContainer
-                        position="bottom-right"
-                        autoClose={2000}
-                        hideProgressBar={false}
-                        newestOnTop={false}
-                        closeOnClick
-                        rtl={false}
-                        pauseOnFocusLoss
-                        draggable
-                        pauseOnHover
-                        theme="light"
-                    />
                 </div>
             </div>
         </div>
