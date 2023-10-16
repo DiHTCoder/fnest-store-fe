@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 export const Header = () => {
-    const user = useSelector((state) => state.auth.login.currentUser);
+    const user = useSelector((state) => state.auth.login?.currentUser);
     return (
         <header className="grid grid-cols-2 align-element pt-1">
             <div className="flex space-x-5">
