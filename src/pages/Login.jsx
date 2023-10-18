@@ -107,7 +107,7 @@ const Login = () => {
                     <SubmitButton text="đăng nhập" color="primary" />
                 </div>
                 <p className="text-left text-sm text-primary p-2">
-                    <Link to="/reset" className="">
+                    <Link to="/forgot-password" className="">
                         Quên mật khẩu?
                     </Link>
                 </p>
@@ -118,9 +118,8 @@ const Login = () => {
                         <Link to="http://localhost/oauth2/authorization/google">Đăng nhập bằng Google</Link>
                     </span>
                 </button>
-                <p className="text-center p-2">Bạn mới biết đến Fnest?{''}</p>
-                <p className="text-center p-2">
-                    Đã có tài khoản?{''}
+                <p className="text-center p-4">
+                    Bạn mới biết đến Fnest?{''}
                     <Link to="/register" className="ml-2 link link-hover link-primary capitalize">
                         Đăng ky
                     </Link>

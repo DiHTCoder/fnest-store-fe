@@ -5,7 +5,6 @@ import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import userServices from '../services/userServices';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { registerSuccess } from '../features/user/userSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -48,10 +47,10 @@ const Register = () => {
             birthday: '',
         },
         validationSchema: Yup.object({
-            username: Yup.string().required('Vui lòng nhập thông tin!'),
-            email: Yup.string().required('Vui lòng nhập thông tin!'),
-            password: Yup.string().required('Vui lòng nhập thông tin!'),
-            fullName: Yup.string().required('Vui lòng nhập thông tin!'),
+            username: Yup.string().required('Vui lòng nhập thông tin!').max(30, 'Tối đa 30 ký tự'),
+            email: Yup.string().required('Vui lòng nhập thông tin!').max(30, 'Tối đa 30 ký tự'),
+            password: Yup.string().required('Vui lòng nhập thông tin!').min(8, 'Mật khẩu phải chứa ít nhất 8 ký tự'),
+            fullName: Yup.string().required('Vui lòng nhập thông tin!').max(30, 'Tối đa 30 ký tự'),
         }),
         onSubmit: handleSubmit,
     });
@@ -117,7 +116,6 @@ const Register = () => {
                         Quên mật khẩu?
                     </Link>
                 </p>
-                <p className="text-center p-2 opacity-75">HOẶC</p>
                 <p className="text-center p-2">
                     Đã có tài khoản?{''}
                     <Link to="/login" className="ml-2 link link-hover link-primary capitalize">

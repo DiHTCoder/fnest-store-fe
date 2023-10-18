@@ -16,6 +16,8 @@ import {
     VerifyAccount,
     ChangePassword,
     ValidateOTP,
+    ForgotPassword,
+    ResetPassword,
 } from './pages/index';
 import { loader as landingLoader } from './pages/Landing';
 import { loader as singleProductLoader } from './pages/SingleProduct';
@@ -67,6 +69,16 @@ const router = createBrowserRouter([
             {
                 path: '/validate-otp',
                 element: <ValidateOTP />,
+                errorElement: <Error />,
+            },
+            {
+                path: '/forgot-password',
+                element: <ForgotPassword />,
+                errorElement: <Error />,
+            },
+            {
+                path: '/reset-password',
+                element: <ResetPassword />,
                 errorElement: <Error />,
             },
             {

@@ -47,19 +47,17 @@ const userServices = {
             },
         );
     },
-    getOTP(accessToken, email) {
+    getOTP(email) {
         const url = '/otp';
-        return axiosClient.post(
-            url,
-            { email },
-            {
-                headers: {
-                    accept: 'application/json',
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${accessToken}`,
-                },
-            },
-        );
+        return axiosClient.post(url, { email });
+    },
+    getnn(username, otpCode) {
+        const url = '/restore-password';
+        return axiosClient.post(url, { username, otpCode });
+    },
+    getNewPassword(username, otpCode) {
+        const url = '/restore-password';
+        return axiosClient.post(url, { username, otpCode });
     },
     verifyOTP(accessToken, otpCode) {
         const url = '/buyer/profile/email-confirm';
