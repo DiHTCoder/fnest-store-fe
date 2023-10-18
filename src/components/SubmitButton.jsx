@@ -6,8 +6,7 @@ export const SubmitButton = ({ text }) => {
         <button type="submit" className={`btn btn-ghost w-full  bg-primary text-white`} disabled={isSubmitting}>
             {isSubmitting ? (
                 <>
-                    <span className="loading loading-spinner loading-lg"></span>
-                    Đang gửi...
+                    <span className="loading loading-dots loading-lg">{text}</span>
                 </>
             ) : (
                 text || 'submit'

@@ -14,3 +14,5 @@ export { default as VerifyAccount } from './VerifyAccount';
 export { default as ChangePassword } from './ChangePassword';
 export { default as UpdateProfile } from './UpdateProfile';
 export { default as ValidateOTP } from './ValidateOTP';
+export { default as ForgotPassword } from './ForgotPassword';
+export { default as ResetPassword } from './ResetPassword';
