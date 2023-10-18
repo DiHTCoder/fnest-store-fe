@@ -6,16 +6,15 @@ import { NavProfile } from '../components';
 import { Form } from 'react-router-dom';
 import userServices from '../services/userServices';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 
 const ValidateOTP = () => {
     const navigate = useNavigate();
-    const userLogin = useSelector((state) => state.auth.login?.currentUser);
+    const token = useSelector((state) => state.auth.login?.token);
     const handleSubmit = async (values) => {
         try {
-            const resp = await userServices.verifyOTP(userLogin.accessToken, values.otp);
+            const resp = await userServices.verifyOTP(token, values.otp);
             navigate('/profile');
             toast.success(resp.messages[0]);
         } catch (error) {

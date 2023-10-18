@@ -5,7 +5,6 @@ import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import userServices from '../services/userServices';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { updateProfileSuccess, updateCurrentUser } from '../features/user/userSlice';
@@ -14,20 +13,20 @@ import { NavProfile } from '../components';
 
 const UpdateProfile = () => {
     const navigate = useNavigate();
-    const user = useSelector((state) => state.auth.login?.currentUser);
     const dispatch = useDispatch();
+    const token = useSelector((state) => state.auth.login?.token);
 
     const handleSubmit = async (values) => {
         try {
             const resp = await userServices.updateProfile(
-                user.accessToken,
+                token,
                 values.fullName,
                 values.email,
                 'FEMALE',
                 values.birthday,
             );
-            dispatch(updateProfileSuccess(resp.data));
             dispatch(updateCurrentUser(resp.data));
+            dispatch(updateProfileSuccess(resp.data));
             toast.success('Thay doi thành công!');
             navigate('/profile');
         } catch (error) {

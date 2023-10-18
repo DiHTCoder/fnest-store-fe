@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import './index.css';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { SidebarProvider } from './context/sidebar_context.jsx';
 import { store, persistor } from '../store.js';
 import { Provider } from 'react-redux';
