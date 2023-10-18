@@ -4,6 +4,7 @@ const userSlice = createSlice({
     name: 'auth',
     initialState: {
         login: {
+            token: null,
             currentUser: null,
             isFetching: false,
             error: false,
@@ -28,6 +29,11 @@ const userSlice = createSlice({
             state.login.isFetching = false;
             state.login.currentUser = action.payload;
             state.login.error = false;
+        },
+
+        setToken: (state, action) => {
+            // Lưu token trong trạng thái
+            state.login.token = action.payload;
         },
 
         registerSuccess: (state) => {
@@ -57,6 +63,7 @@ const userSlice = createSlice({
 
 export const {
     loginSuccess,
+    setToken,
     registerSuccess,
     updateCurrentUser,
     updateProfileSuccess,

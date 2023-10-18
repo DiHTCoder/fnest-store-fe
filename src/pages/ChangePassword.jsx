@@ -9,15 +9,18 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { NavProfile } from '../components';
-
+import { logOutSuccess } from '../features/user/userSlice';
+import { useDispatch } from 'react-redux';
 const ChangePassword = () => {
     const navigate = useNavigate();
-    const user = useSelector((state) => state.auth.login?.currentUser);
+    const dispatch = useDispatch();
+    const token = useSelector((state) => state.auth.login?.token);
 
     const handleSubmit = async (values) => {
         try {
-            const resp = await userServices.changePassword(user.accessToken, values.oldpassword, values.newpassword);
-            toast.success('Thay đổi thành công!');
+            const resp = await userServices.changePassword(token, values.oldpassword, values.newpassword);
+            toast.success('Thay đổi thành công! Đăng nhập để tiếp tục');
+            dispatch(logOutSuccess());
             navigate('/profile');
         } catch (error) {
             if (error.response && error.response.data && error.response.data.messages) {

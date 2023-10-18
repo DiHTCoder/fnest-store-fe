@@ -15,15 +15,15 @@ import 'react-toastify/dist/ReactToastify.css';
 const Profile = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const userLogin = useSelector((state) => state.auth.login?.currentUser);
+    const token = useSelector((state) => state.auth.login?.token);
     useEffect(() => {
-        if (!userLogin) {
+        if (!token) {
             navigate('/login');
         }
-        if (userLogin?.accessToken) {
+        if (token) {
             const getUserProfile = async () => {
                 try {
-                    const resp = await userServices.getProfile(userLogin.accessToken);
+                    const resp = await userServices.getProfile(token);
                     dispatch(getProfileSuccess(resp.data));
                 } catch (error) {
                     if (error.response && error.response.data && error.response.data.messages) {
@@ -82,8 +82,12 @@ const Profile = () => {
                                     )}
                                 </div>
                                 <h2 className="py-2">{user?.fullName}</h2>
-                                <h2 className="py-2">012346767</h2>
-                                <h2 className="py-2">{user?.gender}</h2>
+                                <h2 className="py-2">Chưa xác định</h2>
+                                {user?.gender ? (
+                                    <h2 className="py-2">{user?.gender}</h2>
+                                ) : (
+                                    <h2 className="py-2">Chưa xác định</h2>
+                                )}
                                 <h2 className="py-2">{date}</h2>
                             </div>
                         </div>

@@ -1,26 +1,28 @@
 import { FormInput, SubmitButton } from '../components';
 import login from '../assets/images/login.jpg';
-import { FaFacebook } from 'react-icons/fa';
-import { FcGoogle } from 'react-icons/fc';
 import { Form, Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
-import userServices from '../services/userServices';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from 'react-router-dom';
-import { loginSuccess } from '../features/user/userSlice';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { loginSuccess, setToken, getProfileSuccess } from '../features/user/userSlice';
 import { useDispatch } from 'react-redux';
+import { FcGoogle } from 'react-icons/fc';
+import userServices from '../services/userServices';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 const Login = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    //Login by username and password
     const handleSubmit = async (values) => {
         try {
             const resp = await userServices.login(values.email, values.password);
-            dispatch(loginSuccess(resp.data));
             if (resp.messages && resp.messages.length > 0) {
+                dispatch(loginSuccess(resp.data.user));
+                dispatch(setToken(resp.data.accessToken));
                 toast.success(resp.messages[0]);
                 navigate('/');
             }
@@ -34,6 +36,33 @@ const Login = () => {
         }
     };
 
+    //Login by google
+    const [searchParams, setSearchParams] = useSearchParams();
+    const token = searchParams.get('token');
+
+    if (token) {
+        dispatch(setToken(token));
+        useEffect(() => {
+            const getUserProfile = async () => {
+                try {
+                    const resp = await userServices.getProfile(token);
+                    dispatch(loginSuccess(resp.data));
+                    toast.success(resp.messages[0]);
+                    navigate('/');
+                } catch (error) {
+                    if (error.response && error.response.data && error.response.data.messages) {
+                        const errorMessages = error.response.data.messages;
+                        toast.error(errorMessages.join(', ')); // Display error messages from the response
+                    } else {
+                        toast.error('Có lỗi xảy ra.'); // Fallback error message
+                    }
+                }
+            };
+            getUserProfile();
+        }, []);
+    }
+
+    //Form checking
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -55,7 +84,6 @@ const Login = () => {
                 <h3 className="text-2xl pb-2 font-semibold text-center text-primary">
                     Chào mừng bạn đến với <br /> Nội thất Fnest!
                 </h3>
-
                 <p className="text-lg font-bold text-center">Đăng nhập bằng tài khoản của bạn</p>
                 <FormInput
                     type="text"
@@ -84,21 +112,17 @@ const Login = () => {
                     </Link>
                 </p>
                 <p className="text-center p-2 opacity-75">HOẶC</p>
-                {/* <div className="grid grid-cols-2 gap-2">
-                    <button className="btn btn-ghost flex text-center place-items-center justify-center border-[1px] border-solid rounded bg-violet-500 hover:bg-violet-600">
-                        <FaFacebook className="text-primary m-3" />
-                        Facebook
-                    </button>
-                    <button className="btn btn-ghost flex text-center place-items-center justify-center border-[1px] border-solid rounded">
-                        {' '}
-                        <FcGoogle className="text-primary m-3" />
-                        Google
-                    </button>
-                </div> */}
+                <button className="flex justify-center w-full items-center py-2">
+                    <FcGoogle className="w-12 h-12 text-primary" />
+                    <span className="ml-2">
+                        <Link to="http://localhost/oauth2/authorization/google">Đăng nhập bằng Google</Link>
+                    </span>
+                </button>
+                <p className="text-center p-2">Bạn mới biết đến Fnest?{''}</p>
                 <p className="text-center p-2">
-                    Bạn mới biết đến Fnest?{''}
+                    Đã có tài khoản?{''}
                     <Link to="/register" className="ml-2 link link-hover link-primary capitalize">
-                        Đăng ký
+                        Đăng ky
                     </Link>
                 </p>
             </Form>

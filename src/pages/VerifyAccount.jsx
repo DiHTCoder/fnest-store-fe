@@ -6,15 +6,15 @@ import { NavProfile } from '../components';
 import { Form } from 'react-router-dom';
 import userServices from '../services/userServices';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 const VerifyAccount = () => {
     const navigate = useNavigate();
-    const userLogin = useSelector((state) => state.auth.login?.currentUser);
+    const userLogin = useSelector((state) => state.auth.login);
+    console.log(userLogin);
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const resp = await userServices.getOTP(userLogin.accessToken, userLogin.user?.email);
+            const resp = await userServices.getOTP(userLogin.token, userLogin.currentUser.user?.email);
             navigate('/validate-otp');
             toast.success(resp.messages[0]);
         } catch (error) {

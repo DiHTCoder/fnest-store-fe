@@ -11,6 +11,7 @@ export const Header = () => {
 
     const handleLogout = () => {
         dispatch(logOutSuccess());
+        navigate('/');
     };
     const user = useSelector((state) => state.auth.login?.currentUser);
     return (
@@ -44,7 +45,7 @@ export const Header = () => {
                                     <img src="https://cdn5.vectorstock.com/i/1000x1000/51/99/icon-of-user-avatar-for-web-site-or-mobile-app-vector-3125199.jpg" />
                                 </div>
                             </div>
-                            <h1 className="font-bold">Hi, {user.user.username}</h1>
+                            <h1 className="font-bold">Hi, {user?.username}</h1>
                         </label>
                         <ul tabIndex={0} className="dropdown-content z-[2] menu shadow bg-base-100 rounded-box w-52">
                             <li>
