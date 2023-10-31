@@ -25,3 +25,6 @@ export { default as Filters } from './Filters';
 export { default as Breadcrumb } from './Breadcrumb';
 export { default as ProductsList } from './ProductsList';
 export { default as NavProfile } from './NavProfile';
+export { default as CartItemsList } from './CartItemsList';
+export { default as CartItem } from './CartItem';
+export { default as CartTotal } from './CartTotal';

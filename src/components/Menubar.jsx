@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { FaBarsStaggered } from 'react-icons/fa6';
 import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
 import { categories } from '../utils/data';
-import { Sidebar } from '../components';
+import { Sidebar } from '.';
 import { useSidebarContext } from '../context/sidebar_context';
 
 const Menubar = () => {
@@ -34,10 +34,7 @@ const Menubar = () => {
         <Wrapper>
             <div className="align-element py-4">
                 <div className="flex items-center">
-                    <div
-                        className="btn btn-ghost hover:bg-slate-100"
-                        onClick={openSidebar}
-                    >
+                    <div className="btn btn-ghost hover:bg-slate-100" onClick={openSidebar}>
                         <FaBarsStaggered className="animate-bounce" />
                         Danh mục
                     </div>
@@ -49,11 +46,7 @@ const Menubar = () => {
                                 <li key={id}>
                                     <div className="btn btn-ghost hover:bg-slate-100 ">
                                         <div className="flex items-center">
-                                            <img
-                                                src={image}
-                                                alt={text}
-                                                className="person-img mr-2"
-                                            />
+                                            <img src={image} alt={text} className="person-img mr-2" />
                                             <span>{text}</span>
                                         </div>
                                     </div>

@@ -51,6 +51,7 @@ const userSlice = createSlice({
             state.update.error = false;
         },
         logOutSuccess: (state) => {
+            state.login.token = null;
             state.login.isFetching = false;
             state.login.currentUser = null;
             state.login.error = false;
