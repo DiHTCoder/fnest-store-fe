@@ -1,5 +1,5 @@
 import React from 'react';
-import { ProductsGrid, ProductsList } from '../components/';
+import { ProductsGrid, ProductsList } from '.';
 import { BsFillGridFill, BsList } from 'react-icons/bs';
 
 const ProductsContainer = () => {
@@ -12,21 +12,14 @@ const ProductsContainer = () => {
                         <BsFillGridFill />
                         <BsList />
                     </div>
-                    <h2 className="font-medium">
-                        ( Có 20 sản phẩm được tìm thấy)
-                    </h2>
+                    <h2 className="font-medium">( Có 20 sản phẩm được tìm thấy)</h2>
                 </div>
                 {/* Bộ sưu tập */}
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text capitalize">Sắp xếp</span>
                     </label>
-                    <select
-                        className="select select-bordered"
-                        name="sắp xếp"
-                        id="sort"
-                        defaultValue="all"
-                    >
+                    <select className="select select-bordered" name="sắp xếp" id="sort" defaultValue="all">
                         <option value="hi">Tăng</option>
                         <option value="hi">Giảm</option>
                         <option value="hi">A-z</option>

@@ -18,6 +18,7 @@ import {
     ValidateOTP,
     ForgotPassword,
     ResetPassword,
+    Map,
 } from './pages/index';
 import { loader as landingLoader } from './pages/Landing';
 import { loader as singleProductLoader } from './pages/SingleProduct';
@@ -109,6 +110,11 @@ const router = createBrowserRouter([
             {
                 path: '/register',
                 element: <Register />,
+                errorElement: <Error />,
+            },
+            {
+                path: '/map',
+                element: <Map />,
                 errorElement: <Error />,
             },
         ],

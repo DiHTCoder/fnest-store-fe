@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
-import { Product } from '../components';
+import { Product } from '.';
 const ProductsGrid = () => {
     const { products } = useLoaderData();
     return (

@@ -51,10 +51,6 @@ const userServices = {
         const url = '/otp';
         return axiosClient.post(url, { email });
     },
-    getnn(username, otpCode) {
-        const url = '/restore-password';
-        return axiosClient.post(url, { username, otpCode });
-    },
     getNewPassword(username, otpCode) {
         const url = '/restore-password';
         return axiosClient.post(url, { username, otpCode });

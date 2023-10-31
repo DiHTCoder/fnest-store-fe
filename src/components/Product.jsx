@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { AiOutlineHeart } from 'react-icons/ai';
-import { Stars } from '../components';
+import { Stars } from '.';
 import { formatPrice } from '../utils/helpers';
 
 const Product = ({ product }) => {
@@ -15,11 +15,7 @@ const Product = ({ product }) => {
             className="card w-full hover:shadow-xl ease-in-out duration-300 bg-white"
         >
             <figure className="px-2 pt-2 relative">
-                <img
-                    src={image}
-                    alt={title}
-                    className="rounded-xl h-64 md:h-48 w-full object-cover"
-                />
+                <img src={image} alt={title} className="rounded-xl h-64 md:h-48 w-full object-cover" />
                 <div className="flex">
                     <span className="absolute top-2 right-2 p-1 text-white tracking-wide">
                         <AiOutlineHeart className="w-[30px] h-[30px] hover:text-primary transition-colors duration-300" />
@@ -33,18 +29,12 @@ const Product = ({ product }) => {
                 <div className="flex">
                     <h2 className="card-title capitalize">
                         {title}
-                        <div className="badge badge-secondary text-white">
-                            NEW
-                        </div>
+                        <div className="badge badge-secondary text-white">NEW</div>
                     </h2>
                 </div>
                 <div className="flex justify-between">
-                    <span className="text-secondary text-left">
-                        Giá:{formatedPrice}
-                    </span>
-                    <span className=" text-left line-through">
-                        {formatedPrice}
-                    </span>
+                    <span className="text-secondary text-left">Giá:{formatedPrice}</span>
+                    <span className=" text-left line-through">{formatedPrice}</span>
                 </div>
                 <div className="flex justify-between">
                     <Stars />

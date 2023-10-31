@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import menu from '../utils/menu.js';
-import { ProductsGrid } from '../components';
+import { ProductsGrid } from './index.js';
 
 const allCategories = ['all', ...new Set(menu.map((item) => item.category))];
 const FeaturedProducts = () => {

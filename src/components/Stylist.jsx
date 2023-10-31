@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { SingleStylist } from '../components';
+import { SingleStylist } from '.';
 const url = 'https://course-api.com/react-tours-project';
 
 const Stylist = () => {

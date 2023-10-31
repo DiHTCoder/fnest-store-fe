@@ -2,7 +2,7 @@ import React from 'react';
 import Logo from '../assets/logo.svg';
 import { BsCart3, BsMoonFill, BsSunFill } from 'react-icons/bs';
 import { NavLink } from 'react-router-dom';
-import { NavLinks } from '../components';
+import { NavLinks } from '.';
 import { FaBarsStaggered } from 'react-icons/fa6';
 import { FaShoppingCart } from 'react-icons/fa';
 const Navbar = () => {
