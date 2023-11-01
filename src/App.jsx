@@ -19,6 +19,7 @@ import {
     ForgotPassword,
     ResetPassword,
     Map,
+    UserAddress,
 } from './pages/index';
 import { loader as landingLoader } from './pages/Landing';
 import { loader as singleProductLoader } from './pages/SingleProduct';
@@ -80,6 +81,11 @@ const router = createBrowserRouter([
             {
                 path: '/reset-password',
                 element: <ResetPassword />,
+                errorElement: <Error />,
+            },
+            {
+                path: '/address',
+                element: <UserAddress />,
                 errorElement: <Error />,
             },
             {

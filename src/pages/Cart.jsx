@@ -6,7 +6,7 @@ import { SubmitButton, Breadcrumb } from '../components';
 const Cart = () => {
     const user = useSelector((state) => state.auth.login?.token);
     return (
-        <div>
+        <>
             <Breadcrumb url="cart" page="Giỏ hàng" />
             <div className="grid gap-8 lg:grid-cols-12">
                 <div className="lg:col-span-8">
@@ -27,7 +27,7 @@ const Cart = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 
