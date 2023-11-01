@@ -1,6 +1,5 @@
 import React from 'react';
 import { formatPrice, generateAmountOptions } from '../utils/helpers';
-import { FaDove } from 'react-icons/fa6';
 const cartItems = [
     {
         cartID: 1,

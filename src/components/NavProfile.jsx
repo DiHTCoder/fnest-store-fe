@@ -64,7 +64,7 @@ const NavProfile = () => {
                         </li>
                         <li className="py-1 flex items-center">
                             <BsCheck className="text-green" />
-                            Địa Chỉ
+                            <NavLink to="/address">Địa Chỉ</NavLink>
                         </li>
                         <li className="py-1 flex items-center">
                             <BsCheck className="text-green" />

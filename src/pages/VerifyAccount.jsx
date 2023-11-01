@@ -14,7 +14,7 @@ const VerifyAccount = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const resp = await userServices.getOTP(userLogin.currentUser.user?.email);
+            const resp = await userServices.getOTP(userLogin.currentUser.email);
             navigate('/validate-otp');
             toast.success(resp.messages[0]);
         } catch (error) {
