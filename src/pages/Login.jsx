@@ -9,7 +9,6 @@ import { loginSuccess, setToken, getProfileSuccess } from '../features/user/user
 import { useDispatch } from 'react-redux';
 import { FcGoogle } from 'react-icons/fc';
 import userServices from '../services/userServices';
-import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
 const Login = () => {

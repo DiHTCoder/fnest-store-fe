@@ -8,6 +8,7 @@ const userSlice = createSlice({
             currentUser: null,
             isFetching: false,
             error: false,
+            addresses: null,
         },
         register: {
             isFetching: false,
@@ -59,6 +60,9 @@ const userSlice = createSlice({
         updateCurrentUser: (state, action) => {
             state.login.currentUser = action.payload;
         },
+        getUserAddresses: (state, action) => {
+            state.login.addresses = action.payload;
+        },
     },
 });
 
@@ -70,5 +74,6 @@ export const {
     updateProfileSuccess,
     logOutSuccess,
     getProfileSuccess,
+    getUserAddresses,
 } = userSlice.actions;
 export default userSlice.reducer;
