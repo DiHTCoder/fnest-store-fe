@@ -1,54 +1,77 @@
 import React, { useState, useEffect } from 'react';
 import { NavProfile, SubmitButton, FormInput } from '../components';
 import addressServices from '../services/addressServices';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { BiTargetLock, BiPlus } from 'react-icons/bi';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import { getProvinces } from '../features/address/addressSlice';
+import { AiOutlineWarning } from 'react-icons/ai';
+import { GrUpdate } from 'react-icons/gr';
+import { BiPurchaseTag } from 'react-icons/bi';
 
 const UserAddress = () => {
+    const dispatch = useDispatch();
+    const navigateTo = useNavigate();
+
+    //Get tokens
+    const token = useSelector((state) => state.auth.login?.token);
+
+    const [addressIdToUpdate, setAddressIdToUpdate] = useState(null);
+    const [isUpdateMode, setIsUpdateMode] = useState(false);
+
+    //initial address of a user
     const [address, setAddress] = useState([]);
+
+    //Initial address when user selects
     const [province, setProvince] = useState([]);
     const [district, setDistrict] = useState([]);
     const [ward, setWard] = useState([]);
+
+    //Form info after user selects
     const [selectedProvince, setSelectedProvince] = useState('');
     const [selectedDistrict, setSelectedDistrict] = useState('');
     const [selectedWard, setSelectedWard] = useState('');
     const [receiverName, setReceiverName] = useState('');
     const [receiverPhone, setReceiverPhone] = useState('');
     const [addressDetail, setAddressDetail] = useState('');
-    const token = useSelector((state) => state.auth.login?.token);
 
+    const resetForm = () => {
+        setAddressIdToUpdate(null);
+        setIsUpdateMode(false);
+        setSelectedProvince('');
+        setSelectedDistrict('');
+        setSelectedWard('');
+        setReceiverName('');
+        setReceiverPhone('');
+        setAddressDetail('');
+    };
+
+    //get all addresses
     useEffect(() => {
         if (!token) {
-            navigate('/login');
+            navigateTo('/login');
         } else {
-            const getDeliveryAddressDetail = async () => {
+            const getAllUserAddresses = async () => {
                 try {
                     const resp = await addressServices.getDeliveryAddress(token);
                     setAddress(resp.data);
                 } catch (error) {
-                    if (error.response && error.response.data && error.response.data.messages) {
-                        const errorMessages = error.response.data.messages;
-                        toast.error(errorMessages.join(', '));
-                    } else {
-                        toast.error('Có lỗi xảy ra.');
-                    }
+                    console.error(error);
                 }
             };
-            getDeliveryAddressDetail();
+            const getAllProvinces = async () => {
+                try {
+                    const resp = await addressServices.getAllProvinces();
+                    dispatch(getProvinces(resp.data));
+                    setProvince(resp.data);
+                } catch (error) {
+                    console.error(error);
+                }
+            };
+            getAllUserAddresses();
+            getAllProvinces();
         }
-    }, [token]);
-
-    useEffect(() => {
-        const getProvinces = async () => {
-            try {
-                const respProvince = await addressServices.getAllProvinces();
-                setProvince(respProvince.data);
-            } catch (error) {
-                console.error(error);
-            }
-        };
-        getProvinces();
     }, []);
 
     const handleProvinceChange = async (selectedProvince) => {
@@ -61,7 +84,6 @@ const UserAddress = () => {
             console.error(error);
         }
     };
-
     const handleDistrictChange = async (selectedDistrict) => {
         setSelectedDistrict(selectedDistrict);
         try {
@@ -71,28 +93,119 @@ const UserAddress = () => {
             console.error(error);
         }
     };
-
     const handleWardChange = (selectedWard) => {
         setSelectedWard(selectedWard);
     };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (isUpdateMode) {
+            if (addressIdToUpdate) {
+                try {
+                    const resp = await addressServices.updateDeliveryAddress(
+                        token,
+                        addressIdToUpdate,
+                        addressDetail,
+                        receiverName,
+                        receiverPhone,
+                        selectedWard,
+                        selectedProvince,
+                        selectedDistrict,
+                    );
+                    document.getElementById('dialog').close();
+                    // Update the address state with the new data
+                    setAddress((prevAddress) => {
+                        const updatedAddresses = prevAddress.deliveryAddresses.map((item) => {
+                            if (item.id === addressIdToUpdate) {
+                                // Replace the existing address with the updated one
+                                return resp.data;
+                            }
+                            return item;
+                        });
+                        return {
+                            ...prevAddress,
+                            deliveryAddresses: updatedAddresses,
+                        };
+                    });
+                    resetForm();
+                    toast.success(resp.messages[0]);
+                } catch (error) {
+                    toast.error('Có lỗi xảy ra.');
+                }
+            }
+        } else {
+            try {
+                const resp = await addressServices.addDeliveryAddress(
+                    token,
+                    addressDetail,
+                    receiverName,
+                    receiverPhone,
+                    selectedWard,
+                    selectedProvince,
+                    selectedDistrict,
+                );
+                document.getElementById('dialog').close();
+                // Update the address state with the new data
+                setAddress((prevAddress) => {
+                    const updatedAddresses = [...prevAddress.deliveryAddresses, resp.data];
+                    return {
+                        ...prevAddress,
+                        deliveryAddresses: updatedAddresses,
+                    };
+                });
+                resetForm();
+                toast.success(resp.messages[0]);
+            } catch (error) {
+                if (error.response && error.response.data && error.response.data.messages) {
+                    const errorMessages = error.response.data.messages;
+                    toast.error(errorMessages.join(', '));
+                } else {
+                    toast.error('Có lỗi xảy ra.');
+                }
+            }
+        }
+    };
+
+    const handleUpdateAddress = (addressId) => {
+        setAddressIdToUpdate(addressId);
+        setIsUpdateMode(true);
+        document.getElementById('dialog').showModal();
+    };
+
+    const handleDeleteAddress = async (addressId) => {
         try {
-            const resp = await addressServices.addDeliveryAddress(
-                token,
-                addressDetail,
-                receiverName,
-                receiverPhone,
-                selectedWard,
-                selectedProvince,
-                selectedDistrict,
-            );
+            const resp = await addressServices.deleteDeliveryAddress(token, addressId);
             toast.success(resp.messages[0]);
-            closeDialog();
+
+            const updatedAddresses = address.deliveryAddresses.filter((item) => item.id !== addressId);
+            setAddress({
+                ...address,
+                deliveryAddresses: updatedAddresses,
+            });
         } catch (error) {
             if (error.response && error.response.data && error.response.data.messages) {
                 const errorMessages = error.response.data.messages;
                 toast.error(errorMessages.join(', '));
+            } else {
+                toast.error('Có lỗi xảy ra.');
+            }
+        }
+    };
+
+    const handleSetDefaultAddress = async (addressId) => {
+        try {
+            const resp = await addressServices.setDefaultAddress(token, addressId);
+            toast.success(resp.messages[0]);
+        } catch (error) {
+            if (error.response && error.response.data && error.response.data.messages) {
+                const errorMessages = error.response.data.messages;
+                toast.error(errorMessages.join(', '));
+                setAddress((prevAddress) => {
+                    return {
+                        ...prevAddress,
+                        defaultAddressId: addressId, // Set the new default address ID
+                    };
+                });
             } else {
                 toast.error('Có lỗi xảy ra.');
             }
@@ -105,17 +218,20 @@ const UserAddress = () => {
             <div className="card col-span-3 bg-white shadow-lg">
                 <div className="m-4">
                     <div className="border-b-2 pb-5">
-                        <div className="flex justify-between">
+                        <div className="grid grid-cols-2">
                             <div>
                                 <div className="text-lg font-bold">Địa chỉ của tôi</div>
-                                <div className="text-bold font-light text-error">
+                                <div className="font-bold font-light text-error">
                                     Thông tin về địa chỉ nhận hàng và trả hàng
                                 </div>
                             </div>
-                            <div>
+                            <div className="flex justify-end">
                                 <button
                                     className="btn bg-primary btn-ghost text-white"
-                                    onClick={() => document.getElementById('dialog').showModal()}
+                                    onClick={() => {
+                                        setIsUpdateMode(false);
+                                        document.getElementById('dialog').showModal();
+                                    }}
                                 >
                                     <BiPlus /> Thêm địa chỉ
                                 </button>
@@ -148,7 +264,7 @@ const UserAddress = () => {
                                                 onchange={(e) => setReceiverPhone(e.target.value)}
                                             />
                                             <h2 className="m-2">Địa chỉ giao hàng</h2>
-                                            <div className="flex space-x-2">
+                                            <div className="flex space-x-2 my-2">
                                                 <select
                                                     className="select w-full max-w-xs"
                                                     name="provinceCityName"
@@ -192,13 +308,16 @@ const UserAddress = () => {
                                                 type="text"
                                                 name="addressDetail"
                                                 label="Địa chỉ cụ thể "
-                                                placeholder="Thôn /Ấp /Làng / Bản..."
+                                                placeholder="Địa chỉ cụ thể (khu dân cư, xóm, làng, ấp...)"
                                                 value={addressDetail}
                                                 onchange={(e) => setAddressDetail(e.target.value)}
                                             />
                                             <div className="py-3">
-                                                <SubmitButton text="Thêm địa chỉ" color="primary" />
-                                            </div>{' '}
+                                                <SubmitButton
+                                                    text={isUpdateMode ? 'Cập nhật' : 'Thêm địa chỉ'}
+                                                    color="primary"
+                                                />
+                                            </div>
                                         </form>
                                     </div>
                                 </dialog>
@@ -206,31 +325,58 @@ const UserAddress = () => {
                         </div>
                     </div>
                     <div className="m-10">
-                        {address ? (
-                            address.map((item) => (
-                                <div key={item.id} className="my-10">
-                                    <div className="flex justify-between">
+                        {address.length === 0 ? (
+                            <h1 className="text-2xl font-bold text-error">
+                                <AiOutlineWarning /> Vui lòng thêm địa chỉ nhận hàng!
+                            </h1>
+                        ) : (
+                            address.deliveryAddresses.map((item) => (
+                                <div key={item.id} className="my-5">
+                                    <div className="grid grid-cols-2">
                                         <div>
-                                            <span>{item.receiverName}</span> |{' '}
+                                            <span className="font-bold">{item.receiverName}</span> |{' '}
                                             <span className="text-info">{item.receiverPhone}</span>
+                                            <div className="my-2">
+                                                <p className="text-sm text-info">{item.deliveryAddress}</p>
+                                            </div>
+                                            <div className="flex text-center items-center space-x-2 p-2">
+                                                {item.id === address.defaultAddressId ? (
+                                                    <div className="text-primary flex items-center">
+                                                        <BiTargetLock />
+                                                        <span> Mặc định</span>
+                                                    </div>
+                                                ) : (
+                                                    <>
+                                                        <div className="flex text-blue-400 items-center ">
+                                                            <BiPurchaseTag />
+                                                            <button onClick={() => handleSetDefaultAddress(item.id)}>
+                                                                Đặt làm mặc định
+                                                            </button>
+                                                        </div>
+                                                    </>
+                                                )}
+                                            </div>
                                         </div>
-                                        <div>
-                                            <span className="text-primary mx-2">Cập nhật</span>
-                                            <span className="text-primary">Xóa</span>
+                                        <div className="justify-end flex">
+                                            <span
+                                                className="text-primary mx-2 btn btn-sm"
+                                                onClick={() => handleUpdateAddress(item.id)}
+                                            >
+                                                <GrUpdate />
+                                                Cập nhật
+                                            </span>
+                                            <span
+                                                className="text-primary btn btn-sm"
+                                                onClick={() => handleDeleteAddress(item.id)}
+                                            >
+                                                Xóa
+                                            </span>
                                         </div>
                                     </div>
-                                    <div className="my-2">
-                                        <p className="text-sm text-info">{item.deliveryAddress}</p>
-                                    </div>
-                                    <div className="flex text-center items-center space-x-2 p-2">
-                                        <BiTargetLock />
-                                        <span className="text-primary">Mặc định</span>
-                                    </div>
+
                                     <div className="border-[0.5px]"></div>
                                 </div>
                             ))
-                        ) : (
-                            <></>
                         )}
                     </div>
                 </div>
