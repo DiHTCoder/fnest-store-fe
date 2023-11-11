@@ -27,8 +27,8 @@ function App() {
 
     return (
         <Wrapper>
-            <section className="section">
-                <div className="relative flex overflow-hidden text-center w-full h-[450px] max-w-7xl mx-0 my-auto">
+            <div className="relative flex min-h-[504px] items-center justify-center px-4 pb-12 pt-24 lg:min-h-[644px]">
+                <div className="absolute inset-0 brightness-75">
                     {people.map((person, personIndex) => {
                         const { id, image, name, title, quote } = person;
 
@@ -36,37 +36,24 @@ function App() {
                         if (personIndex === index) {
                             position = 'activeSlide';
                         }
-                        if (
-                            personIndex === index - 1 ||
-                            (index === 0 && personIndex === people.length - 1)
-                        ) {
+                        if (personIndex === index - 1 || (index === 0 && personIndex === people.length - 1)) {
                             position = 'lastSlide';
                         }
 
                         return (
                             <article className={position} key={id}>
-                                <img
-                                    src={image}
-                                    alt={name}
-                                    className="mb-[10px] w-full h-[650px] object-cover border-[4px] border-solid"
-                                />
+                                <img src={image} alt={name} className="mb-[10px] w-full h-[650px] object-cover" />
                             </article>
                         );
                     })}
-                    <button
-                        className="prev"
-                        onClick={() => setIndex(index - 1)}
-                    >
+                    <button className="prev" onClick={() => setIndex(index - 1)}>
                         <FiChevronLeft />
                     </button>
-                    <button
-                        className="next"
-                        onClick={() => setIndex(index + 1)}
-                    >
+                    <button className="next" onClick={() => setIndex(index + 1)}>
                         <FiChevronRight />
                     </button>
                 </div>
-            </section>
+            </div>
         </Wrapper>
     );
 }

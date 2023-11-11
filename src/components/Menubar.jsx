@@ -31,7 +31,7 @@ const Menubar = () => {
     };
 
     return (
-        <Wrapper>
+        <Wrapper className="">
             <div className="align-element py-4">
                 <div className="flex items-center">
                     <div className="btn btn-ghost hover:bg-slate-100" onClick={openSidebar}>

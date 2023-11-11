@@ -11,7 +11,7 @@ const FeaturedProducts = () => {
     return (
         <section className="">
             <div className="text-center my-3">
-                {categories.map((category, index) => {
+                {/* {categories.map((category, index) => {
                     return (
                         <button
                             type="button"
@@ -22,7 +22,7 @@ const FeaturedProducts = () => {
                             {category}
                         </button>
                     );
-                })}
+                })} */}
                 <ProductsGrid />
             </div>
 

@@ -22,8 +22,8 @@ const Landing = () => {
 
     return (
         <main>
-            <Sliders />
             <div className="">
+                <Sliders />
                 <Title text="Ưu đãi tốt" />
                 <FeaturedProducts />
                 <Title text="Đánh giá thực tế" />

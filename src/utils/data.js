@@ -1,3 +1,8 @@
+import banner1 from '../assets/banner/banner-1.jpg';
+import banner2 from '../assets/banner/banner-2.jpg';
+import banner3 from '../assets/banner/banner-3.jpg';
+import banner4 from '../assets/banner/banner-4.jpg';
+
 export const categories = [
     {
         id: 1,
@@ -65,28 +70,28 @@ export const categories = [
 const people = [
     {
         id: 1,
-        image: 'https://www.course-api.com/images/people/person-1.jpeg',
+        image: banner3,
         name: 'maria ferguson',
         title: 'office manager',
         quote: 'Fingerstache umami squid, kinfolk subway tile selvage tumblr man braid viral kombucha gentrify fanny pack raclette pok pok mustache.',
     },
     {
         id: 2,
-        image: 'https://www.course-api.com/images/people/person-4.jpeg',
+        image: banner1,
         name: 'john doe',
         title: 'regular guy',
         quote: 'Gastropub sustainable tousled prism occupy. Viral XOXO roof party brunch actually, chambray listicle microdosing put a bird on it paleo subway tile squid umami.',
     },
     {
         id: 3,
-        image: 'https://www.course-api.com/images/people/person-3.jpeg',
+        image: banner2,
         name: 'peter smith',
         title: 'product designer',
         quote: 'Drinking vinegar polaroid street art echo park, actually semiotics next level butcher master cleanse hammock flexitarian ethical paleo.',
     },
     {
         id: 4,
-        image: 'https://www.course-api.com/images/people/person-2.jpeg',
+        image: banner4,
         name: 'susan andersen',
         title: 'the boss',
         quote: 'Marfa af yr 3 wolf moon kogi, readymade distillery asymmetrical seitan kale chips fingerstache cloud bread mustache twee messenger bag. ',

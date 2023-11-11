@@ -1,5 +1,5 @@
 import { Outlet, useNavigation } from 'react-router-dom';
-import { Header, Navbar, Menubar, Footer, Loading } from '../components';
+import { Header, Navbar, Sliders, Footer, Loading } from '../components';
 const HomeLayout = () => {
     const navigation = useNavigation();
     const isPageLoading = navigation.state === 'loading';
@@ -7,8 +7,7 @@ const HomeLayout = () => {
         <>
             <div className="bg-white">
                 <Header />
-                <Navbar />
-                <Menubar />
+                {/* <Menubar /> */}
             </div>
             {isPageLoading ? (
                 <Loading />

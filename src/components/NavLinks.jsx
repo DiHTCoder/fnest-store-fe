@@ -19,7 +19,7 @@ const NavLinks = () => {
                 if (url === 'checkout' || url === 'orders' || url === 'cart') return null;
                 return (
                     <li key={id}>
-                        <NavLink className="btn btn-ghost hover:bg-slate-100" to={url}>
+                        <NavLink className="btn btn-ghost" to={url}>
                             {text}
                         </NavLink>
                     </li>
