@@ -5,7 +5,7 @@ const ProductsGrid = () => {
     const { products } = useLoaderData();
     return (
         <div className="grid lg:grid-cols-4 gap-2">
-            {products.map((product) => {
+            {products.content.map((product) => {
                 {
                     /* const dollarsAmount = formatPrice(price); */
                 }

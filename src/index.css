@@ -69,7 +69,9 @@ Variables
         transform: scale(1);
     }
 }
-
+html {
+    scroll-behavior: smooth;
+}
 /*
   =============== 
   Sidebar

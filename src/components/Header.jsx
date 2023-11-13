@@ -12,6 +12,7 @@ import { BsHeart } from 'react-icons/bs';
 export const Header = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { cartTotalQuantity } = useSelector((state) => state.cart);
     const HEADER_TRANSPARENT_DISTANCE = 250;
     const [scrollY, setScrollY] = useState(0);
 
@@ -34,10 +35,8 @@ export const Header = () => {
     const user = useSelector((state) => state.auth.login?.currentUser);
     return (
         <header
-            className={` ${
-                scrollY > HEADER_TRANSPARENT_DISTANCE ? 'fixed' : ''
-            } transition-all ease-in left-0 right-0 top-0 z-50 flex h-[64px] items-center justify-center text-slate-800  md:h-[74px] lg:h-[88px]
-     bg-white shadow`}
+            className="sticky transition-all ease-in left-0 right-0 top-0 z-30 flex h-[64px] items-center justify-center bg-base-100 bg-opacity-90 backdrop-blur text-base-content  md:h-[74px] lg:h-[88px]
+            duration-100 [transform:translate3d(0,0,0)] shadow"
         >
             <div className="navbar hidden h-full max-w-screen-xl px-4 py-2 md:flex lg:py-3">
                 <div className="navbar">
@@ -70,7 +69,9 @@ export const Header = () => {
                         <NavLink to="/cart" className="btn btn-ghost btn-circle btn-md ml-4">
                             <div className="indicator">
                                 <BsCart3 className="h-8 w-8" />
-                                <span className="badge badge-sm badge-primary indicator-item text-white">0</span>
+                                <span className="badge badge-sm badge-primary indicator-item text-white">
+                                    {cartTotalQuantity}
+                                </span>
                             </div>
                         </NavLink>
                         {user ? (

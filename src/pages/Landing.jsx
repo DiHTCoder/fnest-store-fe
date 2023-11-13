@@ -1,25 +1,13 @@
 import { Sliders, EvaluateSlider, FeaturedProducts, Title, Stylist, Services } from '../components';
-import { customFetch } from '../services';
 import productServices from '../services/productServices'; // Import hàm productsapi
-const url = '/products?featured=true';
-import { useState, useEffect } from 'react';
 
 export const loader = async () => {
-    const response = await customFetch(url);
-    const products = response.data.data;
+    const response = await productServices.getFeaturedProducts();
+    const products = response.data;
     return { products };
 };
 
 const Landing = () => {
-    const [productData, setProductData] = useState([]);
-
-    // useEffect(() => {
-    //     const fetchProducts = async () => {
-    //         const productList = await productServices.getFeaturedProducts();
-    //     };
-    //     fetchProducts();
-    // }, []);
-
     return (
         <main>
             <div className="">
