@@ -9,7 +9,7 @@ const persistConfig = {
     version: 1,
     storage,
 };
-const rootReducer = combineReducers({ auth: userReducer, cart: cartReducer, address: addressReduce });
+const rootReducer = combineReducers({ auth: userReducer, address: addressReduce, cart: cartReducer });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({

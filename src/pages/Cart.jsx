@@ -17,7 +17,7 @@ const Cart = () => {
                     <div className="mt-2">
                         {user ? (
                             <Link to="/checkout">
-                                <SubmitButton text="Thanh toán" />
+                                <SubmitButton text="Đặt hàng" />
                             </Link>
                         ) : (
                             <Link to="/login" className="btn btn-primary btn-block mt-8 text-white">

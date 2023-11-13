@@ -1,9 +1,9 @@
 import axiosClient from '../utils/axiosClient';
 
 const productServices = {
-    getFeaturedProducts(params) {
-        const url = '/products?featured=true';
-        return axiosClient.get(url, { params });
+    getFeaturedProducts(currentPage, pageSize, sort) {
+        const url = '/product/featured-page';
+        return axiosClient.get(url, { currentPage, pageSize, sort });
     },
 
     getProductDetail(id) {

@@ -221,9 +221,7 @@ const UserAddress = () => {
                         <div className="grid grid-cols-2">
                             <div>
                                 <div className="text-lg font-bold">Địa chỉ của tôi</div>
-                                <div className="font-bold font-light text-error">
-                                    Thông tin về địa chỉ nhận hàng và trả hàng
-                                </div>
+                                <div className="font-bold text-error">Thông tin về địa chỉ nhận hàng và trả hàng</div>
                             </div>
                             <div className="flex justify-end">
                                 <button
