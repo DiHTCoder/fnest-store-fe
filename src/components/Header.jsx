@@ -8,13 +8,31 @@ import { BsCart3 } from 'react-icons/bs';
 import { NavLinks } from '.';
 import { FaBarsStaggered } from 'react-icons/fa6';
 import { BsHeart } from 'react-icons/bs';
+import vie from '../assets/flag/vi-flag.png';
+import eng from '../assets/flag/en-flag.png';
+import { useTranslation } from 'react-i18next';
+import i18n from 'i18next';
 
 export const Header = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const { t } = useTranslation('translation');
+
+    const user = useSelector((state) => state.auth.login?.currentUser);
+
     const { cartTotalQuantity } = useSelector((state) => state.cart);
     const HEADER_TRANSPARENT_DISTANCE = 250;
     const [scrollY, setScrollY] = useState(0);
+    const [currentLanguage, setCurrentLanguage] = useState('vie');
+    const [flagImage, setFlagImage] = useState(vie);
+
+    const changeLanguage = () => {
+        const newLanguage = currentLanguage === 'eng' ? 'vie' : 'eng';
+        setCurrentLanguage(newLanguage);
+        setFlagImage(newLanguage === 'eng' ? eng : vie);
+        i18n.changeLanguage(newLanguage);
+    };
 
     useEffect(() => {
         const handleScroll = () => {
@@ -27,12 +45,12 @@ export const Header = () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
+
     const handleLogout = () => {
         dispatch(logOutSuccess());
         navigate('/');
     };
 
-    const user = useSelector((state) => state.auth.login?.currentUser);
     return (
         <header
             className="sticky transition-all ease-in left-0 right-0 top-0 z-30 flex h-[64px] items-center justify-center bg-base-100 bg-opacity-90 backdrop-blur text-base-content  md:h-[74px] lg:h-[88px]
@@ -60,10 +78,15 @@ export const Header = () => {
                         </ul>
                     </div>
                     <div className="navbar-end">
-                        <NavLink to="/cart" className="btn btn-ghost btn-circle btn-md ml-4">
+                        <div className="btn btn-ghost btn-circle btn-md ml-4" onClick={changeLanguage}>
+                            <div className="indicator">
+                                <img src={flagImage} alt="" />
+                            </div>
+                        </div>
+
+                        <NavLink to="/favourite" className="btn btn-ghost btn-circle btn-md ml-4">
                             <div className="indicator">
                                 <BsHeart className="h-8 w-8" />
-                                <span className="badge badge-sm badge-primary indicator-item text-white">0</span>
                             </div>
                         </NavLink>
                         <NavLink to="/cart" className="btn btn-ghost btn-circle btn-md ml-4">
@@ -82,27 +105,27 @@ export const Header = () => {
                                             <img src="https://cdn5.vectorstock.com/i/1000x1000/51/99/icon-of-user-avatar-for-web-site-or-mobile-app-vector-3125199.jpg" />
                                         </div>
                                     </div>
-                                    <h1 className="font-bold">Hi, {user?.username}</h1>
+                                    <h1 className="font-bold">Hi,{user?.username}</h1>
                                 </label>
                                 <ul
                                     tabIndex={0}
                                     className="dropdown-content z-[2] menu shadow bg-base-100 rounded-box w-52"
                                 >
                                     <li>
-                                        <NavLink to="/profile">Quản lý tài khoản</NavLink>
+                                        <NavLink to="/profile">{t('profile')}</NavLink>
                                     </li>
                                     <li>
-                                        <a>Đơn mua</a>
+                                        <a>{t('purchase_orders')}</a>
                                     </li>
                                     <li>
-                                        <p onClick={handleLogout}>Đăng xuất</p>
+                                        <p onClick={handleLogout}>{t('logout')}</p>
                                     </li>
                                 </ul>
                             </div>
                         ) : (
                             <div className="flex font-bold">
                                 <NavLink to="/login" className="btn btn-ghost flex space-x-1 bg-info text-white mx-4">
-                                    <span>Đăng nhâp/Đăng ký</span>
+                                    <span>{t('login_register')}</span>
                                 </NavLink>
                             </div>
                         )}

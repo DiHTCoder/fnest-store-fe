@@ -1,17 +1,20 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-
-const links = [
-    { id: 1, url: '/', text: 'Trang chủ' },
-    { id: 2, url: 'products', text: 'Sản phẩm' },
-    { id: 3, url: 'about', text: 'Về chúng tôi' },
-    { id: 4, url: 'map', text: 'Bản đồ' },
-    { id: 5, url: 'checkout', text: 'Thanh toán' },
-    { id: 6, url: 'orders', text: 'Đơn hàng' },
-    { id: 7, url: 'creative', text: 'Góc sáng tạo' },
-];
+import { useTranslation } from 'react-i18next';
 
 const NavLinks = () => {
+    const { t } = useTranslation('translation');
+
+    const links = [
+        { id: 1, url: '/', text: t('homepage') },
+        { id: 2, url: 'products', text: t('products') },
+        { id: 3, url: 'about', text: t('about_us') },
+        { id: 4, url: 'map', text: t('map') },
+        { id: 5, url: 'checkout', text: t('purchase_orders') },
+        { id: 6, url: 'orders', text: t('purchase_orders') },
+        { id: 7, url: 'creative', text: t('creative') },
+    ];
+
     return (
         <>
             {links.map((link) => {

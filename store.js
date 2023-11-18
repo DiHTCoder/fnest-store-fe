@@ -2,6 +2,9 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import userReducer from './src/features/user/userSlice';
 import cartReducer from './src/features/cart/cartSlice';
 import addressReduce from './src/features/address/addressSlice';
+import favouriteReducer from './src/features/favourite/favouriteSlice';
+import productReducer from './src/features/product/productsSlice';
+import filtersReducer from './src/features/product/filtersSlice';
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 const persistConfig = {
@@ -9,7 +12,14 @@ const persistConfig = {
     version: 1,
     storage,
 };
-const rootReducer = combineReducers({ auth: userReducer, address: addressReduce, cart: cartReducer });
+const rootReducer = combineReducers({
+    auth: userReducer,
+    address: addressReduce,
+    cart: cartReducer,
+    favourite: favouriteReducer,
+    products: productReducer,
+    filters: filtersReducer,
+});
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({

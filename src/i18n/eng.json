@@ -1,0 +1,11 @@
+{
+    "homepage": "Home",
+    "products": "Products",
+    "about_us": "About Us",
+    "map": "Map",
+    "creative": "Creative Corner",
+    "login_register": "Log in/Sign up",
+    "profile": "Manage Account",
+    "purchase_orders": "Purchase Orders",
+    "logout": "Log out"
+}

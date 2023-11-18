@@ -11,18 +11,9 @@ const productServices = {
         return axiosClient.get(url);
     },
 
-    add(data) {
-        const url = `/products/${data.id}`;
-        return axiosClient.post(url, data);
-    },
-    update(data) {
-        const url = `/products/${data.id}`;
-        return axiosClient.patch(url, data);
-    },
-
-    remove(id) {
-        const url = `/products/${id}`;
-        return axiosClient.delete(url);
+    getAllProducts(name, currentPage, pageSize, sort, priceMin) {
+        const url = `product/search-filter?name.contains=${name}&currentPage=${currentPage}&pageSize=${pageSize}&sort=${sort}&price.min=${priceMin}`;
+        return axiosClient.get(url);
     },
 };
 

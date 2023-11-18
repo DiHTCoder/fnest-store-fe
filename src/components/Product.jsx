@@ -4,13 +4,18 @@ import { AiOutlineHeart } from 'react-icons/ai';
 import { Stars } from '.';
 import { formatPrice } from '../utils/helpers';
 import { useDispatch } from 'react-redux';
-import { addItemToCart } from '../features/cart/cartSlice';
+import { addItemToCart, getTotals } from '../features/cart/cartSlice';
+import { addItemToFavourite } from '../features/favourite/favouriteSlice';
 
 const Product = ({ product }) => {
     const dispatch = useDispatch();
     const formatedPrice = formatPrice(product.price);
     const handleAddToCart = () => {
-        dispatch(addItemToCart(product)); // Thêm sản phẩm vào giỏ hàng
+        dispatch(addItemToCart(product));
+        dispatch(getTotals());
+    };
+    const handleAddToFavourite = () => {
+        dispatch(addItemToFavourite(product)); // Thêm sản phẩm vào giỏ hàng
     };
 
     return (
@@ -26,9 +31,14 @@ const Product = ({ product }) => {
                     className="rounded-xl h-64 md:h-48 w-full object-cover"
                 />
                 <div className="flex">
-                    <span className="absolute top-2 right-2 p-1 text-white tracking-wide">
-                        <AiOutlineHeart className="w-[30px] h-[30px] hover:text-primary transition-colors duration-300" />
-                    </span>
+                    <button
+                        className="absolute top-2 right-2 p-1 text-white tracking-wide group"
+                        onClick={() => {
+                            handleAddToFavourite();
+                        }}
+                    >
+                        <AiOutlineHeart className="w-[30px] h-[30px] text-info transition duration-300 group-hover:text-red-500" />
+                    </button>
                     <span className="absolute top-2 left-2 badge badge-secondary text-white tracking-wide text-lg">
                         15%
                     </span>

@@ -23,7 +23,7 @@ const FeaturedProducts = () => {
                         </button>
                     );
                 })} */}
-                <ProductsGrid />
+                {/* <ProductsGrid /> */}
             </div>
 
             {/* {menuItems.map((menuItem) => {

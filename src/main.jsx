@@ -8,6 +8,7 @@ import { SidebarProvider } from './context/sidebar_context.jsx';
 import { store, persistor } from '../store.js';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import './i18n/i18n';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <Provider store={store}>
