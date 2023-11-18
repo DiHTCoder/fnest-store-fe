@@ -28,3 +28,6 @@ export { default as NavProfile } from './NavProfile';
 export { default as CartItemsList } from './CartItemsList';
 export { default as CartItem } from './CartItem';
 export { default as CartTotal } from './CartTotal';
+export { default as FavouriteList } from './FavouriteList';
+export { default as FavouriteItem } from './FavouriteItem';
+export { default as Banner } from './Bannner';

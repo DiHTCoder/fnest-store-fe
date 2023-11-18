@@ -19,3 +19,4 @@ export { default as ResetPassword } from './ResetPassword';
 export { default as Map } from './Map';
 export { default as ShoppingCart } from './ShoppingCart';
 export { default as UserAddress } from './UserAddress';
+export { default as Favourite } from './Favourite';

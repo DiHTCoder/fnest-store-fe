@@ -20,6 +20,7 @@ import {
     ResetPassword,
     Map,
     UserAddress,
+    Favourite,
 } from './pages/index';
 import { loader as landingLoader } from './pages/Landing';
 import { loader as singleProductLoader } from './pages/SingleProduct';
@@ -91,6 +92,11 @@ const router = createBrowserRouter([
             {
                 path: '/cart',
                 element: <Cart />,
+                errorElement: <ErrorElement />,
+            },
+            {
+                path: '/favourite',
+                element: <Favourite />,
                 errorElement: <ErrorElement />,
             },
             {
