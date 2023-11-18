@@ -3,7 +3,10 @@ import { createSlice } from '@reduxjs/toolkit';
 const productsSlice = createSlice({
     name: 'products',
     initialState: {
-        productsList: { content: [], currentPage: 0, totalPages: 0, isLoading: false },
+        content: [],
+        currentPage: 0,
+        totalPages: 0,
+        isLoading: false,
     },
     reducers: {
         setProductsList: (state, action) => {
