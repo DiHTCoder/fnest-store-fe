@@ -8,28 +8,44 @@ const defaultState = {
 };
 
 const getCartFromLocalStorage = () => {
-    return JSON.parse(localStorage.getItem('cartItems')) || defaultState;
+    return JSON.parse(localStorage.getItem('cartItems')) || defaultState.cartItems;
 };
 
 const cartSlice = createSlice({
     name: 'cart',
     initialState: getCartFromLocalStorage(),
     reducers: {
+        // addItemToCart: (state, action) => {
+        //     const existingIndex = state.cartItems.findIndex((item) => item.id === action.payload.id);
+        //     if (existingIndex >= 0) {
+        //         state.cartItems[existingIndex] = {
+        //             ...state.cartItems[existingIndex],
+        //             cartQuantity: state.cartItems[existingIndex].cartQuantity + 1,
+        //         };
+        //         toast.info('Số lượng sản phẩm đã được cập nhật!');
+        //     } else {
+        //         let tempProductItem = { ...action.payload, cartQuantity: 1 };
+        //         state.cartItems.push(tempProductItem);
+        //         toast.success('Sản phẩm đã được thêm vào giỏ hàng!');
+        //     }
+        //     localStorage.setItem('cartItems', JSON.stringify(state.cartItems));
+        // },
         addItemToCart: (state, action) => {
-            const existingIndex = state.cartItems.findIndex((item) => item.id === action.payload.id);
-            if (existingIndex >= 0) {
-                state.cartItems[existingIndex] = {
-                    ...state.cartItems[existingIndex],
-                    cartQuantity: state.cartItems[existingIndex].cartQuantity + 1,
-                };
+            const cartQuantity = action.payload.quantity !== undefined ? action.payload.quantity : 1;
+            const item = state.cartItems.find((i) => i.id === action.payload.id);
+
+            if (item) {
+                item.cartQuantity += cartQuantity;
                 toast.info('Số lượng sản phẩm đã được cập nhật!');
             } else {
-                let tempProductItem = { ...action.payload, cartQuantity: 1 };
+                const tempProductItem = { ...action.payload, cartQuantity: cartQuantity };
                 state.cartItems.push(tempProductItem);
                 toast.success('Sản phẩm đã được thêm vào giỏ hàng!');
             }
+
             localStorage.setItem('cartItems', JSON.stringify(state.cartItems));
         },
+
         decreaseCart(state, action) {
             const itemIndex = state.cartItems.findIndex((item) => item.id === action.payload.id);
 

@@ -73,9 +73,15 @@ const TopHeader = () => {
                         <NavLink to="/cart" className="btn btn-ghost btn-circle btn-md text-white">
                             <div className="indicator">
                                 <BsCart3 className="h-6 w-6" />
-                                <span className="badge badge-sm badge-primary indicator-item text-white">
-                                    {cartTotalQuantity}
-                                </span>
+                                {cartTotalQuantity > 0 ? (
+                                    <>
+                                        <span className="badge badge-sm badge-primary indicator-item text-white">
+                                            {cartTotalQuantity}
+                                        </span>
+                                    </>
+                                ) : (
+                                    <></>
+                                )}
                             </div>
                         </NavLink>
 

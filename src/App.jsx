@@ -26,7 +26,6 @@ import {
     CollectionDetail,
 } from './pages/index';
 import { loader as landingLoader } from './pages/Landing';
-import { loader as singleProductLoader } from './pages/SingleProduct';
 import { ErrorElement } from './components';
 
 const router = createBrowserRouter([
@@ -55,7 +54,6 @@ const router = createBrowserRouter([
                 path: 'products/:id',
                 element: <SingleProduct />,
                 errorElement: <ErrorElement />,
-                loader: singleProductLoader,
             },
             {
                 path: 'profile',

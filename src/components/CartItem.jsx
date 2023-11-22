@@ -39,7 +39,6 @@ const CartItem = ({ item }) => {
                 <div className="mt-2 flex items-center justify-between">
                     <div className="sm:ml-12">
                         {/* AMOUNT */}
-
                         <div class="flex items-center border-gray-100">
                             <button
                                 class="btn btn-ghost"

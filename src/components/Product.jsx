@@ -15,27 +15,26 @@ const Product = ({ product }) => {
         dispatch(addItemToCart(product));
         dispatch(getTotals());
     };
-    const handleAddToFavourite = () => {
+    const handleAddToFavourite = (e) => {
+        e.preventDefault();
         dispatch(addItemToFavourite(product)); // Thêm sản phẩm vào giỏ hàng
     };
 
     return (
-        <div
-            key={product.id}
-            to={`/products/${product.id}`}
-            className="card w-full hover:shadow-xl ease-in-out duration-300 bg-white"
-        >
-            <figure className="px-2 pt-2 relative">
-                <img
-                    src={product.thumbnail}
-                    alt={product.name}
-                    className="rounded-xl h-64 md:h-48 w-full object-cover"
-                />
+        <div key={product.id} className="card w-full hover:shadow-xl ease-in-out duration-300 bg-white">
+            <Link to={`/products/${product.id}`}>
+                <figure className="px-2 pt-2 relative">
+                    <img
+                        src={product.thumbnail}
+                        alt={product.name}
+                        className="rounded-xl h-64 md:h-48 w-full object-cover"
+                    />
+                </figure>
                 <div className="flex">
                     <button
-                        className="absolute top-2 right-2 p-1 text-white tracking-wide group"
-                        onClick={() => {
-                            handleAddToFavourite();
+                        className="absolute btn btn-circle bg-white top-2 right-2 p-1 text-white tracking-wide group"
+                        onClick={(e) => {
+                            handleAddToFavourite(e);
                         }}
                     >
                         <AiOutlineHeart className="w-[30px] h-[30px] text-info transition duration-300 group-hover:text-red-500" />
@@ -44,22 +43,21 @@ const Product = ({ product }) => {
                         15%
                     </span>
                 </div>
-            </figure>
-            <div className="card-body">
-                <div className="flex">
-                    <h2 className="card-title capitalize ">{product.name}</h2>
-                    <div className="badge badge-secondary text-white">NEW</div>
+                <div className="card-body">
+                    <div className="flex min-h-[84px]">
+                        <h2 className="card-title capitalize ">{product.name}</h2>
+                        <div className="badge badge-secondary text-white">NEW</div>
+                    </div>
+                    <div className="flex justify-between">
+                        <span className="text-secondary text-left">{formatedPrice}</span>
+                        <span className=" text-left line-through">{formatedPrice}</span>
+                    </div>
+                    <div className="flex justify-between">
+                        <Stars />
+                        <div>SL: {product.inStock}</div>
+                    </div>
                 </div>
-                <div className="flex justify-between">
-                    <span className="text-secondary text-left">{formatedPrice}</span>
-                    <span className=" text-left line-through">{formatedPrice}</span>
-                </div>
-                <div className="flex justify-between">
-                    <Stars />
-                    <div>SL: {product.inStock}</div>
-                </div>
-            </div>
-
+            </Link>
             <div
                 onClick={() => {
                     handleAddToCart();

@@ -7,7 +7,7 @@ const productServices = {
     },
 
     getProductDetail(id) {
-        const url = `/products/${id}`;
+        const url = `/product/${id}`;
         return axiosClient.get(url);
     },
 
