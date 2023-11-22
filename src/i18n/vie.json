@@ -3,9 +3,11 @@
     "products": "Sản phẩm",
     "about_us": "Về chúng tôi",
     "map": "Bản đồ",
+    "rooms": "Phòng",
     "creative": "Góc sáng tạo",
-    "login_register": "Đăng nhập/Đăng ký",
+    "login_register": "Đăng nhập",
     "profile": "Quản lý tài khoản",
+    "collections": "Bộ sưu tập",
     "purchase_orders": "Đơn mua",
     "logout": "Đăng xuất"
 }

@@ -1,11 +1,12 @@
 import { Outlet, useNavigation } from 'react-router-dom';
-import { Header, Footer, Loading, Sliders } from '../components';
+import { Header, Footer, Loading, Sliders, TopHeader } from '../components';
 
 const HomeLayout = () => {
     const navigation = useNavigation();
     const isPageLoading = navigation.state === 'loading';
     return (
         <>
+            <TopHeader />
             <Header />
             {isPageLoading ? (
                 <Loading />

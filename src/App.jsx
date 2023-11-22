@@ -21,6 +21,7 @@ import {
     Map,
     UserAddress,
     Favourite,
+    Rooms,
 } from './pages/index';
 import { loader as landingLoader } from './pages/Landing';
 import { loader as singleProductLoader } from './pages/SingleProduct';
@@ -97,6 +98,11 @@ const router = createBrowserRouter([
             {
                 path: '/favourite',
                 element: <Favourite />,
+                errorElement: <ErrorElement />,
+            },
+            {
+                path: '/rooms/:roomId',
+                element: <Rooms />,
                 errorElement: <ErrorElement />,
             },
             {

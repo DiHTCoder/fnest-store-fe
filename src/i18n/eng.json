@@ -3,9 +3,11 @@
     "products": "Products",
     "about_us": "About Us",
     "map": "Map",
+    "rooms": "Rooms",
     "creative": "Creative Corner",
-    "login_register": "Log in/Sign up",
+    "login_register": "Log in",
     "profile": "Manage Account",
+    "collections": "Collections",
     "purchase_orders": "Purchase Orders",
     "logout": "Log out"
 }

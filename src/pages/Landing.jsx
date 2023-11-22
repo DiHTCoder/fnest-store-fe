@@ -1,5 +1,16 @@
-import { Sliders, EvaluateSlider, FeaturedProducts, Title, Stylist, Services } from '../components';
-import productServices from '../services/productServices'; // Import hàm productsapi
+import {
+    Sliders,
+    EvaluateSlider,
+    FeaturedProducts,
+    Title,
+    Stylist,
+    Services,
+    Contact,
+    Purpose,
+    Collection,
+    Inspiration,
+} from '../components';
+import productServices from '../services/productServices';
 
 export const loader = async () => {
     const response = await productServices.getFeaturedProducts();
@@ -14,12 +25,19 @@ const Landing = () => {
                 <Sliders />
                 <Title text="Ưu đãi tốt" />
                 <FeaturedProducts />
-                <Title text="Đánh giá thực tế" />
-                <EvaluateSlider />
-                <Title text="Dịch vụ" />
-                <Services />
+                <Title text="Mục tiêu" />
+                <Purpose />
+                <Title text="Bộ sưu tập" />
+                <Collection />
                 <Title text=" Gợi ý phong cách thiết kế đẹp" />
                 <Stylist />
+                <Contact />
+                <Title text="Đánh giá" />
+                <EvaluateSlider />
+                <Title text="Góc cảm hứng" />
+                <Inspiration />
+                <Title text="Dịch vụ" />
+                <Services />
             </div>
         </main>
     );
