@@ -37,3 +37,4 @@ export { default as TopHeader } from './TopHeader';
 export { default as Purpose } from './Purpose';
 export { default as Collection } from './Collection';
 export { default as Inspiration } from './Inspiration';
+export { default as CollectionsContainer } from './CollectionsContainer';

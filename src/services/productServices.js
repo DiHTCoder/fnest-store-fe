@@ -19,6 +19,10 @@ const productServices = {
         const url = `product/by-category?categoryName=${categoryName}&currentPage=${currentPage}&pageSize=${pageSize}&sort=${sort}`;
         return axiosClient.get(url);
     },
+    getProductsByCollection(id, currentPage, pageSize, sort) {
+        const url = `product/by-collection?id=${id}&currentPage=${currentPage}&pageSize=${pageSize}&sort=${sort}`;
+        return axiosClient.get(url);
+    },
 };
 
 export default productServices;
