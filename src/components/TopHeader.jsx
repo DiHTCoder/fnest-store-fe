@@ -34,9 +34,9 @@ const TopHeader = () => {
         navigate('/');
     };
     return (
-        <div className="bg-info border-b-[1px] text-white">
+        <div className="bg-info border-b-[1px] ">
             <section className="flex align-element justify-between items-center ">
-                <div className="items-start">
+                <div className="items-start text-white">
                     <div className="flex items-center">
                         <span className="text-sm uppercase font-bold">{currentLanguage}</span>
                         <div className="btn btn-ghost btn-circle btn-sm" onClick={changeLanguage}>
@@ -58,19 +58,19 @@ const TopHeader = () => {
                         </div>
                     </div>
                 </div>
-                <div className="items-end">
-                    <div className="flex items-center gap-2">
-                        <NavLink to="/favourite" className="btn btn-ghost btn-circle btn-md">
+                <div className="items-end ">
+                    <div className="flex items-center gap-2 ">
+                        <NavLink to="/favourite" className="btn btn-ghost btn-circle btn-md text-white">
                             <div className="indicator">
                                 <CiLocationOn className="h-8 w-8" />
                             </div>
                         </NavLink>
-                        <NavLink to="/favourite" className="btn btn-ghost btn-circle btn-md">
+                        <NavLink to="/favourite" className="btn btn-ghost btn-circle btn-md text-white">
                             <div className="indicator">
                                 <BsHeart className="h-6 w-6" />
                             </div>
                         </NavLink>
-                        <NavLink to="/cart" className="btn btn-ghost btn-circle btn-md ">
+                        <NavLink to="/cart" className="btn btn-ghost btn-circle btn-md text-white">
                             <div className="indicator">
                                 <BsCart3 className="h-6 w-6" />
                                 <span className="badge badge-sm badge-primary indicator-item text-white">
@@ -87,11 +87,11 @@ const TopHeader = () => {
                                             <img src="https://cdn5.vectorstock.com/i/1000x1000/51/99/icon-of-user-avatar-for-web-site-or-mobile-app-vector-3125199.jpg" />
                                         </div>
                                     </div>
-                                    <h1 className="font-bold">Hi,{user?.username}</h1>
+                                    <h1 className="font-bold text-white">Hi,{user?.username}</h1>
                                 </label>
                                 <ul
                                     tabIndex={0}
-                                    className="dropdown-content z-[100] menu shadow bg-base-100 rounded-box w-52 "
+                                    className="dropdown-content z-[100] menu shadow bg-base-100 rounded-box w-52"
                                 >
                                     <li>
                                         <NavLink to="/profile">{t('profile')}</NavLink>
@@ -106,7 +106,7 @@ const TopHeader = () => {
                             </div>
                         ) : (
                             <div className="flex ">
-                                <NavLink to="/login" className="flex space-x-1 items-center justify-center">
+                                <NavLink to="/login" className="flex space-x-1 items-center justify-center text-white">
                                     <CiUser className="w-6 h-6" /> <span>{t('login_register')}</span>
                                 </NavLink>
                             </div>

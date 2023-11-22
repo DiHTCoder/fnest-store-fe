@@ -1,10 +1,10 @@
 import { Banner, ProductsContainer } from '../components';
-import banner2 from '../assets/banner/banner-2.jpg';
+import banner3 from '../assets/product/products.jpg';
 
 const Products = () => {
     return (
         <>
-            <Banner name="Sản phẩm" url="products" image={banner2} />
+            <Banner name="Sản phẩm" url="products" image={banner3} />
             <ProductsContainer />
         </>
     );

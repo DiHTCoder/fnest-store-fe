@@ -6,6 +6,7 @@ import { formatPrice } from '../utils/helpers';
 import { useDispatch } from 'react-redux';
 import { addItemToCart, getTotals } from '../features/cart/cartSlice';
 import { addItemToFavourite } from '../features/favourite/favouriteSlice';
+import { IoMdAddCircleOutline } from 'react-icons/io';
 
 const Product = ({ product }) => {
     const dispatch = useDispatch();
@@ -50,24 +51,23 @@ const Product = ({ product }) => {
                     <div className="badge badge-secondary text-white">NEW</div>
                 </div>
                 <div className="flex justify-between">
-                    <span className="text-secondary text-left">Giá:{formatedPrice}</span>
+                    <span className="text-secondary text-left">{formatedPrice}</span>
                     <span className=" text-left line-through">{formatedPrice}</span>
                 </div>
                 <div className="flex justify-between">
                     <Stars />
-                    <div>Còn lại: {product.inStock}</div>
+                    <div>SL: {product.inStock}</div>
                 </div>
             </div>
-            <div className="flex justify-between">
-                <button
-                    className="btn btn-outline btn-info"
-                    onClick={() => {
-                        handleAddToCart();
-                    }}
-                >
-                    Thêm vào giỏ hàng
-                </button>
-                <button className="btn">Xem thêm</button>
+
+            <div
+                onClick={() => {
+                    handleAddToCart();
+                }}
+                class="flex items-center justify-center rounded-md bg-info px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-500 focus:outline-none focus:ring-4 focus:ring-blue-300"
+            >
+                <IoMdAddCircleOutline className="w-6 h-6" />
+                Thêm vào giỏ hàng
             </div>
         </div>
     );
