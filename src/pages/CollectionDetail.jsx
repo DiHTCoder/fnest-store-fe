@@ -1,63 +1,61 @@
 import React from 'react';
-import { ProductsGrid, Pagination, ProductsList, Loading, Filters } from '../components';
-import { useDispatch, useSelector } from 'react-redux';
-import { BsFillGridFill, BsList } from 'react-icons/bs';
+import { useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
 import productServices from '../services/productServices';
-import { setProductsList } from '../features/product/productsSlice';
-import { useEffect, useState } from 'react';
-const ProductsContainer = () => {
-    const dispatch = useDispatch();
+import collectionServices from '../services/collectionServices';
+import { Filters, Loading, Banner, ProductsGrid, ProductsList } from '../components';
+import { BsFillGridFill, BsList } from 'react-icons/bs';
 
-    const data = useSelector((state) => state.products);
-    const filters = useSelector((state) => state.filters);
+const CollectionDetail = () => {
+    const selectedCollection = useSelector((stata) => stata.collections.selectedCollection);
+    const [products, setProducts] = useState([]);
+    const [collection, setCollection] = useState({});
     const [layout, setLayout] = useState('grid');
+    console.log(products);
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        setIsLoading(true);
-        const getProducts = async () => {
+        const fetchRoomById = async () => {
+            setIsLoading(true);
             try {
-                const products = await productServices.getAllProducts(
-                    filters.search,
+                const respProducts = await productServices.getProductsByCollection(
+                    selectedCollection,
                     0,
-                    10,
-                    filters.sortBy,
-                    filters.priceMin,
+                    12,
+                    'name.desc',
                 );
-                dispatch(setProductsList(products.data));
+                const respCollection = await collectionServices.getCollectionById(selectedCollection);
+                setProducts(respProducts.data);
+                setCollection(respCollection.data);
                 setIsLoading(false);
             } catch (error) {
-                console.error('Error fetching products:', error);
+                console.error('Lỗi khi lấy dữ liệu:', error);
+                setIsLoading(false);
             }
         };
-        getProducts();
-    }, [dispatch, filters]);
+        fetchRoomById();
+    }, [selectedCollection]);
 
     const setActiveStyles = (pattern) => {
         return `text-xl btn btn-circle btn-sm ${
             pattern === layout ? 'btn-info text-white' : 'btn-ghost text-based-content'
         }`;
     };
-    const handlePageChange = async (page) => {
-        setIsLoading(true);
-        try {
-            const products = await productServices.getAllProducts('', page, 2, 'name.desc');
-            setIsLoading(false);
 
-            dispatch(setProductsList(products.data));
-        } catch (error) {
-            console.error('Lỗi khi lấy dữ liệu sản phẩm:', error);
-        }
-    };
     return (
         <>
             {isLoading ? (
                 <Loading />
             ) : (
                 <>
+                    <Banner
+                        name={`Bộ sưu tập ${collection.name}`}
+                        url={`collections/${collection.id}`}
+                        image={collection.imageUrl}
+                    />
                     <Filters />
                     <div className="flex justify-between items-center my-3 border-b border-base-300 py-5">
-                        <h2 className="text-lg font-bold">Tất cả sản phẩm của cửa hàng</h2>
+                        <h2 className="text-lg font-bold">Tất cả sản phẩm của bộ sưu tập</h2>
                         <div className="flex items-center gap-3">
                             <div className="flex gap-x-4">
                                 <button
@@ -76,27 +74,18 @@ const ProductsContainer = () => {
                                 </button>
                             </div>
                             <h2 className="font-medium">
-                                ( Có {data ? data.content.length : 0} sản phẩm được tìm thấy)
+                                {/* ( Có {products ? products.content.length : 0} sản phẩm được tìm thấy) */}
                             </h2>
                         </div>
                     </div>
-                    {data ? (
+                    {products.content != null ? (
                         layout === 'grid' ? (
-                            <ProductsGrid products={data} columns="4" />
+                            <ProductsGrid products={products} />
                         ) : (
-                            <ProductsList products={data} />
+                            <ProductsList products={products} />
                         )
                     ) : (
                         <h2>Không có sản phẩm nào</h2>
-                    )}
-                    {data.totalPages > 1 ? (
-                        <Pagination
-                            totalPages={data.totalPages}
-                            currentPage={data.currentPage}
-                            onPageChange={handlePageChange}
-                        />
-                    ) : (
-                        <></>
                     )}
                 </>
             )}
@@ -104,4 +93,4 @@ const ProductsContainer = () => {
     );
 };
 
-export default ProductsContainer;
+export default CollectionDetail;

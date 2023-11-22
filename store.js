@@ -5,6 +5,7 @@ import addressReduce from './src/features/address/addressSlice';
 import favouriteReducer from './src/features/favourite/favouriteSlice';
 import productReducer from './src/features/product/productsSlice';
 import roomReducer from './src/features/room/roomSilce';
+import collectionReducer from './src/features/collection/collectionsSlice';
 import filtersReducer from './src/features/product/filtersSlice';
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
     products: productReducer,
     rooms: roomReducer,
     filters: filtersReducer,
+    collections: collectionReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

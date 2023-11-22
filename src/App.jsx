@@ -22,6 +22,8 @@ import {
     UserAddress,
     Favourite,
     Rooms,
+    Collections,
+    CollectionDetail,
 } from './pages/index';
 import { loader as landingLoader } from './pages/Landing';
 import { loader as singleProductLoader } from './pages/SingleProduct';
@@ -42,6 +44,11 @@ const router = createBrowserRouter([
             {
                 path: '/products',
                 element: <Products />,
+                errorElement: <ErrorElement />,
+            },
+            {
+                path: '/collections',
+                element: <Collections />,
                 errorElement: <ErrorElement />,
             },
             {
@@ -103,6 +110,11 @@ const router = createBrowserRouter([
             {
                 path: '/rooms/:roomId',
                 element: <Rooms />,
+                errorElement: <ErrorElement />,
+            },
+            {
+                path: '/collections/:collectionsId',
+                element: <CollectionDetail />,
                 errorElement: <ErrorElement />,
             },
             {

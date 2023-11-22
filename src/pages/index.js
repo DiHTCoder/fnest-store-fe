@@ -21,3 +21,5 @@ export { default as ShoppingCart } from './ShoppingCart';
 export { default as UserAddress } from './UserAddress';
 export { default as Favourite } from './Favourite';
 export { default as Rooms } from './Rooms';
+export { default as Collections } from './Collections';
+export { default as CollectionDetail } from './CollectionDetail';
