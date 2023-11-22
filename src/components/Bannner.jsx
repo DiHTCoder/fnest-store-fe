@@ -2,7 +2,7 @@ import React from 'react';
 import { Breadcrumb } from '../components';
 const Bannner = ({ name, image, url }) => {
     return (
-        <div className="carousel w-full h-[440px]">
+        <div className="carousel w-full h-[450px]">
             <div className="carousel-item relative w-full flex items-center justify-center">
                 <div className="absolute inset-0 brightness-75">
                     <img src={image} className="w-full h-full object-cover" alt="Banner" draggable="false" />
