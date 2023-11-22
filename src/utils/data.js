@@ -71,30 +71,16 @@ const people = [
     {
         id: 1,
         image: banner3,
-        name: 'maria ferguson',
-        title: 'office manager',
-        quote: 'Fingerstache umami squid, kinfolk subway tile selvage tumblr man braid viral kombucha gentrify fanny pack raclette pok pok mustache.',
+        name: 'Huỳnh Tiến Dĩ',
+        title: 'Quản lý cửa hàng',
+        quote: 'Nghệ thuật của sự ấm áp và thoải mái, nơi mà nội thất trở thành ngôn ngữ của không gian sống của bạn.Chúng tôi không chỉ cung cấp đồ nội thất - chúng tôi là nguồn cảm hứng để bạn tạo ra không gian sống hoàn hảo.',
     },
     {
         id: 2,
         image: banner1,
-        name: 'john doe',
-        title: 'regular guy',
-        quote: 'Gastropub sustainable tousled prism occupy. Viral XOXO roof party brunch actually, chambray listicle microdosing put a bird on it paleo subway tile squid umami.',
-    },
-    {
-        id: 3,
-        image: banner2,
-        name: 'peter smith',
-        title: 'product designer',
-        quote: 'Drinking vinegar polaroid street art echo park, actually semiotics next level butcher master cleanse hammock flexitarian ethical paleo.',
-    },
-    {
-        id: 4,
-        image: banner4,
-        name: 'susan andersen',
-        title: 'the boss',
-        quote: 'Marfa af yr 3 wolf moon kogi, readymade distillery asymmetrical seitan kale chips fingerstache cloud bread mustache twee messenger bag. ',
+        name: 'Nguyễn Ngọc Duy',
+        title: 'CEO',
+        quote: 'Mỗi sản phẩm nội thất là một bức tranh trong câu chuyện của bạn, và chúng tôi giúp bạn viết nên những câu chuyện tuyệt vời. Trải nghiệm cuộc sống hiện đại và ấm cúng với sự tinh tế của bộ sưu tập nội thất đa dạng của chúng tôi',
     },
 ];
 export default people;

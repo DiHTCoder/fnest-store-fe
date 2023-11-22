@@ -12,9 +12,7 @@ const Footer = () => {
         <footer className="footer footer-center p-10 bg-white text-primary-content">
             <div className="grid grid-cols-4 gap-3 align-element">
                 <div className="h-full p-4 bg-neutral rounded w-full">
-                    <h2 className="text-xl font-semibold text-left">
-                        Đa dạng thanh toán
-                    </h2>
+                    <h2 className="text-xl font-semibold text-left">Đa dạng thanh toán</h2>
                     <div className="mt-3 flex flex-col space-y-2">
                         <div className="flex items-center space-x-3">
                             <PiSwapFill className="w-4 h-4 i-semi-sync text-primary" />
@@ -36,9 +34,7 @@ const Footer = () => {
                 </div>
 
                 <div className="h-full p-4 bg-neutral rounded w-full">
-                    <h2 className="text-xl font-semibold text-left">
-                        Thông tin hữu ích
-                    </h2>
+                    <h2 className="text-xl font-semibold text-left">Thông tin hữu ích</h2>
                     <div className="mt-3 flex flex-col space-y-2">
                         <div className="flex items-center space-x-3">
                             <TbSettingsCheck className="w-4 h-4 i-semi-sync text-primary" />
@@ -54,25 +50,19 @@ const Footer = () => {
                     <div className="mt-3 flex flex-col space-y-2">
                         <div className="flex items-center space-x-3">
                             <LiaShippingFastSolid className="w-4 h-4 i-semi-sync text-primary" />
-                            <span className="text-md">
-                                Chính sách vận chuyển
-                            </span>
+                            <span className="text-md">Chính sách vận chuyển</span>
                         </div>
                     </div>
                     <div className="mt-3 flex flex-col space-y-2">
                         <div className="flex items-center space-x-3">
                             <BsCashCoin className="w-4 h-4 i-semi-sync text-primary" />
-                            <span className="text-md">
-                                Chính sách thanh toán
-                            </span>
+                            <span className="text-md">Chính sách thanh toán</span>
                         </div>
                     </div>
                     <div className="mt-3 flex flex-col space-y-2">
                         <div className="flex items-center space-x-3">
                             <AiOutlineScan className="w-4 h-4 i-semi-sync text-primary" />
-                            <span className="text-md">
-                                Chính sách kiểm hàng
-                            </span>
+                            <span className="text-md">Chính sách kiểm hàng</span>
                         </div>
                     </div>
                     <div className="mt-3 flex flex-col space-y-2">
@@ -83,9 +73,7 @@ const Footer = () => {
                     </div>
                 </div>
                 <div className="h-full p-4 bg-neutral rounded w-full">
-                    <h2 className="text-xl font-semibold text-left">
-                        Mạng xã hội
-                    </h2>
+                    <h2 className="text-xl font-semibold text-left">Mạng xã hội</h2>
                     <div className="mt-3 flex flex-col space-y-2">
                         <div className="flex items-center space-x-3">
                             <AiFillFacebook className="w-4 h-4 i-semi-sync text-primary" />
@@ -106,19 +94,14 @@ const Footer = () => {
                     </div>
                 </div>
                 <div className="h-full p-4 bg-neutral rounded w-full">
-                    <h2 className="text-xl font-semibold text-left">
-                        Phản hồi, góp ý, khiếu nại
-                    </h2>
+                    <h2 className="text-xl font-semibold text-left">Phản hồi, góp ý, khiếu nại</h2>
                     <p className="text-left py-2">
-                        Phản hồi nóng về chất lượng sản phẩm và dịch vụ. Đội ngũ
-                        Kiểm Soát Chất Lượng của chúng tôi sẵn sàng lắng nghe
-                        quý khách.
+                        Phản hồi nóng về chất lượng sản phẩm và dịch vụ. Đội ngũ Kiểm Soát Chất Lượng của chúng tôi sẵn
+                        sàng lắng nghe quý khách.
                     </p>
                     <div className="mt-4">
                         <NavLink to="/contact">
-                            <button className="btn btn-ghost bg-primary text-white">
-                                Gửi phản hồi ngay
-                            </button>
+                            <button className="btn btn-ghost bg-primary text-white">Gửi phản hồi ngay</button>
                         </NavLink>
                     </div>
                 </div>

@@ -1,38 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { logOutSuccess } from '../features/user/userSlice';
-import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Logo from '../assets/Logo1.png';
-import { BsCart3 } from 'react-icons/bs';
 import { NavLinks } from '.';
 import { FaBarsStaggered } from 'react-icons/fa6';
-import { BsHeart } from 'react-icons/bs';
-import vie from '../assets/flag/vi-flag.png';
-import eng from '../assets/flag/en-flag.png';
-import { useTranslation } from 'react-i18next';
-import i18n from 'i18next';
 
 export const Header = () => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-
-    const { t } = useTranslation('translation');
-
-    const user = useSelector((state) => state.auth.login?.currentUser);
-
     const { cartTotalQuantity } = useSelector((state) => state.cart);
     const HEADER_TRANSPARENT_DISTANCE = 250;
     const [scrollY, setScrollY] = useState(0);
-    const [currentLanguage, setCurrentLanguage] = useState('vie');
-    const [flagImage, setFlagImage] = useState(vie);
-
-    const changeLanguage = () => {
-        const newLanguage = currentLanguage === 'eng' ? 'vie' : 'eng';
-        setCurrentLanguage(newLanguage);
-        setFlagImage(newLanguage === 'eng' ? eng : vie);
-        i18n.changeLanguage(newLanguage);
-    };
 
     useEffect(() => {
         const handleScroll = () => {
@@ -46,93 +22,67 @@ export const Header = () => {
         };
     }, []);
 
-    const handleLogout = () => {
-        dispatch(logOutSuccess());
-        navigate('/');
-    };
-
     return (
-        <header
-            className="sticky transition-all ease-in left-0 right-0 top-0 z-30 flex h-[64px] items-center justify-center bg-base-100 bg-opacity-90 backdrop-blur text-base-content  md:h-[74px] lg:h-[88px]
-            duration-100 [transform:translate3d(0,0,0)] shadow"
-        >
-            <div className="navbar hidden h-full max-w-screen-xl px-4 py-2 md:flex lg:py-3">
-                <div className="navbar">
-                    <div className="navbar-start">
-                        <div className="dropdown">
-                            <label tabIndex={0} className="btn btn-ghost lg:hidden">
-                                <FaBarsStaggered className="h-6 w-6" />
-                            </label>
-                            <ul
-                                tabIndex={0}
-                                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-200 rounded-box w-52"
-                            ></ul>
-                        </div>
-                        <NavLink to="/" className="w-[200px]">
-                            <img src={Logo} alt="" />
-                        </NavLink>
-                    </div>
-                    <div className="navbar-center hidden lg:flex">
-                        <ul className="flex align-center justify-center">
-                            <NavLinks />
-                        </ul>
-                    </div>
-                    <div className="navbar-end">
-                        <div className="btn btn-ghost btn-circle btn-md ml-4" onClick={changeLanguage}>
-                            <div className="indicator">
-                                <img src={flagImage} alt="" />
-                            </div>
-                        </div>
-
-                        <NavLink to="/favourite" className="btn btn-ghost btn-circle btn-md ml-4">
-                            <div className="indicator">
-                                <BsHeart className="h-8 w-8" />
-                            </div>
-                        </NavLink>
-                        <NavLink to="/cart" className="btn btn-ghost btn-circle btn-md ml-4">
-                            <div className="indicator">
-                                <BsCart3 className="h-8 w-8" />
-                                <span className="badge badge-sm badge-primary indicator-item text-white">
-                                    {cartTotalQuantity}
-                                </span>
-                            </div>
-                        </NavLink>
-                        {user ? (
-                            <div className="dropdown dropdown-hover mx-4">
-                                <label tabIndex={0} className="flex justify-center items-center space-x-1 ">
-                                    <div className="avatar online">
-                                        <div className="w-10 rounded-full">
-                                            <img src="https://cdn5.vectorstock.com/i/1000x1000/51/99/icon-of-user-avatar-for-web-site-or-mobile-app-vector-3125199.jpg" />
-                                        </div>
-                                    </div>
-                                    <h1 className="font-bold">Hi,{user?.username}</h1>
+        <>
+            <header
+                className="sticky transition-all ease-in left-0 right-0 top-0 z-30 flex h-[64px] items-center justify-center bg-base-100 bg-opacity-90 backdrop-blur text-base-content  md:h-[74px] lg:h-[100px]
+        duration-100 [transform:translate3d(0,0,0)] shadow"
+            >
+                <div className="navbar hidden h-full max-w-screen-xl px-4 py-2 md:flex lg:py-3">
+                    <div className="navbar">
+                        <div className="navbar-start">
+                            <div className="dropdown">
+                                <label tabIndex={0} className="btn btn-ghost lg:hidden">
+                                    <FaBarsStaggered className="h-6 w-6" />
                                 </label>
                                 <ul
                                     tabIndex={0}
-                                    className="dropdown-content z-[2] menu shadow bg-base-100 rounded-box w-52"
-                                >
-                                    <li>
-                                        <NavLink to="/profile">{t('profile')}</NavLink>
-                                    </li>
-                                    <li>
-                                        <a>{t('purchase_orders')}</a>
-                                    </li>
-                                    <li>
-                                        <p onClick={handleLogout}>{t('logout')}</p>
-                                    </li>
-                                </ul>
+                                    className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-200 rounded-box w-52"
+                                ></ul>
                             </div>
-                        ) : (
-                            <div className="flex font-bold">
-                                <NavLink to="/login" className="btn btn-ghost flex space-x-1 bg-info text-white mx-4">
-                                    <span>{t('login_register')}</span>
-                                </NavLink>
-                            </div>
-                        )}
+                            <NavLink to="/" className="w-[200px]">
+                                <img src={Logo} alt="" />
+                            </NavLink>
+                        </div>
+                        <div className="navbar-center hidden lg:flex">
+                            <ul className="flex align-center justify-center">
+                                <NavLinks />
+                            </ul>
+                        </div>
+                        <div className="navbar-end">
+                            <form>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                        <svg
+                                            class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                                            aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 20 20"
+                                        >
+                                            <path
+                                                stroke="currentColor"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                                            />
+                                        </svg>
+                                    </div>
+                                    <input
+                                        type="search"
+                                        id="default-search"
+                                        class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="Tìm kiếm..."
+                                        required
+                                    />
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </header>
+            </header>
+        </>
     );
 };
 export default Header;

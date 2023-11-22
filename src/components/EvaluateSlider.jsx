@@ -39,13 +39,9 @@ const EvaluateSlider = () => {
 
                     return (
                         <article className={position} key={id}>
-                            <img
-                                src={image}
-                                alt={name}
-                                className="person-img"
-                            />
-                            <h4>{name}</h4>
-                            <p className="title">{title}</p>
+                            <img src={image} alt={name} className="person-img" />
+                            <h4 className="font-bold text-xl">{name}</h4>
+                            <p className="title text-secondary">{title}</p>
                             <p className="text">{quote}</p>
                         </article>
                     );

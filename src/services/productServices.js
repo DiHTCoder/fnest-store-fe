@@ -15,6 +15,10 @@ const productServices = {
         const url = `product/search-filter?name.contains=${name}&currentPage=${currentPage}&pageSize=${pageSize}&sort=${sort}&price.min=${priceMin}`;
         return axiosClient.get(url);
     },
+    getProductsByCategory(categoryName, currentPage, pageSize, sort) {
+        const url = `product/by-category?categoryName=${categoryName}&currentPage=${currentPage}&pageSize=${pageSize}&sort=${sort}`;
+        return axiosClient.get(url);
+    },
 };
 
 export default productServices;

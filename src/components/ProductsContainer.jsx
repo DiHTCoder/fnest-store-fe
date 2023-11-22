@@ -82,7 +82,7 @@ const ProductsContainer = () => {
                     </div>
                     {data ? (
                         layout === 'grid' ? (
-                            <ProductsGrid products={data} />
+                            <ProductsGrid products={data} columns="4" />
                         ) : (
                             <ProductsList products={data} />
                         )
