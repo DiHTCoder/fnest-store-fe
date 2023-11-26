@@ -2,11 +2,8 @@ import React from 'react';
 
 import table from '../assets/images/table.png';
 
-
 const Stylist = () => {
-   
     return (
-
         <section aria-labelledby="home" class="relative">
             <div class="flex flex-wrap-reverse gap-8 justify-center">
                 <div class="flex gap-6 flex-wrap flex-col items-start lg:justify-center">
@@ -64,7 +61,7 @@ const Stylist = () => {
             ></div>
             <div
                 class="
-            bg-teal-900
+            bg-info
             h-24
             xl:h-48
             -mx-8 

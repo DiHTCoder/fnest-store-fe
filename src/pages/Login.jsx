@@ -9,16 +9,19 @@ import { loginSuccess, setToken, getProfileSuccess } from '../features/user/user
 import { useDispatch } from 'react-redux';
 import { FcGoogle } from 'react-icons/fc';
 import userServices from '../services/userServices';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const Login = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [isLoading, setIsLoading] = useState(false);
 
     //Login by username and password
     const handleSubmit = async (values) => {
+        setIsLoading(true);
         try {
             const resp = await userServices.login(values.email, values.password);
+            setIsLoading(false);
             if (resp.messages && resp.messages.length > 0) {
                 dispatch(loginSuccess(resp.data.user));
                 dispatch(setToken(resp.data.accessToken));
@@ -26,6 +29,7 @@ const Login = () => {
                 navigate('/');
             }
         } catch (error) {
+            setIsLoading(false);
             if (error.response && error.response.data && error.response.data.messages) {
                 const errorMessages = error.response.data.messages;
                 toast.error(errorMessages.join(', ')); // Display error messages from the response
@@ -111,16 +115,17 @@ const Login = () => {
                     </Link>
                 </p>
                 <p className="text-center p-2 opacity-75">HOẶC</p>
-                <button className="flex justify-center w-full items-center py-2">
-                    <FcGoogle className="w-12 h-12 text-primary" />
-                    <span className="ml-2">
-                        <Link to="http://localhost/oauth2/authorization/google">Đăng nhập bằng Google</Link>
-                    </span>
-                </button>
+                <Link to="http://localhost/oauth2/authorization/google">
+                    <div className="btn btn-ghost flex justify-center w-full items-center">
+                        <FcGoogle className="w-12 h-12 text-primary" />
+                        <span className="ml-2">Đăng nhập bằng Google</span>
+                    </div>
+                </Link>
+
                 <p className="text-center p-4">
                     Bạn mới biết đến Fnest?{''}
-                    <Link to="/register" className="ml-2 link link-hover link-primary capitalize">
-                        Đăng ky
+                    <Link to="/register" className="ml-2 link link-hover link-primary">
+                        Đăng ký ngay!
                     </Link>
                 </p>
             </Form>

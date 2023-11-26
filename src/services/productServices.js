@@ -23,6 +23,10 @@ const productServices = {
         const url = `product/by-collection?id=${id}&currentPage=${currentPage}&pageSize=${pageSize}&sort=${sort}`;
         return axiosClient.get(url);
     },
+    applyCouponCode(orderTotal, code) {
+        const url = `/coupon-code/apply?orderTotal=${orderTotal}&code=${code}`;
+        return axiosClient.post(url);
+    },
 };
 
 export default productServices;
