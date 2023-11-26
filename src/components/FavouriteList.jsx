@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { CartItem, FavouriteItem } from '../components';
+import { FavouriteItem } from '../components';
 import { useDispatch } from 'react-redux';
 import image from '../assets/cart/gio-hang-trong.jpg';
 import { clearFavourite } from '../features/favourite/favouriteSlice';

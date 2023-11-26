@@ -2,9 +2,9 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { CartItem } from '../components';
 import image from '../assets/cart/gio-hang-trong.jpg';
-import { SubmitButton } from '../components';
 import { useDispatch } from 'react-redux';
 import { clearCart } from '../features/cart/cartSlice';
+import { toast } from 'react-toastify';
 
 const CartItemsList = () => {
     const cart = useSelector((state) => state.cart);
@@ -12,6 +12,7 @@ const CartItemsList = () => {
 
     const handleDeleteAll = () => {
         dispatch(clearCart());
+        toast.success('Đã xóa tất cả sản phẩm!');
     };
 
     return (
