@@ -40,15 +40,13 @@ const Profile = () => {
     const user = useSelector((state) => state.auth.profile?.user);
     const date = formatDate(user?.birthday);
     return (
-        <div className="grid grid-cols-4 my-5">
+        <div className="grid grid-cols-4 mt-10 mb-40">
             <NavProfile />
             <div className="card col-span-3 bg-white shadow-lg">
                 <div className="mx-4 my-4">
                     <div className="border-b-2 pb-5">
                         <div className="text-lg font-bold">Hồ Sơ Của Tôi</div>
-                        <div className="text-bold font-light text-primary">
-                            Quản lý thông tin hồ sơ để bảo mật tài khoản
-                        </div>
+                        <div className="text-bold">Quản lý thông tin hồ sơ để bảo mật tài khoản</div>
                     </div>
                     <div className="mx-20 my-5">
                         <div className="grid grid-cols-5 space-x-3">
@@ -68,7 +66,7 @@ const Profile = () => {
                                 </div>
                                 <div className="py-1">
                                     {user?.emailConfirmed ? (
-                                        <BsCheck2Circle className="text-green w-8 h-8" />
+                                        <BsCheck2Circle className="text-success w-8 h-8" />
                                     ) : (
                                         <div className="flex py-2 space-x-2">
                                             <h2>Vui lòng xác nhận !</h2>

@@ -101,7 +101,7 @@ const Register = () => {
 
                 <FormInput
                     type="date"
-                    label="Birthday(*)"
+                    label="Ngày sinh(*)"
                     name="birthday"
                     value={formik.values.birthday}
                     placeholder="Birthday"
@@ -117,9 +117,9 @@ const Register = () => {
                     </Link>
                 </p>
                 <p className="text-center p-2">
-                    Đã có tài khoản?{''}
-                    <Link to="/login" className="ml-2 link link-hover link-primary capitalize">
-                        Đăng nhập
+                    Bạn đã có tài khoản?
+                    <Link to="/login" className="ml-2 link link-hover link-primary">
+                        Đăng nhập!
                     </Link>
                 </p>
             </Form>

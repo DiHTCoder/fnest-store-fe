@@ -34,7 +34,7 @@ const TopHeader = () => {
         navigate('/');
     };
     return (
-        <div className="bg-info border-b-[1px] ">
+        <div className="bg-[#303036] border-b-[1px]">
             <section className="flex align-element justify-between items-center ">
                 <div className="items-start text-white">
                     <div className="flex items-center">
@@ -103,7 +103,7 @@ const TopHeader = () => {
                                         <NavLink to="/profile">{t('profile')}</NavLink>
                                     </li>
                                     <li>
-                                        <a>{t('purchase_orders')}</a>
+                                        <NavLink to="/orders">{t('purchase_orders')}</NavLink>
                                     </li>
                                     <li>
                                         <p onClick={handleLogout}>{t('logout')}</p>

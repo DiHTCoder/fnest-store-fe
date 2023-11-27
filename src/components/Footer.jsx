@@ -6,17 +6,25 @@ import { LiaShippingFastSolid } from 'react-icons/lia';
 import { AiOutlineScan, AiFillFacebook } from 'react-icons/ai';
 import { SiAboutdotme, SiTiktok } from 'react-icons/si';
 import { NavLink } from 'react-router-dom';
-
+import Logo from '../assets/Logo1.png';
 const Footer = () => {
     return (
-        <footer className="footer footer-center p-10 bg-white text-primary-content">
-            <div className="grid grid-cols-4 gap-3 align-element">
-                <div className="h-full p-4 bg-neutral rounded w-full">
+        <footer className="footer footer-center p-10 bg-[#303036] text-primary-content">
+            <div className="text-white align-element">
+                <img src={Logo} alt="" className="w-1/6" />
+                <p>
+                    Khám phá sự đẳng cấp và sự sang trọng tận cùng với những tinh hoa nghệ thuật nội thất tại trang web
+                    của chúng tôi. Chúng tôi không chỉ cung cấp sản phẩm nội thất, mà còn là nguồn cảm hứng để biến
+                    không gian sống của bạn thành kiệt tác
+                </p>
+            </div>
+            <div className="grid grid-cols-4 gap-3 text-white align-element">
+                <div className="h-full p-4 rounded w-full">
                     <h2 className="text-xl font-semibold text-left">Đa dạng thanh toán</h2>
                     <div className="mt-3 flex flex-col space-y-2">
                         <div className="flex items-center space-x-3">
                             <PiSwapFill className="w-4 h-4 i-semi-sync text-primary" />
-                            <span className="text-md">Chuyển khoản</span>
+                            <span className="text-md ">Chuyển khoản</span>
                         </div>
                     </div>
                     <div className="mt-3 flex flex-col space-y-2">
@@ -33,7 +41,7 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <div className="h-full p-4 bg-neutral rounded w-full">
+                <div className="h-full p-4  rounded w-full">
                     <h2 className="text-xl font-semibold text-left">Thông tin hữu ích</h2>
                     <div className="mt-3 flex flex-col space-y-2">
                         <div className="flex items-center space-x-3">
@@ -72,7 +80,7 @@ const Footer = () => {
                         </div>
                     </div>
                 </div>
-                <div className="h-full p-4 bg-neutral rounded w-full">
+                <div className="h-full p-4  rounded w-full">
                     <h2 className="text-xl font-semibold text-left">Mạng xã hội</h2>
                     <div className="mt-3 flex flex-col space-y-2">
                         <div className="flex items-center space-x-3">
@@ -93,7 +101,7 @@ const Footer = () => {
                         </div>
                     </div>
                 </div>
-                <div className="h-full p-4 bg-neutral rounded w-full">
+                <div className="h-full p-4 rounded w-full">
                     <h2 className="text-xl font-semibold text-left">Phản hồi, góp ý, khiếu nại</h2>
                     <p className="text-left py-2">
                         Phản hồi nóng về chất lượng sản phẩm và dịch vụ. Đội ngũ Kiểm Soát Chất Lượng của chúng tôi sẵn
@@ -106,10 +114,10 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
-            <div className="border-[0.5px] w-full"></div>
+            <div className="border-[0.5px] w-full text-white"></div>
             <aside>
-                <p>Copyright © {new Date().getFullYear()} Nội Thất Fnest</p>
-                <h5>All rights reserved</h5>
+                <p className="text-white">Copyright © {new Date().getFullYear()} Nội Thất Fnest</p>
+                <p className="text-white">All rights reserved</p>
             </aside>
         </footer>
     );

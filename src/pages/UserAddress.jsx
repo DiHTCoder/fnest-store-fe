@@ -194,8 +194,10 @@ const UserAddress = () => {
 
     const handleSetDefaultAddress = async (addressId) => {
         try {
-            const resp = await addressServices.setDefaultAddress(token, addressId);
-            toast.success(resp.messages[0]);
+            const respSet = await addressServices.setDefaultAddress(token, addressId);
+            toast.success(respSet.messages[0]);
+            const resp = await addressServices.getDeliveryAddress(token);
+            setAddress(resp.data);
         } catch (error) {
             if (error.response && error.response.data && error.response.data.messages) {
                 const errorMessages = error.response.data.messages;
@@ -213,7 +215,7 @@ const UserAddress = () => {
     };
 
     return (
-        <div className="grid grid-cols-4 my-5">
+        <div className="grid grid-cols-4  mt-10 mb-40">
             <NavProfile />
             <div className="card col-span-3 bg-white shadow-lg">
                 <div className="m-4">
@@ -221,7 +223,7 @@ const UserAddress = () => {
                         <div className="grid grid-cols-2">
                             <div>
                                 <div className="text-lg font-bold">Địa chỉ của tôi</div>
-                                <div className="font-bold text-error">Thông tin về địa chỉ nhận hàng và trả hàng</div>
+                                <div className="">Thông tin về địa chỉ nhận hàng và trả hàng</div>
                             </div>
                             <div className="flex justify-end">
                                 <button
@@ -324,28 +326,29 @@ const UserAddress = () => {
                     </div>
                     <div className="m-10">
                         {address.length === 0 ? (
-                            <h1 className="text-2xl font-bold text-error">
-                                <AiOutlineWarning /> Vui lòng thêm địa chỉ nhận hàng!
-                            </h1>
+                            <div className="text-xl font-bold text-warning flex items-center">
+                                <AiOutlineWarning />
+                                <p> Vui lòng thêm địa chỉ nhận hàng!</p>
+                            </div>
                         ) : (
                             address.deliveryAddresses.map((item) => (
                                 <div key={item.id} className="my-5">
                                     <div className="grid grid-cols-2">
                                         <div>
                                             <span className="font-bold">{item.receiverName}</span> |{' '}
-                                            <span className="text-info">{item.receiverPhone}</span>
+                                            <span className="">{item.receiverPhone}</span>
                                             <div className="my-2">
-                                                <p className="text-sm text-info">{item.deliveryAddress}</p>
+                                                <p className="text-sm">{item.deliveryAddress}</p>
                                             </div>
-                                            <div className="flex text-center items-center space-x-2 p-2">
+                                            <div className="flex text-center items-center p-2">
                                                 {item.id === address.defaultAddressId ? (
-                                                    <div className="text-primary flex items-center">
+                                                    <div className="text-primary flex items-center gap-2">
                                                         <BiTargetLock />
-                                                        <span> Mặc định</span>
+                                                        <span> Địa chỉ mặc định</span>
                                                     </div>
                                                 ) : (
                                                     <>
-                                                        <div className="flex text-blue-400 items-center ">
+                                                        <div className="flex text-blue-400 items-center gap-2 ">
                                                             <BiPurchaseTag />
                                                             <button onClick={() => handleSetDefaultAddress(item.id)}>
                                                                 Đặt làm mặc định
@@ -356,19 +359,18 @@ const UserAddress = () => {
                                             </div>
                                         </div>
                                         <div className="justify-end flex">
-                                            <span
-                                                className="text-primary mx-2 btn btn-sm"
+                                            <button
+                                                className="flex items-center gap-2 text-primary mx-2"
                                                 onClick={() => handleUpdateAddress(item.id)}
                                             >
-                                                <GrUpdate />
                                                 Cập nhật
-                                            </span>
-                                            <span
-                                                className="text-primary btn btn-sm"
+                                            </button>
+                                            <button
+                                                className="flex items-center gap-2 text-primary"
                                                 onClick={() => handleDeleteAddress(item.id)}
                                             >
                                                 Xóa
-                                            </span>
+                                            </button>
                                         </div>
                                     </div>
 
