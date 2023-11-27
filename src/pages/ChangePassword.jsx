@@ -51,13 +51,13 @@ const ChangePassword = () => {
     });
 
     return (
-        <div className="grid grid-cols-4 my-5">
+        <div className="grid grid-cols-4 mt-10 mb-40">
             <NavProfile />
             <div className="card col-span-3 bg-white shadow-lg">
                 <div className="mx-4 my-4">
                     <div className="border-b-2 pb-5">
                         <div className="text-lg font-bold">Đổi mật khẩu</div>
-                        <div className="text-bold font-light text-error">Vui lòng nhập đầy đủ thông tin!</div>
+                        <div className="">Vui lòng nhập đầy đủ thông tin!</div>
                     </div>
                     <div className="grid grid-cols-2">
                         <Form method="PATCH" className="my-2 mx-6" onSubmit={formik.handleSubmit}>

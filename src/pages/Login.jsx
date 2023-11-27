@@ -79,7 +79,7 @@ const Login = () => {
     });
 
     return (
-        <section className="my-10 grid grid-cols-2 place-items-center">
+        <section className="my-14 grid grid-cols-2 place-items-center">
             <div className="">
                 <img src={login} alt="Ảnh login" />
             </div>

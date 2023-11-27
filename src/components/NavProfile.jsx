@@ -1,8 +1,7 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { getProfileSuccess } from '../features/user/userSlice';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import userServices from '../services/userServices';
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
@@ -14,7 +13,7 @@ import { AiOutlineEdit } from 'react-icons/ai';
 const NavProfile = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [isListVisible, setIsListVisible] = useState(false);
+    const [isListVisible, setIsListVisible] = useState(true);
     const user = useSelector((state) => state.auth.login?.currentUser);
     const userProfile = useSelector((state) => state.auth.profile?.user);
     useEffect(() => {
@@ -33,7 +32,7 @@ const NavProfile = () => {
     }, []);
     return (
         <div className="my-2">
-            <div className="pb-6 border-b-2">
+            <Link to="/profile" className="pb-6 border-b-2 hover:cursor-pointer">
                 <label tabIndex={0} className="flex  items-center space-x-3">
                     <div className="avatar online">
                         <div className="w-14 rounded-full">
@@ -50,7 +49,7 @@ const NavProfile = () => {
                         </div>
                     </div>
                 </label>
-            </div>
+            </Link>
             <div className="my-5">
                 <div className="flex items-center space-x-2 py-2" onClick={() => setIsListVisible(!isListVisible)}>
                     <BiUser className="text-primary" />
@@ -72,10 +71,10 @@ const NavProfile = () => {
                         </li>
                     </ul>
                 </div>
-                <div className="flex items-center space-x-2 pb-2">
+                <NavLink to="/orders" className="flex items-center space-x-2 pb-2">
                     <PiNewspaperClippingThin className="text-primary" />
                     <span>Đơn mua</span>
-                </div>
+                </NavLink>
                 <div className="flex items-center space-x-2 pb-2">
                     <BiSolidBellRing className="text-primary" />
                     <span>Thông báo</span>

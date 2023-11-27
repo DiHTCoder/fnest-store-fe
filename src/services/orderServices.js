@@ -1,6 +1,6 @@
 import axiosClient from '../utils/axiosClient';
 
-const cartServices = {
+const orderServices = {
     getShippingCharge(total) {
         const url = '/shipping-charge';
         return axiosClient.post(url, { total });
@@ -15,6 +15,16 @@ const cartServices = {
             },
         });
     },
+    getAllOrders(accessToken, currentPage, pageSize) {
+        const url = `/buyer/order?currentPage=${currentPage}&pageSize=${pageSize}`;
+        return axiosClient.get(url, {
+            headers: {
+                accept: 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${accessToken}`,
+            },
+        });
+    },
 };
 
-export default cartServices;
+export default orderServices;
