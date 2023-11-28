@@ -25,6 +25,30 @@ const orderServices = {
             },
         });
     },
+    cancelOrders(accessToken, id, status) {
+        const url = `/buyer/order/${id}`;
+        return axiosClient.patch(
+            url,
+            { status },
+            {
+                headers: {
+                    accept: 'application/json',
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            },
+        );
+    },
+    getOrderDetail(accessToken, id) {
+        const url = `/buyer/order/${id}`;
+        return axiosClient.get(url, {
+            headers: {
+                accept: 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${accessToken}`,
+            },
+        });
+    },
 };
 
 export default orderServices;
