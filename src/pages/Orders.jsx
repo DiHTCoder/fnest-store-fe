@@ -58,6 +58,13 @@ const Orders = () => {
             console.error('Lỗi khi lấy chi tiết đơn hàng:', error);
         }
     };
+
+    const handleReviewProduct = async () => {
+        try {
+        } catch (error) {
+            console.error('Lỗi khi lấy chi tiết đơn hàng:', error);
+        }
+    };
     return (
         <div className="grid grid-cols-4 mt-10 mb-40">
             <NavProfile />

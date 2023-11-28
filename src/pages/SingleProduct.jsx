@@ -8,14 +8,18 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { addItemToCart, getTotals } from '../features/cart/cartSlice';
 import { addItemToFavourite } from '../features/favourite/favouriteSlice';
+import { FaRegStar, FaStar } from 'react-icons/fa';
+import avatar from '../assets/images/avatar.jpg';
+import no_evalute from '../assets/images/no-evalute.jpg';
 
 const SingleProduct = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
     const [isLoading, setIsLoading] = useState(false);
-    const [product, setProduct] = useState('');
+    const [product, setProduct] = useState([]); // Sử dụng null thay vì ''
     const [amount, setAmount] = useState(1);
-    const [productReviews, setProductReviews] = useState([]);
+    const [productReviews, setProductReviews] = useState(null); // Sử dụng null thay vì []
+    console.log(productReviews);
     const [selectedImage, setSelectedImage] = useState('');
     const [selectedImageIndex, setSelectedImageIndex] = useState(null);
     const {
@@ -40,11 +44,11 @@ const SingleProduct = () => {
                 setProduct(respProduct.data);
                 setSelectedImage(respProduct.data.thumbnail);
                 setSelectedImageIndex(null);
-                const respReviews = await productServices.getAllProductReviews(name, 0, 12);
+                const respReviews = await productServices.getAllProductReviews(respProduct.data.name, 0, 12);
                 setProductReviews(respReviews.data);
                 setIsLoading(false);
             } catch (error) {
-                console.error('Error fetching room:', error);
+                console.error('Lỗi khi lấy thông tin sản phẩm:', error);
                 setIsLoading(false);
             }
         };
@@ -196,7 +200,83 @@ const SingleProduct = () => {
                     </div>
                 </div>
             </div>
-            <ProductsTab />
+            <div className="card w-full bg-base-100 shadow-xl my-4">
+                <div className="m-10">
+                    <div className="font-bold">TỔNG QUAN ĐÁNH GIÁ SẢN PHẨM</div>
+                    {productReviews?.content.length === 0 ? (
+                        <>
+                            <p className="text-center">Không có đánh giá nào liên quan</p>
+                            <div className="flex items-end justify-center">
+                                <img src={no_evalute} alt="" className="w-1/4" />
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <div className="flex">
+                                <FaStar className="w-8 h-8 text-amber-500" />
+                                <FaStar className="w-8 h-8 text-amber-500" />
+                                <FaStar className="w-8 h-8 text-amber-500" />
+                                <FaStar className="w-8 h-8 text-amber-500" />
+                                <FaRegStar className="w-8 h-8 text-amber-500" />
+                            </div>
+                            {productReviews?.content.length > 0 &&
+                                productReviews.content.map((review) => {
+                                    return (
+                                        <>
+                                            <div className="mt-10 grid grid-cols-10">
+                                                <div>
+                                                    <img
+                                                        src={avatar}
+                                                        alt="Ảnh người dùng"
+                                                        className="w-12 h-12 rounded-full"
+                                                    />
+                                                </div>
+                                                <div className="col-span-9">
+                                                    <div>
+                                                        <p className="font-bold">{review.reviewerName}</p>
+                                                        <div className="flex">
+                                                            {[...Array(5)].map((_, index) =>
+                                                                index < review.point ? (
+                                                                    <FaStar
+                                                                        key={index}
+                                                                        className="w-4 h-4 text-amber-500"
+                                                                    />
+                                                                ) : (
+                                                                    <FaRegStar
+                                                                        key={index}
+                                                                        className="w-4 h-4 text-amber-500"
+                                                                    />
+                                                                ),
+                                                            )}
+                                                        </div>
+                                                        <p className="text-sm">Ngày đánh giá: 12-11-2023</p>
+                                                    </div>
+                                                    <div className="mt-2 text-sm">
+                                                        <div className="flex">
+                                                            <p>Chất lượng sản phẩm: </p>
+                                                            <p>{review.point === 1 && 'Tệ'}</p>
+                                                            <p>{review.point === 2 && 'Không hài lòng'}</p>
+                                                            <p>{review.point === 3 && 'Bình thường'}</p>
+                                                            <p>{review.point === 4 && 'Hài lòng'}</p>
+                                                            <p>{review.point === 5 && 'Tuyệt vời'}</p>
+                                                        </div>
+
+                                                        <p>
+                                                            Sản phẩm quá tốt. Cảm ơn đã mang lại giá trị cho ngôi nhà
+                                                            của tôi
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="divider"></div>
+                                        </>
+                                    );
+                                })}
+                        </>
+                    )}
+                </div>
+            </div>
+            {/* <ProductsTab /> */}
         </>
     );
 };
