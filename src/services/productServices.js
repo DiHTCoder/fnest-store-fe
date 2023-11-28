@@ -10,7 +10,10 @@ const productServices = {
         const url = `/product/${id}`;
         return axiosClient.get(url);
     },
-
+    getAllProductReviews(productName, currentPage, pageSize) {
+        const url = `/product-review/by-product?productName=${productName}&currentPage=${currentPage}&pageSize=${pageSize}`;
+        return axiosClient.get(url);
+    },
     getAllProducts(name, currentPage, pageSize, sort, priceMin) {
         const url = `product/search-filter?name.contains=${name}&currentPage=${currentPage}&pageSize=${pageSize}&sort=${sort}&price.min=${priceMin}`;
         return axiosClient.get(url);
@@ -26,6 +29,20 @@ const productServices = {
     applyCouponCode(orderTotal, code) {
         const url = `/coupon-code/apply?orderTotal=${orderTotal}&code=${code}`;
         return axiosClient.post(url);
+    },
+    reviewProduct(accessToken, content, point, productName) {
+        const url = '/buyer/product-review';
+        return axiosClient.post(
+            url,
+            { content, point, productName },
+            {
+                headers: {
+                    accept: 'application/json',
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            },
+        );
     },
 };
 

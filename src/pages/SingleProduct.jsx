@@ -15,15 +15,33 @@ const SingleProduct = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [product, setProduct] = useState('');
     const [amount, setAmount] = useState(1);
-    const { name, price, description, size, material, sold, inStock, featured, categoryId, collectionId, thumbnail } =
-        product;
-
+    const [productReviews, setProductReviews] = useState([]);
+    const [selectedImage, setSelectedImage] = useState('');
+    const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+    const {
+        name,
+        price,
+        description,
+        size,
+        material,
+        sold,
+        inStock,
+        imageUrls,
+        featured,
+        categoryId,
+        collectionId,
+        thumbnail,
+    } = product;
     useEffect(() => {
         const fetchProductById = async () => {
             setIsLoading(true);
             try {
-                const response = await productServices.getProductDetail(id);
-                setProduct(response.data);
+                const respProduct = await productServices.getProductDetail(id);
+                setProduct(respProduct.data);
+                setSelectedImage(respProduct.data.thumbnail);
+                setSelectedImageIndex(null);
+                const respReviews = await productServices.getAllProductReviews(name, 0, 12);
+                setProductReviews(respReviews.data);
                 setIsLoading(false);
             } catch (error) {
                 console.error('Error fetching room:', error);
@@ -66,12 +84,32 @@ const SingleProduct = () => {
             return tempAmount;
         });
     };
+
+    const handleImageClick = (imageUrl) => {
+        setSelectedImage(imageUrl);
+        setSelectedImageIndex(imageUrl);
+    };
     return (
         <>
             <Breadcrumb url="products" page="Chi tiết sản phẩm" />
             <div className="grid grid-cols-2 gap-10">
                 <div>
-                    <img src={thumbnail} alt={name} />
+                    <img src={selectedImage} alt={name} className="border-solid border-2 rounded-xl" />
+                    <div className="grid grid-cols-6 gap-1 mt-2 ">
+                        {product.imageUrls?.map((url) => {
+                            return (
+                                <img
+                                    key={url}
+                                    src={url}
+                                    alt={product.name}
+                                    className={`rounded-xl object-fit h-[75px] border-solid border-2 ${
+                                        selectedImageIndex === url ? 'border-info' : 'border-gray-300'
+                                    }`}
+                                    onClick={() => handleImageClick(url)}
+                                />
+                            );
+                        })}
+                    </div>
                 </div>
                 <div>
                     <div className="flex justify-between">

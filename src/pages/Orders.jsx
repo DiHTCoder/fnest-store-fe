@@ -1,6 +1,7 @@
 import { NavProfile, Loading } from '../components';
 import { useSelector } from 'react-redux';
 import orderServices from '../services/orderServices';
+import productServices from '../services/productServices';
 import { useEffect, useState } from 'react';
 import { formatPrice } from '../utils/helpers';
 import image from '../assets/cart/gio-hang-trong.jpg';
@@ -312,7 +313,7 @@ const Orders = () => {
                                                 </div>
                                             )}
                                         </dialog>
-                                        {/* feedback */}
+                                        {/* review product */}
                                         <dialog id="feadback_order_dialog" className="modal">
                                             <div className="modal-box w-11/12 max-w-3xl">
                                                 <h3 className="font-bold text-lg">Đánh giá sản phẩm</h3>
