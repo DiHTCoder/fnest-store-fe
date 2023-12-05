@@ -14,6 +14,7 @@ const CollectionsContainer = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         setIsLoading(true);
         const getCollections = async () => {
             try {
@@ -47,7 +48,7 @@ const CollectionsContainer = () => {
                             </h2>
                         </div>
                     </div>
-                    <div className="px-[20px] gap-2 grid grid-cols-3 mt-10">
+                    <div className=" gap-2 grid grid-cols-3 mt-10">
                         {collections.map((collection) => {
                             return (
                                 <Link
@@ -69,12 +70,14 @@ const CollectionsContainer = () => {
                                             </h5>
 
                                             <p className="tracking-wide mb-2 text-justify">
-                                                {readMore ? collection.name : `${collection.name.substring(0, 100)}...`}
+                                                {readMore
+                                                    ? collection.description
+                                                    : `${collection.description.substring(0, 200)}...`}
                                                 <button
                                                     className=" text-primary uppercase cursor-pointer"
                                                     onClick={() => setReadMore(!readMore)}
                                                 >
-                                                    {readMore ? 'Ẩn bớt' : 'Xem thêm'}
+                                                    {readMore ? 'Thu gọn' : 'Xem thêm'}
                                                 </button>
                                             </p>
                                         </div>

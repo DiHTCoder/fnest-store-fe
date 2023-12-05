@@ -1,7 +1,43 @@
-import React from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import lamp from '../assets/images/lamp.png';
+import userServices from '../services/userServices';
+import { FormInput, SubmitButton, Loading } from '../components';
+import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
+import { useFormik } from 'formik';
+import { toast } from 'react-toastify';
 
 const Contact = () => {
+    const initialValues = {
+        fullName: '',
+        email: '',
+        content: '',
+    };
+    const resetForm = () => {
+        formik.resetForm();
+    };
+    const validationSchema = Yup.object({
+        fullName: Yup.string().required('Họ và tên không được để trống'),
+        email: Yup.string().email('Email không hợp lệ').required('Email không được để trống'),
+        content: Yup.string().required('Nội dung không được để trống'),
+    });
+
+    const onSubmit = async (values) => {
+        console.log(values);
+        try {
+            await userServices.sendFeedback(values.fullName, values.email, values.content);
+            toast.success('Gửi feedback thành công!');
+            resetForm();
+        } catch (error) {
+            console.error('Error sending feedback:', error);
+            toast.error('Đã xảy ra lỗi khi gửi feedback');
+        }
+    };
+    const formik = useFormik({
+        initialValues,
+        validationSchema,
+        onSubmit: (values, { resetForm }) => onSubmit(values, { resetForm }),
+    });
     return (
         <section aria-labelledby="contact" class="container mx-auto px-8 overflow-hidden">
             <div class="flex flex-wrap justify-center gap-12 md:gap-6 lg:gap-20">
@@ -57,6 +93,7 @@ const Contact = () => {
       dark:bg-neutral-800
       w-full
   "
+                    onSubmit={formik.handleSubmit}
                 >
                     <h2 id="contact" class="text-3xl font-bold">
                         Thông tin của bạn
@@ -65,6 +102,9 @@ const Contact = () => {
                         <input
                             type="text"
                             id="name"
+                            name="fullName"
+                            onChange={formik.handleChange}
+                            value={formik.values.fullName}
                             class="
       peer
       form-input
@@ -84,7 +124,7 @@ const Contact = () => {
                             placeholder="Họ và tên"
                         />
                         <label
-                            for="name"
+                            htmlFor="name"
                             class="
     text-neutral-500
     text-sm
@@ -111,6 +151,9 @@ const Contact = () => {
                         <input
                             type="email"
                             id="email"
+                            onChange={formik.handleChange}
+                            value={formik.values.email}
+                            name="email"
                             class="
       peer
       form-input
@@ -130,7 +173,7 @@ const Contact = () => {
                             placeholder="Your Email"
                         />
                         <label
-                            for="email"
+                            htmlFor="email"
                             class="
     text-neutral-500
     text-sm
@@ -157,6 +200,8 @@ const Contact = () => {
                         <textarea
                             name="content"
                             id="content"
+                            onChange={formik.handleChange}
+                            value={formik.values.content}
                             cols="20"
                             rows="5"
                             class="
@@ -179,7 +224,10 @@ const Contact = () => {
                             placeholder="How can we help?"
                         ></textarea>
                         <label
-                            for="content"
+                            htmlFor="content"
+                            name="content"
+                            onChange={formik.handleChange}
+                            value={formik.values.content}
                             class="
       text-neutral-500
       text-sm
@@ -202,29 +250,29 @@ const Contact = () => {
                             Bạn cần chúng tôi hỗ trợ?
                         </label>
                     </div>
-                    <a
+                    <button
+                        type="submit"
                         role="menuitem"
-                        class="
-    py-2
-    px-6
-    bg-neutral-900
-    text-white
-    w-max
-    shadow-xl
-    hover:shadow-none
-    transition-shadow
-    focus:outline-none
-    focus-visible:ring-4
-    ring-neutral-900
-    rounded-md
-    ring-offset-4
-    ring-offset-white
-    dark:ring-offset-amber-400
-  "
-                        href="/"
+                        className="
+        py-2
+        px-6
+        bg-neutral-900
+        text-white
+        w-max
+        shadow-xl
+        hover:shadow-none
+        transition-shadow
+        focus:outline-none
+        focus-visible:ring-4
+        ring-neutral-900
+        rounded-md
+        ring-offset-4
+        ring-offset-white
+        dark:ring-offset-amber-400
+    "
                     >
                         Gửi
-                    </a>
+                    </button>
                 </form>
             </div>
         </section>

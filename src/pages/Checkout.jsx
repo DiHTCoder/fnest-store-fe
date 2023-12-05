@@ -10,11 +10,13 @@ import { formatPrice, generateAmountOptions } from '../utils/helpers';
 import { useSelector, useDispatch } from 'react-redux';
 import orderServices from '../services/orderServices';
 import { BiTargetLock, BiPlus, BiPurchaseTag } from 'react-icons/bi';
+import { NavLink } from 'react-router-dom';
 
 const Checkout = () => {
     const dispatch = useDispatch();
     const token = useSelector((state) => state.auth.login?.token);
     const [address, setAddress] = useState([]);
+    console.log('add', address);
     const [couponCode, setCouponCode] = useState('');
     const [discountAmount, setDiscountAmount] = useState('');
     const cart = useSelector((state) => state.cart);
@@ -32,7 +34,6 @@ const Checkout = () => {
                     console.error(error);
                 }
             };
-
             getAllUserAddresses();
         }
     }, []);
@@ -98,8 +99,13 @@ const Checkout = () => {
                         <SiGooglemaps />
                         <span className="text-xl">Địa chỉ nhận hàng</span>
                     </div>
-                    {address.length === 0 ? (
-                        <>Vui lòng thêm địa chỉ giao hàng</>
+                    {address.deliveryAddresses.length === 0 ? (
+                        <div>
+                            <p>Vui lòng thêm địa chỉ giao hàng</p>
+                            <Link to="/address">
+                                <button className="btn btn-ghost">Thêm địa chỉ giao hàng</button>
+                            </Link>
+                        </div>
                     ) : (
                         address.deliveryAddresses.map((item) => (
                             <>

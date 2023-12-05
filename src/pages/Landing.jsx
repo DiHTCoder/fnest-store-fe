@@ -9,6 +9,7 @@ import {
     Purpose,
     Collection,
     Inspiration,
+    CollectionsContainer,
 } from '../components';
 import productServices from '../services/productServices';
 

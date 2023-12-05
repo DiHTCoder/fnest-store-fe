@@ -4,7 +4,7 @@ import banner2 from '../assets/product/banner2.jpg';
 import banner3 from '../assets/product/banner3.jpg';
 import banner4 from '../assets/product/banner4.jpg';
 import banner5 from '../assets/product/banner5.jpg';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const Collection = () => {
     return (
@@ -41,9 +41,9 @@ const Collection = () => {
                         <h3 className="mb-4 text-center text-3xl font-extrabold text-white lg:text-5xl">
                             Sản phẩm <br /> đa dạng
                         </h3>
-                        <Link to="products" className="font-bold text-white underline lg:text-2xl">
+                        <NavLink to="products" className="font-bold text-white underline lg:text-2xl">
                             Xem tất cả
-                        </Link>
+                        </NavLink>
                     </div>
                     <img src={banner1} alt="fmp" fill className="object-fill" />
                 </div>

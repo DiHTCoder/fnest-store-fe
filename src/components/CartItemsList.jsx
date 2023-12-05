@@ -16,7 +16,7 @@ const CartItemsList = () => {
     };
 
     return (
-        <div className="card p-8 bg-base-100 shadow-sm mx-2">
+        <div className="card py-4 bg-base-100 shadow-sm mx-2">
             {cart.cartItems.length === 0 ? (
                 <>
                     <div className="flex flex-col items-center py-10">

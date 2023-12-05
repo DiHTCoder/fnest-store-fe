@@ -80,9 +80,11 @@ const RoomsContainer = ({ roomId }) => {
                                 <ProductsGrid products={products} columns="3" />
                             </>
                         ) : (
-                            <div>
-                                <h2 className="text-center text-2xl font-bold">Không tìm thấy sản phẩm!!!</h2>
-                                <img src={noProduct} alt="" className="w-[400px]" />
+                            <div className="flex items-center justify-center">
+                                <div>
+                                    <img src={noProduct} alt="" className="w-[400px]" />
+                                    <h2 className="text-center text-2xl">Không tìm thấy sản phẩm!!!</h2>
+                                </div>
                             </div>
                         )}
                     </div>

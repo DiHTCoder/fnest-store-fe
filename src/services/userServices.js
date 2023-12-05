@@ -69,6 +69,19 @@ const userServices = {
             },
         );
     },
+    sendFeedback(fullName, email, content) {
+        const url = '/feedback';
+        return axiosClient.post(
+            url,
+            { fullName, email, content },
+            {
+                headers: {
+                    accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+            },
+        );
+    },
 };
 
 export default userServices;

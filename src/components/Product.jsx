@@ -10,7 +10,6 @@ import { IoMdAddCircleOutline } from 'react-icons/io';
 
 const Product = ({ product }) => {
     const dispatch = useDispatch();
-    const formatedPrice = formatPrice(product.price);
     const handleAddToCart = () => {
         dispatch(addItemToCart(product));
         dispatch(getTotals());
@@ -39,18 +38,19 @@ const Product = ({ product }) => {
                     >
                         <AiOutlineHeart className="w-[30px] h-[30px] text-info transition duration-300 group-hover:text-red-500" />
                     </button>
-                    <span className="absolute top-2 left-2 badge badge-secondary text-white tracking-wide text-lg">
-                        15%
-                    </span>
+                    {product.featured && (
+                        <span className="absolute top-2 left-2 badge badge-error text-white tracking-wide text-lg">
+                            NEW
+                        </span>
+                    )}
                 </div>
                 <div className="card-body">
-                    <div className="flex min-h-[84px]">
+                    <div className="min-h-[84px]">
                         <h2 className="card-title capitalize ">{product.name}</h2>
-                        <div className="badge badge-secondary text-white">NEW</div>
                     </div>
                     <div className="flex justify-between">
-                        <span className="text-secondary text-left">{formatedPrice}</span>
-                        <span className=" text-left line-through">{formatedPrice}</span>
+                        <span className="text-secondary text-left">{formatPrice(product.price)}</span>
+                        <span className=" text-left line-through">{formatPrice(product.salePrice)}</span>
                     </div>
                     <div className="flex justify-between">
                         <Stars />

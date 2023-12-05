@@ -26,8 +26,14 @@ const Rooms = () => {
     }, [selectedRoom]);
     return (
         <>
-            <Banner name={room.name} url="rooms" image={room.image} />
-            <RoomsContainer roomId={selectedRoom} />
+            {isLoading ? (
+                <Loading />
+            ) : (
+                <>
+                    <Banner name={room.name} url="rooms" image={room.image} />
+                    <RoomsContainer roomId={selectedRoom} />
+                </>
+            )}
         </>
     );
 };
