@@ -18,7 +18,7 @@ const ProductsList = ({ products }) => {
     };
 
     return (
-        <div className="my-12 grid gap-y-8">
+        <div className="my-12 grid gap-y-4">
             {products.content.map((product) => {
                 return (
                     <div
@@ -62,7 +62,7 @@ const ProductsList = ({ products }) => {
 
                         <div className="ml-0 sm:ml-auto text-lg">
                             {' '}
-                            <p className="font-medium my-4 line-through">{product.salePrice - 2000}</p>
+                            <p className="font-medium my-4 line-through">{formatPrice(product.price)}</p>
                             <p className="font-medium my-4 text-secondary">Giá:{formatPrice(product.salePrice)}</p>
                             <button
                                 className="btn btn-outline btn-info"

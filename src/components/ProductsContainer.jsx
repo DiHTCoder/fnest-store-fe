@@ -15,6 +15,7 @@ const ProductsContainer = () => {
 
     useEffect(() => {
         setIsLoading(true);
+        window.scrollTo(0, 0);
         const getProducts = async () => {
             try {
                 const products = await productServices.getAllProducts(

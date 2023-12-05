@@ -3,7 +3,7 @@ import { Product } from '.';
 
 const ProductsGrid = ({ products, columns }) => {
     return (
-        <div className={`grid lg:grid-cols-4 gap-2 my-10`}>
+        <div className={`grid lg:grid-cols-4 gap-x-4 gap-y-6 my-10`}>
             {products ? (
                 products.content.map((product) => {
                     return <Product key={product.id} product={product} />;

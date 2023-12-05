@@ -25,8 +25,13 @@ const CartItem = ({ item }) => {
                 <div className="flex flex-col lg:flex-row lg:items-center lg:space-x-6">
                     <div className="flex-1">
                         <p className="font-bold">{item.name}</p>
-                        <div className="mt-2">
-                            <p className="text-sm">{item.description}</p>
+                        <div className="mt-2 flex items-center gap-1 text-sm">
+                            <p className="font-bold">Chất liệu:</p>
+                            <p>{item.material}</p>
+                        </div>
+                        <div className="mt-2 flex items-center gap-1 text-sm">
+                            <p className="font-bold">Kích thước:</p>
+                            <p className="text-sm">{item.size}</p>
                         </div>
                     </div>
                     <div className="mt-2 flex items-center space-x-2 flex-col-reverse">

@@ -11,10 +11,10 @@ const CollectionDetail = () => {
     const [products, setProducts] = useState([]);
     const [collection, setCollection] = useState({});
     const [layout, setLayout] = useState('grid');
-    console.log(products);
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         const fetchRoomById = async () => {
             setIsLoading(true);
             try {
