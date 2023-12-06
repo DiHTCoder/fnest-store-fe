@@ -68,8 +68,8 @@ const cartSlice = createSlice({
         getTotals(state, action) {
             let { total, quantity } = state.cartItems.reduce(
                 (cartTotal, cartItem) => {
-                    const { price, cartQuantity } = cartItem;
-                    const itemTotal = price * cartQuantity;
+                    const { salePrice, cartQuantity } = cartItem;
+                    const itemTotal = salePrice * cartQuantity;
 
                     cartTotal.total += itemTotal;
                     cartTotal.quantity += cartQuantity;
