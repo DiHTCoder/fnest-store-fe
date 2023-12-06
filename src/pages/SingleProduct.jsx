@@ -133,8 +133,8 @@ const SingleProduct = () => {
                         </span>
                     </div>
                     <div className="text-lg">
-                        <span className="text-primary text-2xl font-bold pr-4">{formatPrice(price)}</span>
-                        <span className="line-through">{formatPrice(salePrice)}</span>
+                        <span className="text-primary text-2xl font-bold pr-4">{formatPrice(salePrice)}</span>
+                        <span className="line-through">{formatPrice(price)}</span>
                     </div>
                     <div className="pb-2 border-b-2">
                         <span className="text-sm tex-base-300">SKU:{product.id}</span>

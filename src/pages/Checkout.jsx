@@ -75,7 +75,7 @@ const Checkout = () => {
                 orderDetailList: cart.cartItems.map((item) => ({
                     productId: item.id,
                     quantity: item.cartQuantity,
-                    total: item.price * item.cartQuantity,
+                    total: item.salePrice * item.cartQuantity,
                 })),
             };
             const resp = await orderServices.ordering(token, orderData);
