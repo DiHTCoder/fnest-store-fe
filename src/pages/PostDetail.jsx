@@ -25,7 +25,7 @@ const PostDetail = () => {
                 <Loading />
             ) : (
                 <div className="my-10 text-center">
-                    <h1 className="text-4xl my-2">Gợi ý phong cách căn phòng</h1>
+                    <h1 className="text-4xl my-2">{data.title}</h1>
                     <div className="text-justify text-lg leading-loose">{data.description}</div>
                     <div className="my-4 mx-auto max-w-full h-auto" style={{ maxWidth: '800px' }}>
                         <div className="flex flex-wrap justify-center">

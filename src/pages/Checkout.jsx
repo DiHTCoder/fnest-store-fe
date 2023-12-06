@@ -159,7 +159,7 @@ const Checkout = () => {
                                         <div>{cartItem.name}</div>
                                         <div>{cartItem.size}</div>
                                         <div>{cartItem.cartQuantity}</div>
-                                        <div>{formatPrice(cartItem.cartQuantity * cartItem.price)}</div>
+                                        <div>{formatPrice(cartItem.cartQuantity * cartItem.salePrice)}</div>
                                     </div>
                                 );
                             })}
