@@ -17,7 +17,7 @@ const NavLinks = () => {
         { id: 4, url: 'collections', text: t('collections') },
         { id: 5, url: 'checkout', text: t('purchase_orders') },
         { id: 6, url: 'orders', text: t('purchase_orders') },
-        { id: 7, url: 'creative', text: t('creative') },
+        { id: 7, url: 'posts', text: t('creative') },
     ];
 
     const rooms = useSelector((state) => state.rooms.currentRoom);

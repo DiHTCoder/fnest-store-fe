@@ -5,6 +5,11 @@ const newServices = {
         const url = `/post?currentPage=${currentPage}&pageSize=${pageSize}`;
         return axiosClient.get(url);
     },
+
+    getNewById(id) {
+        const url = `/post/${id}`;
+        return axiosClient.get(url);
+    },
 };
 
 export default newServices;
