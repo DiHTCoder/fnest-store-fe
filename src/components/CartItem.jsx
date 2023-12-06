@@ -38,7 +38,7 @@ const CartItem = ({ item }) => {
                         <div className="text-2xl text-secondary font-semibold">
                             {formatPrice(item.price * item.cartQuantity)}
                         </div>
-                        <div className="text-sm">Giá: {formatPrice(item.price)}</div>
+                        <div className="text-sm line-through">Giá: {formatPrice(item.salePrice)}</div>
                     </div>
                 </div>
                 <div className="mt-2 flex items-center justify-between">
