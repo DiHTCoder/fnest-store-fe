@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
 import { SiGooglemaps } from 'react-icons/si';
 import { CiDiscount1 } from 'react-icons/ci';
-import { getTotals, setOrderTotal, applyDiscountCode, clearCart } from '../features/cart/cartSlice';
+import { setOrderTotal, applyDiscountCode, clearCart } from '../features/cart/cartSlice';
 import { formatPrice, generateAmountOptions } from '../utils/helpers';
 import { useSelector, useDispatch } from 'react-redux';
 import orderServices from '../services/orderServices';
