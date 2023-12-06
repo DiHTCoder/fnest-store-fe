@@ -23,3 +23,5 @@ export { default as Favourite } from './Favourite';
 export { default as Rooms } from './Rooms';
 export { default as Collections } from './Collections';
 export { default as CollectionDetail } from './CollectionDetail';
+export { default as Post } from './Post';
+export { default as PostDetail } from './PostDetail';

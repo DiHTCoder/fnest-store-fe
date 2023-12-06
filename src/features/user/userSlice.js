@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 
 const userSlice = createSlice({
     name: 'auth',
@@ -56,6 +57,7 @@ const userSlice = createSlice({
             state.login.isFetching = false;
             state.login.currentUser = null;
             state.login.error = false;
+            toast.success('Đăng xuất tài khoản thành công!');
         },
         updateCurrentUser: (state, action) => {
             state.login.currentUser = action.payload;

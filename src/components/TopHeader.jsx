@@ -60,7 +60,7 @@ const TopHeader = () => {
                 </div>
                 <div className="items-end ">
                     <div className="flex items-center gap-2 ">
-                        <NavLink to="/favourite" className="btn btn-ghost btn-circle btn-md text-white">
+                        <NavLink to="/" className="btn btn-ghost btn-circle btn-md text-white">
                             <div className="indicator">
                                 <CiLocationOn className="h-8 w-8" />
                             </div>
