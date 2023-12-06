@@ -125,18 +125,18 @@ const Login = () => {
                             </Link>
                         </p>
                         <p className="text-center p-2 opacity-75">HOẶC</p>
-                        {/* <Link to="https://fnest-store.api.codeforlife.blog/oauth2/authorization/google">
-                            <div className="btn btn-ghost flex justify-center w-full items-center">
-                                <FcGoogle className="w-12 h-12 text-primary" />
-                                <span className="ml-2">Đăng nhập bằng Google</span>
-                            </div>
-                        </Link> */}
-                        <Link to="http://localhost:/oauth2/authorization/google">
+                        <Link to="https://fnest-store.api.codeforlife.blog/oauth2/authorization/google">
                             <div className="btn btn-ghost flex justify-center w-full items-center">
                                 <FcGoogle className="w-12 h-12 text-primary" />
                                 <span className="ml-2">Đăng nhập bằng Google</span>
                             </div>
                         </Link>
+                        {/* <Link to="http://localhost:/oauth2/authorization/google">
+                            <div className="btn btn-ghost flex justify-center w-full items-center">
+                                <FcGoogle className="w-12 h-12 text-primary" />
+                                <span className="ml-2">Đăng nhập bằng Google</span>
+                            </div>
+                        </Link> */}
                         <p className="text-center p-4">
                             Bạn mới biết đến Fnest?{''}
                             <Link to="/register" className="ml-2 link link-hover link-primary">
