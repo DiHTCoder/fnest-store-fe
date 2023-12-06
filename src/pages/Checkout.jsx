@@ -17,11 +17,9 @@ const Checkout = () => {
     const token = useSelector((state) => state.auth.login?.token);
     const [isLoading, setIsLoading] = useState(true);
     const [address, setAddress] = useState([]);
-    console.log('add', address);
     const [couponCode, setCouponCode] = useState('');
     const [discountAmount, setDiscountAmount] = useState('');
     const cart = useSelector((state) => state.cart);
-    console.log(cart);
 
     useEffect(() => {
         if (!token) {
@@ -77,7 +75,7 @@ const Checkout = () => {
                 orderDetailList: cart.cartItems.map((item) => ({
                     productId: item.id,
                     quantity: item.cartQuantity,
-                    total: item.salePrice * item.cartQuantity,
+                    total: item.price * item.cartQuantity,
                 })),
             };
             const resp = await orderServices.ordering(token, orderData);
@@ -189,7 +187,7 @@ const Checkout = () => {
                                 <>
                                     <div>
                                         <h2>Mã giảm giá: {cart.discountCode}</h2>
-                                        <h2>Số tiền giảm được: {cart.discount}</h2>
+                                        <h2>Số tiền giảm được: {formatPrice(cart.discount)}</h2>
                                     </div>
                                 </>
                             ) : (
