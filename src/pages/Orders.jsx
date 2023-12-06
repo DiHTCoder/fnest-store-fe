@@ -112,9 +112,11 @@ const Orders = () => {
                 ) : (
                     <div className="mx-10 my-4">
                         {filteredOrders.length === 0 ? (
-                            <div className="flex items-center">
-                                <img src={image} alt="" />
-                                <p className=" text-lg text-center font-bold">Chưa có đơn hàng nào.</p>
+                            <div className="flex items-center justify-center">
+                                <div>
+                                    <img src={image} alt="" />
+                                    <p className=" text-lg text-center font-bold">Bạn chưa có đơn hàng nào</p>
+                                </div>
                             </div>
                         ) : (
                             <>

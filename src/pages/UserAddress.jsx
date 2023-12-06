@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { NavProfile, SubmitButton, FormInput } from '../components';
+import { NavProfile, SubmitButton, FormInput, Loading } from '../components';
 import addressServices from '../services/addressServices';
 import { useSelector, useDispatch } from 'react-redux';
 import { BiTargetLock, BiPlus } from 'react-icons/bi';
@@ -7,23 +7,19 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { getProvinces } from '../features/address/addressSlice';
 import { AiOutlineWarning } from 'react-icons/ai';
-import { GrUpdate } from 'react-icons/gr';
 import { BiPurchaseTag } from 'react-icons/bi';
 
 const UserAddress = () => {
     const dispatch = useDispatch();
     const navigateTo = useNavigate();
 
-    //Get tokens
     const token = useSelector((state) => state.auth.login?.token);
 
     const [addressIdToUpdate, setAddressIdToUpdate] = useState(null);
     const [isUpdateMode, setIsUpdateMode] = useState(false);
-
-    //initial address of a user
+    const [isLoading, setIsLoading] = useState(true);
     const [address, setAddress] = useState([]);
-
-    //Initial address when user selects
+    console.log(address);
     const [province, setProvince] = useState([]);
     const [district, setDistrict] = useState([]);
     const [ward, setWard] = useState([]);
@@ -47,32 +43,26 @@ const UserAddress = () => {
         setAddressDetail('');
     };
 
-    //get all addresses
     useEffect(() => {
         if (!token) {
             navigateTo('/login');
         } else {
-            const getAllUserAddresses = async () => {
-                try {
-                    const resp = await addressServices.getDeliveryAddress(token);
-                    setAddress(resp.data);
-                } catch (error) {
-                    console.error(error);
-                }
-            };
-            const getAllProvinces = async () => {
-                try {
-                    const resp = await addressServices.getAllProvinces();
-                    dispatch(getProvinces(resp.data));
-                    setProvince(resp.data);
-                } catch (error) {
-                    console.error(error);
-                }
-            };
-            getAllUserAddresses();
-            getAllProvinces();
+            fetchData();
         }
     }, []);
+
+    const fetchData = async () => {
+        try {
+            const respUserAdd = await addressServices.getDeliveryAddress(token);
+            const respProvinces = await addressServices.getAllProvinces();
+            setAddress(respUserAdd.data);
+            dispatch(getProvinces(respProvinces.data));
+            setProvince(respProvinces.data);
+            setIsLoading(false);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     const handleProvinceChange = async (selectedProvince) => {
         setSelectedProvince(selectedProvince);
@@ -84,6 +74,7 @@ const UserAddress = () => {
             console.error(error);
         }
     };
+
     const handleDistrictChange = async (selectedDistrict) => {
         setSelectedDistrict(selectedDistrict);
         try {
@@ -144,17 +135,10 @@ const UserAddress = () => {
                     selectedProvince,
                     selectedDistrict,
                 );
-                document.getElementById('dialog').close();
-                // Update the address state with the new data
-                setAddress((prevAddress) => {
-                    const updatedAddresses = [...prevAddress.deliveryAddresses, resp.data];
-                    return {
-                        ...prevAddress,
-                        deliveryAddresses: updatedAddresses,
-                    };
-                });
-                resetForm();
                 toast.success(resp.messages[0]);
+                document.getElementById('dialog').close();
+                resetForm();
+                fetchData();
             } catch (error) {
                 if (error.response && error.response.data && error.response.data.messages) {
                     const errorMessages = error.response.data.messages;
@@ -176,12 +160,7 @@ const UserAddress = () => {
         try {
             const resp = await addressServices.deleteDeliveryAddress(token, addressId);
             toast.success(resp.messages[0]);
-
-            const updatedAddresses = address.deliveryAddresses.filter((item) => item.id !== addressId);
-            setAddress({
-                ...address,
-                deliveryAddresses: updatedAddresses,
-            });
+            fetchData();
         } catch (error) {
             if (error.response && error.response.data && error.response.data.messages) {
                 const errorMessages = error.response.data.messages;
@@ -196,8 +175,7 @@ const UserAddress = () => {
         try {
             const respSet = await addressServices.setDefaultAddress(token, addressId);
             toast.success(respSet.messages[0]);
-            const resp = await addressServices.getDeliveryAddress(token);
-            setAddress(resp.data);
+            fetchData();
         } catch (error) {
             if (error.response && error.response.data && error.response.data.messages) {
                 const errorMessages = error.response.data.messages;
