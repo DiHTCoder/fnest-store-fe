@@ -4,7 +4,7 @@ import { Loading } from '.';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCollectionsList, setSelectedCollection } from '../features/collection/collectionsSlice';
 import collectionServices from '../services/collectionServices';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const CollectionsContainer = () => {
     const dispatch = useDispatch();
@@ -51,38 +51,31 @@ const CollectionsContainer = () => {
                     <div className=" gap-2 grid grid-cols-3 mt-10">
                         {collections.map((collection) => {
                             return (
-                                <Link
-                                    to={`/collections/${collection.id}`}
-                                    onClick={() => handleCollectionClick(collection.id)}
-                                >
-                                    <article className="bg-white border rounded-sm shadow-sm hover:shadow-xl ease-in-out duration-300 relative mb-2">
-                                        <img
-                                            src={collection.imageUrl}
-                                            alt="Ảnh"
-                                            className="h-[20rem] rounded-tr-sm rounded-tl-sm w-full"
-                                        />
-                                        {/* <span className="absolute  top-0 right-0 p-1 text-white tracking-wide bg-primary rounded-tr-sm">
-                                        ${price}
-                                    </span> */}
-                                        <div className="leading-6 m-2 font-think tracking-wide px-5">
-                                            <h5 className="text-center m-2  font-semibold leading-6 text-xl">
-                                                {collection.name}
-                                            </h5>
+                                <article className="bg-white border rounded-sm shadow-sm hover:shadow-xl ease-in-out duration-300 relative mb-2">
+                                    <img
+                                        src={collection.imageUrl}
+                                        alt="Ảnh"
+                                        className="h-[20rem] rounded-tr-sm rounded-tl-sm w-full"
+                                    />
+                                    <div className="leading-6 m-2 font-think tracking-wide px-5">
+                                        <h5 className="text-center m-2  font-semibold leading-6 text-xl">
+                                            {collection.name}
+                                        </h5>
 
-                                            <p className="tracking-wide mb-2 text-justify">
-                                                {readMore
-                                                    ? collection.description
-                                                    : `${collection.description.substring(0, 200)}...`}
-                                                <button
-                                                    className=" text-primary uppercase cursor-pointer"
-                                                    onClick={() => setReadMore(!readMore)}
-                                                >
-                                                    {readMore ? 'Thu gọn' : 'Xem thêm'}
-                                                </button>
-                                            </p>
-                                        </div>
-                                    </article>
-                                </Link>
+                                        <p className="tracking-wide mb-2 text-justify">
+                                            {readMore
+                                                ? collection.description
+                                                : `${collection.description.substring(0, 150)}[...]`}
+                                            <NavLink
+                                                to={`/collections/${collection.id}`}
+                                                onClick={() => handleCollectionClick(collection.id)}
+                                                className=" text-primary uppercase cursor-pointer"
+                                            >
+                                                Xem chi tiết
+                                            </NavLink>
+                                        </p>
+                                    </div>
+                                </article>
                             );
                         })}
                     </div>
