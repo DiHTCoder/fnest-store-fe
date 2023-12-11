@@ -23,7 +23,6 @@ const Contact = () => {
     });
 
     const onSubmit = async (values) => {
-        console.log(values);
         try {
             await userServices.sendFeedback(values.fullName, values.email, values.content);
             toast.success('Gửi feedback thành công!');
@@ -90,7 +89,7 @@ const Contact = () => {
       md:my-12
       lg:my-16
       bg-white
-      dark:bg-neutral-800
+
       w-full
   "
                     onSubmit={formik.handleSubmit}

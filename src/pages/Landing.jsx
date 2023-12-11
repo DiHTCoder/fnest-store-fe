@@ -12,6 +12,7 @@ import {
     CollectionsContainer,
 } from '../components';
 import productServices from '../services/productServices';
+import { useEffect } from 'react';
 
 export const loader = async () => {
     const response = await productServices.getFeaturedProducts();
@@ -20,6 +21,9 @@ export const loader = async () => {
 };
 
 const Landing = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     return (
         <main>
             <div className="">

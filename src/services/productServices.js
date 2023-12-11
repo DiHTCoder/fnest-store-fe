@@ -30,11 +30,11 @@ const productServices = {
         const url = `/coupon-code/apply?orderTotal=${orderTotal}&code=${code}`;
         return axiosClient.post(url);
     },
-    reviewProduct(accessToken, content, point, productName) {
+    reviewProduct(accessToken, orderItemId, content, point) {
         const url = '/buyer/product-review';
         return axiosClient.post(
             url,
-            { content, point, productName },
+            { orderItemId, content, point },
             {
                 headers: {
                     accept: 'application/json',

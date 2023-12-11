@@ -1,4 +1,4 @@
-import { formatPrice } from '../utils/helpers';
+import { formatDate, formatPrice } from '../utils/helpers';
 import { useState } from 'react';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { Stars, ProductsTab, Breadcrumb, Loading } from '../components';
@@ -16,9 +16,10 @@ const SingleProduct = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
     const [isLoading, setIsLoading] = useState(false);
-    const [product, setProduct] = useState([]); // Sử dụng null thay vì ''
+    const [product, setProduct] = useState([]);
+    console.log(product);
     const [amount, setAmount] = useState(1);
-    const [productReviews, setProductReviews] = useState(null); // Sử dụng null thay vì []
+    const [productReviews, setProductReviews] = useState(null);
     console.log(productReviews);
     const [selectedImage, setSelectedImage] = useState('');
     const [selectedImageIndex, setSelectedImageIndex] = useState(null);
@@ -29,8 +30,10 @@ const SingleProduct = () => {
         size,
         salePrice,
         material,
+        reviewAmount,
         sold,
         inStock,
+        totalReviewPoint,
         imageUrls,
         featured,
         categoryId,
@@ -38,10 +41,12 @@ const SingleProduct = () => {
         thumbnail,
     } = product;
     useEffect(() => {
+        window.scrollTo(0, 0);
         const fetchProductById = async () => {
             setIsLoading(true);
             try {
                 const respProduct = await productServices.getProductDetail(id);
+                console.log(respProduct);
                 setProduct(respProduct.data);
                 setSelectedImage(respProduct.data.thumbnail);
                 setSelectedImageIndex(null);
@@ -123,19 +128,24 @@ const SingleProduct = () => {
                     </div>
 
                     <div className="flex justify-between p-2">
-                        <div className="flex">
-                            <Stars />
-                            (100 đánh giá)
+                        <div className="flex items-center">
+                            <Stars />({reviewAmount} đánh giá)
                         </div>
                         <span>
                             <b>Đã bán: </b>
                             {sold}
                         </span>
                     </div>
-                    <div className="text-lg">
-                        <span className="text-primary text-2xl font-bold pr-4">{formatPrice(salePrice)}</span>
-                        <span className="line-through">{formatPrice(price)}</span>
-                    </div>
+                    {product.onSale ? (
+                        <div className="text-lg">
+                            <span className="text-primary text-2xl font-bold pr-4">{formatPrice(salePrice)}</span>
+                            <span className="line-through">{formatPrice(price)}</span>
+                        </div>
+                    ) : (
+                        <div className="text-lg">
+                            <span className="text-primary text-2xl font-bold pr-4">{formatPrice(price)}</span>
+                        </div>
+                    )}
                     <div className="pb-2 border-b-2">
                         <span className="text-sm tex-base-300">SKU:{product.id}</span>
                     </div>
@@ -204,14 +214,7 @@ const SingleProduct = () => {
             <div className="card w-full bg-base-100 shadow-xl my-4">
                 <div className="m-10">
                     <div className="font-bold">TỔNG QUAN ĐÁNH GIÁ SẢN PHẨM</div>
-                    {productReviews?.content.length === 0 ? (
-                        <>
-                            <p className="text-center">Không có đánh giá nào liên quan</p>
-                            <div className="flex items-end justify-center">
-                                <img src={no_evalute} alt="" className="w-1/4" />
-                            </div>
-                        </>
-                    ) : (
+                    {productReviews ? (
                         <>
                             <div className="flex">
                                 <FaStar className="w-8 h-8 text-amber-500" />
@@ -250,7 +253,9 @@ const SingleProduct = () => {
                                                                 ),
                                                             )}
                                                         </div>
-                                                        <p className="text-sm">Ngày đánh giá: 12-11-2023</p>
+                                                        <p className="text-sm">
+                                                            Ngày đánh giá: {formatDate(review.createdAt)}
+                                                        </p>
                                                     </div>
                                                     <div className="mt-2 text-sm">
                                                         <div className="flex">
@@ -262,10 +267,7 @@ const SingleProduct = () => {
                                                             <p>{review.point === 5 && 'Tuyệt vời'}</p>
                                                         </div>
 
-                                                        <p>
-                                                            Sản phẩm quá tốt. Cảm ơn đã mang lại giá trị cho ngôi nhà
-                                                            của tôi
-                                                        </p>
+                                                        <p>{review.content}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -273,6 +275,14 @@ const SingleProduct = () => {
                                         </>
                                     );
                                 })}
+                        </>
+                    ) : (
+                        <>
+                            {' '}
+                            <p className="text-center">Không có đánh giá nào liên quan</p>
+                            <div className="flex items-end justify-center">
+                                <img src={no_evalute} alt="" className="w-1/4" />
+                            </div>
                         </>
                     )}
                 </div>
