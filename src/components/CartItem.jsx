@@ -35,10 +35,26 @@ const CartItem = ({ item }) => {
                         </div>
                     </div>
                     <div className="mt-2 flex items-center space-x-2 flex-col-reverse">
-                        <div className="text-2xl text-secondary font-semibold">
-                            {formatPrice(item.salePrice * item.cartQuantity)}
-                        </div>
-                        <div className="text-sm line-through">Giá: {formatPrice(item.salePrice)}</div>
+                        {item.salePrice ? (
+                            <>
+                                <div className="text-2xl text-secondary font-semibold">
+                                    {formatPrice(item.salePrice * item.cartQuantity)}
+                                </div>
+                                <div className="text-sm flex gap-2">
+                                    <div className="line-through">Giá: {formatPrice(item.price)}</div>
+                                    <div> {formatPrice(item.salePrice)}</div>
+                                </div>
+                            </>
+                        ) : (
+                            <>
+                                <div className="text-2xl text-secondary font-semibold">
+                                    {formatPrice(item.price * item.cartQuantity)}
+                                </div>
+                                <div className="text-sm flex gap-2">
+                                    <div className="">Giá: {formatPrice(item.price)}</div>
+                                </div>
+                            </>
+                        )}
                     </div>
                 </div>
                 <div className="mt-2 flex items-center justify-between">

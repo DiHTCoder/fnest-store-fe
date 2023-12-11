@@ -4,16 +4,18 @@ import productServices from '../services/productServices';
 import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
 import { SiGooglemaps } from 'react-icons/si';
-import { CiDiscount1 } from 'react-icons/ci';
+import { CiDiscount1, CiShoppingCart } from 'react-icons/ci';
 import { setOrderTotal, applyDiscountCode, clearCart } from '../features/cart/cartSlice';
 import { formatPrice, generateAmountOptions } from '../utils/helpers';
 import { useSelector, useDispatch } from 'react-redux';
 import orderServices from '../services/orderServices';
 import { BiTargetLock, BiPlus, BiPurchaseTag } from 'react-icons/bi';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Checkout = () => {
     const dispatch = useDispatch();
+    const navigateTo = useNavigate();
+
     const token = useSelector((state) => state.auth.login?.token);
     const [isLoading, setIsLoading] = useState(true);
     const [address, setAddress] = useState([]);
@@ -45,46 +47,46 @@ const Checkout = () => {
     const handleApplyCode = async () => {
         try {
             const response = await productServices.applyCouponCode(cart.cartTotalAmount, couponCode);
-
-            if (response.status === 'FAIL') {
-            } else {
-                setDiscountAmount(response.data);
-                dispatch(
-                    applyDiscountCode({
-                        couponCode: couponCode,
-                        discount: response.data.discount,
-                        shipping: response.data.shipping_charge,
-                    }),
-                );
-                setCouponCode('');
-                toast.success(response.messages[0]);
-            }
+            setDiscountAmount(response.data);
+            dispatch(
+                applyDiscountCode({
+                    couponCode: couponCode,
+                    discount: response.data.discount,
+                    shipping: response.data.shipping_charge,
+                }),
+            );
+            setCouponCode('');
+            toast.success(response.messages[0]);
         } catch (error) {
             console.error('Lỗi:', error);
-            toast.error(error);
+            toast.error('Mã giảm giá không tồn tại!');
         }
     };
 
     const orderItems = async () => {
-        try {
-            const orderData = {
-                total: cart.cartTotalAmount,
-                shippingCharge: cart.shipping,
-                deliveryAddressId: 1,
-                code: cart.discountCode,
-                orderDetailList: cart.cartItems.map((item) => ({
-                    productId: item.id,
-                    quantity: item.cartQuantity,
-                    total: item.salePrice * item.cartQuantity,
-                })),
-            };
-            const resp = await orderServices.ordering(token, orderData);
-            if (resp.data) {
-                toast.success(resp.messages[0]);
-                dispatch(clearCart());
+        if (address.defaultAddressId == null) {
+            toast.warning('Vui lòng thêm địa chỉ giao hàng');
+        } else {
+            try {
+                const orderData = {
+                    shippingCharge: cart.shipping,
+                    deliveryAddressId: address.defaultAddressId,
+                    code: cart.discountCode,
+                    paymentMethod: 'COD',
+                    orderItemList: cart.cartItems.map((item) => ({
+                        productId: item.id,
+                        quantity: item.cartQuantity,
+                    })),
+                };
+                const resp = await orderServices.ordering(token, orderData);
+                if (resp.data) {
+                    toast.success(resp.messages[0]);
+                    dispatch(clearCart());
+                    navigateTo('/orders');
+                }
+            } catch (error) {
+                console.error('Error placing order:', error);
             }
-        } catch (error) {
-            console.error('Error placing order:', error);
         }
     };
 
@@ -97,15 +99,14 @@ const Checkout = () => {
                     <Breadcrumb url="checkout" page="Thanh toán" />
 
                     {/* Address */}
-                    <div className="card bg-base-100 shadow-sm mx-2 my-4">
-                        <div className="mx-10 my-10">
+                    <div className="card bg-base-100 shadow-sm  my-4">
+                        <div className="m-5">
                             <div className="flex gap-2 items-center">
                                 <SiGooglemaps />
                                 <span className="text-xl">Địa chỉ nhận hàng</span>
                             </div>
                             {address.defaultAddressId === null ? (
                                 <div className="flex items-center">
-                                    <p>Vui lòng thêm địa chỉ nhận hàng</p>
                                     <Link to="/address">
                                         <button className="btn btn-ghost">Thêm địa chỉ nhận hàng</button>
                                     </Link>
@@ -115,7 +116,7 @@ const Checkout = () => {
                                 address.deliveryAddresses.map((item) => (
                                     <>
                                         {item.id === address.defaultAddressId ? (
-                                            <div className="flex my-2" key={item.id}>
+                                            <div className="flex m-4" key={item.id}>
                                                 <span className="font-bold">{item.receiverName}</span>
                                                 <span className="ml-2 font-bold">({item.receiverPhone})</span>
                                                 <div className="mx-10">
@@ -138,12 +139,13 @@ const Checkout = () => {
                     </div>
 
                     {/* Order items */}
-                    <div className="card bg-base-100 shadow-sm mx-2">
-                        <div className="mx-10 my-10">
+                    <div className="card bg-base-100 shadow-sm ">
+                        <div className="m-5">
                             <div className="flex gap-2 items-center border-b-[1px] mb-2">
+                                <CiShoppingCart />
                                 <span className="text-xl my-2 ">Sản phẩm</span>
                             </div>
-                            <div className="grid grid-cols-5 font-bold ">
+                            <div className="grid grid-cols-5 font-bold items-center text-center">
                                 <div>Hình ảnh</div>
                                 <div>Tên</div>
                                 <div>Kích thước</div>
@@ -152,14 +154,18 @@ const Checkout = () => {
                             </div>
                             {cart.cartItems.map((cartItem) => {
                                 return (
-                                    <div className="grid grid-cols-5 my-10" key={cartItem.id}>
-                                        <div>
+                                    <div className="grid grid-cols-5 my-4 text-center items-center" key={cartItem.id}>
+                                        <div className="flex justify-center">
                                             <img src={cartItem.thumbnail} alt="" className="max-w-[50%]" />
                                         </div>
                                         <div>{cartItem.name}</div>
                                         <div>{cartItem.size}</div>
                                         <div>{cartItem.cartQuantity}</div>
-                                        <div>{formatPrice(cartItem.cartQuantity * cartItem.salePrice)}</div>
+                                        {cartItem.onSale ? (
+                                            <div>{formatPrice(cartItem.cartQuantity * cartItem.salePrice)}</div>
+                                        ) : (
+                                            <div>{formatPrice(cartItem.cartQuantity * cartItem.price)}</div>
+                                        )}
                                     </div>
                                 );
                             })}
@@ -167,15 +173,15 @@ const Checkout = () => {
                     </div>
 
                     {/*  Coupon */}
-                    <div className="card bg-base-100 shadow-sm mx-2 my-4">
-                        <div className="mx-10 my-10">
+                    <div className="card bg-base-100 shadow-sm  my-4">
+                        <div className="m-5">
                             <div className="flex gap-2 items-center">
                                 <CiDiscount1 className="w-6 h-6" />
                                 <span className="text-xl">Mã giảm giá</span>
                             </div>
                             <div className="join my-4">
                                 <input
-                                    className="input input-bordered join-item"
+                                    className="input input-bordered join-item "
                                     placeholder="Mã giảm giá"
                                     onBlur={handleCouponCodeChange}
                                 />
@@ -186,8 +192,8 @@ const Checkout = () => {
                             {cart.discountCode ? (
                                 <>
                                     <div>
-                                        <h2>Mã giảm giá: {cart.discountCode}</h2>
-                                        <h2>Số tiền giảm được: {formatPrice(cart.discount)}</h2>
+                                        <h2 className="font-bold text-error">Mã giảm giá: {cart.discountCode}</h2>
+                                        <h2 className="font-bold">Giảm: -{formatPrice(cart.discount)}</h2>
                                     </div>
                                 </>
                             ) : (
@@ -197,24 +203,24 @@ const Checkout = () => {
                     </div>
 
                     {/*  Total */}
-                    <div className="card bg-base-100 shadow-sm mx-2 my-4">
-                        <div className="mx-10 my-10">
+                    <div className="card bg-base-100 shadow-sm  my-4">
+                        <div className="m-5">
                             <div className="flex gap-2 items-center justify-between ">
                                 <span className="text-xl">Phương thức thanh toán</span>
-                                <span>Thanh toán khi nhận hàng</span>
+                                <span>Thanh toán khi nhận hàng̣ (COD)</span>
                             </div>
                             <div className="flex justify-end border-y-[1px] my-4">
                                 <div className="">
                                     <div className="flex gap-2 my-4">
-                                        <p>Tổng tiền hàng:</p>
-                                        <p>{formatPrice(cart.cartTotalAmount)}</p>
-                                    </div>
-                                    <div className="flex gap-2 my-4">
                                         <p>Phí vận chuyển:</p>
                                         <p>{formatPrice(cart.shipping)}</p>
                                     </div>
+                                    <div className="flex gap-2 my-4">
+                                        <p>Giảm giá:</p>
+                                        <p>-{formatPrice(cart.discount)}</p>
+                                    </div>
                                     <div className="flex items-center gap-2 my-4">
-                                        <p>Tổng thannh toán:</p>
+                                        <p className="font-bold">Tổng thannh toán:</p>
                                         <p className="text-2xl text-primary">{formatPrice(cart.cartTotalAmount)}</p>
                                     </div>
                                 </div>

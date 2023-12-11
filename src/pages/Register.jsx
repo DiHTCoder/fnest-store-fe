@@ -32,6 +32,7 @@ const Register = () => {
                 navigate('/login');
             }
         } catch (error) {
+            setIsLoading(false);
             if (error.response && error.response.data && error.response.data.messages) {
                 const errorMessages = error.response.data.messages;
                 toast.error(errorMessages.join(', ')); // Display error messages from the response
@@ -52,7 +53,7 @@ const Register = () => {
         },
         validationSchema: Yup.object({
             username: Yup.string().required('Vui lòng nhập thông tin!').max(30, 'Tối đa 30 ký tự'),
-            email: Yup.string().required('Vui lòng nhập thông tin!').max(30, 'Tối đa 30 ký tự'),
+            email: Yup.string().required('Vui lòng nhập thông tin!').max(35, 'Tối đa 35 ký tự'),
             password: Yup.string().required('Vui lòng nhập thông tin!').min(8, 'Mật khẩu phải chứa ít nhất 8 ký tự'),
             fullName: Yup.string().required('Vui lòng nhập thông tin!').max(30, 'Tối đa 30 ký tự'),
         }),

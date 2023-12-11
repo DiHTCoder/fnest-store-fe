@@ -303,13 +303,13 @@ const UserAddress = () => {
                         </div>
                     </div>
                     <div className="m-10">
-                        {address.length === 0 ? (
+                        {address.defaultAddressId === null ? (
                             <div className="text-xl font-bold text-warning flex items-center">
                                 <AiOutlineWarning />
                                 <p> Vui lòng thêm địa chỉ nhận hàng!</p>
                             </div>
                         ) : (
-                            address.deliveryAddresses.map((item) => (
+                            address.deliveryAddresses&& address.deliveryAddresses.map((item) => (
                                 <div key={item.id} className="my-5">
                                     <div className="grid grid-cols-2">
                                         <div>

@@ -48,10 +48,16 @@ const Product = ({ product }) => {
                     <div className="min-h-[84px]">
                         <h2 className="card-title capitalize ">{product.name}</h2>
                     </div>
-                    <div className="flex justify-between">
-                        <span className="text-secondary text-left">{formatPrice(product.salePrice)}</span>
-                        <span className=" text-left line-through">{formatPrice(product.price)}</span>
-                    </div>
+                    {product.onSale ? (
+                        <div className="flex justify-between">
+                            <span className="text-secondary text-left">{formatPrice(product.salePrice)}</span>
+                            <span className=" text-left line-through">{formatPrice(product.price)}</span>
+                        </div>
+                    ) : (
+                        <div className="">
+                            <span className="text-secondary text-left">{formatPrice(product.price)}</span>
+                        </div>
+                    )}
                     <div className="flex justify-between">
                         <Stars />
                         <div>SL: {product.inStock}</div>
