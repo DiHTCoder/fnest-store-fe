@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSelectedRoom } from '../features/room/roomSilce';
 import Logo from '../assets/Logo1.png';
 import { NavLinks } from '.';
 import { FaBarsStaggered } from 'react-icons/fa6';
 
 export const Header = () => {
+    const dispatch = useDispatch();
+
     const { cartTotalQuantity } = useSelector((state) => state.cart);
     const HEADER_TRANSPARENT_DISTANCE = 250;
     const [scrollY, setScrollY] = useState(0);
+    const rooms = useSelector((state) => state.rooms.currentRoom);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -22,62 +26,82 @@ export const Header = () => {
         };
     }, []);
 
+    const handleRoomClick = (id) => {
+        dispatch(setSelectedRoom(id));
+    };
+
     return (
         <>
             <header
-                className="sticky transition-all ease-in left-0 right-0 top-0 z-30 flex h-[64px] items-center justify-center bg-base-100 bg-opacity-90 backdrop-blur text-base-content  md:h-[74px] lg:h-[100px]
-        duration-100 [transform:translate3d(0,0,0)] shadow"
+                className={`sticky transition-all ease-in left-0 right-0 top-0 z-30 flex items-center justify-center bg-base-100 bg-opacity-90 backdrop-blur text-base-content md:h-[74px] lg:h-[80px]
+        duration-100 [transform:translate3d(0,0,0)] shadow ${
+            scrollY > HEADER_TRANSPARENT_DISTANCE ? 'bg-base-200' : ''
+        }`}
             >
-                <div className="navbar hidden h-full max-w-screen-xl px-4 py-2 md:flex lg:py-3">
+                <div className="navbar max-w-screen-xl px-4 py-2 flex lg:py-3">
                     <div className="navbar">
-                        <div className="navbar-start">
-                            <div className="dropdown">
-                                <label tabIndex={0} className="btn btn-ghost lg:hidden">
-                                    <FaBarsStaggered className="h-6 w-6" />
-                                </label>
-                                <ul
-                                    tabIndex={0}
-                                    className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-200 rounded-box w-52"
-                                ></ul>
-                            </div>
+                        <div className="navbar-start ">
                             <NavLink to="/" className="w-[200px]">
                                 <img src={Logo} alt="" />
                             </NavLink>
                         </div>
-                        <div className="navbar-center hidden lg:flex">
+                        <div className="lg:navbar-center hidden lg:flex">
                             <ul className="flex align-center justify-center">
                                 <NavLinks />
                             </ul>
                         </div>
                         <div className="navbar-end">
-                            <form>
-                                <div class="relative">
-                                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                        <svg
-                                            class="w-4 h-4 text-gray-500 dark:text-gray-400"
-                                            aria-hidden="true"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 20 20"
-                                        >
-                                            <path
-                                                stroke="currentColor"
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                stroke-width="2"
-                                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                                            />
-                                        </svg>
-                                    </div>
-                                    <input
-                                        type="search"
-                                        id="default-search"
-                                        class="block w-full p-4 ps-10 text-sm   rounded-lg  focus:ring-blue-500 focus:border-blue-500     dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="Tìm kiếm..."
-                                        required
-                                    />
+                            <div className="drawer drawer-end lg:hidden block md:navbar-start">
+                                <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+                                <div className="drawer-content flex justify-end">
+                                    <label htmlFor="my-drawer" className="btn btn-ghost drawer-button">
+                                        <FaBarsStaggered className="h-6 w-6 order-last" />
+                                    </label>
                                 </div>
-                            </form>
+                                <div className="drawer-side">
+                                    <label
+                                        htmlFor="my-drawer"
+                                        aria-label="close sidebar"
+                                        className="drawer-overlay"
+                                    ></label>
+                                    <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+                                        <li>
+                                            <NavLink to="/">Trang chủ</NavLink>
+                                        </li>
+                                        <li>
+                                            <NavLink to="products">Sản phẩm</NavLink>
+                                        </li>
+                                        <li>
+                                            <details open>
+                                                <summary>Phòng</summary>
+
+                                                <ul>
+                                                    {rooms ? (
+                                                        rooms.map((room) => (
+                                                            <li key={room.id}>
+                                                                <NavLink
+                                                                    to={`/rooms/${room.id}`}
+                                                                    onClick={() => handleRoomClick(room.id)}
+                                                                >
+                                                                    {room.name}
+                                                                </NavLink>
+                                                            </li>
+                                                        ))
+                                                    ) : (
+                                                        <></>
+                                                    )}
+                                                </ul>
+                                            </details>
+                                        </li>
+                                        <li>
+                                            <NavLink to="collections">Bộ sưu tập</NavLink>
+                                        </li>
+                                        <li>
+                                            <NavLink to="posts">Góc sáng tạo</NavLink>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

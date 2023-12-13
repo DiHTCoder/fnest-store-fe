@@ -65,16 +65,18 @@ const Register = () => {
             {isLoading ? (
                 <Loading />
             ) : (
-                <section className="my-10 grid grid-cols-2 place-items-center">
+                <section className="my-6 grid lg:grid-cols-2 grid-cols-1 place-items-center">
                     <div className="w-full h-full">
                         <img src={login} alt="Ảnh login" />
                     </div>
                     <Form
                         method="post"
-                        className="card w-[500px] p-8 bg-base-100 shadow-xl"
+                        className="card lg:w-[500px] md:w-[500px] w-[300px] p-8 bg-base-100 shadow-xl"
                         onSubmit={formik.handleSubmit}
                     >
-                        <h3 className="text-2xl pb-2 font-semibold text-center text-primary">Đăng ký tài khoản</h3>
+                        <h3 className="md:text-2xl lg:text-2xl pb-2 font-semibold text-center text-primary">
+                            Đăng ký tài khoản
+                        </h3>
                         <FormInput
                             type="text"
                             label="Tên đăng nhập(*)"
@@ -129,7 +131,7 @@ const Register = () => {
                                 Quên mật khẩu?
                             </Link>
                         </p>
-                        <p className="text-center p-2">
+                        <p className="text-center p-2 text-sm">
                             Bạn đã có tài khoản?
                             <Link to="/login" className="ml-2 link link-hover link-primary">
                                 Đăng nhập!

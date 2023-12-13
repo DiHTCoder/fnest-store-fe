@@ -85,19 +85,21 @@ const Login = () => {
             {isLoading ? (
                 <Loading />
             ) : (
-                <section className="my-14 grid grid-cols-2 place-items-center">
+                <section className="my-14 grid lg:grid-cols-2 grid-cols-1 place-items-center">
                     <div className="">
                         <img src={login} alt="Ảnh login" />
                     </div>
                     <Form
                         method="post"
-                        className="card w-[500px] p-8 bg-base-100 shadow-xl"
+                        className="card lg:w-[500px] md:w-[500px] w-[300px] p-8 bg-base-100 shadow-xl"
                         onSubmit={formik.handleSubmit}
                     >
-                        <h3 className="text-2xl pb-2 font-semibold text-center text-primary">
+                        <h3 className="md:text-2xl lg:text-2xl pb-2 font-semibold text-center text-primary">
                             Chào mừng bạn đến với <br /> Nội thất Fnest!
                         </h3>
-                        <p className="text-lg font-bold text-center">Đăng nhập bằng tài khoản của bạn</p>
+                        <p className="md:text-xl lg:text-xl text-sm font-bold text-center">
+                            Đăng nhập bằng tài khoản của bạn
+                        </p>
                         <FormInput
                             type="text"
                             label="Tên đăng nhập(*)"
@@ -126,9 +128,9 @@ const Login = () => {
                         </p>
                         <p className="text-center p-2 opacity-75">HOẶC</p>
                         <Link to="https://fnest-store.api.codeforlife.blog/oauth2/authorization/google">
-                            <div className="btn btn-ghost flex justify-center w-full items-center">
+                            <div className="btn btn-ghost flex justify-center w-full items-center text-center">
                                 <FcGoogle className="w-12 h-12 text-primary" />
-                                <span className="ml-2">Đăng nhập bằng Google</span>
+                                <p className="hidden md:block lg:block"> Đăng nhập bằng Google</p>
                             </div>
                         </Link>
                         {/* <Link to="http://localhost:/oauth2/authorization/google">
@@ -137,12 +139,12 @@ const Login = () => {
                                 <span className="ml-2">Đăng nhập bằng Google</span>
                             </div>
                         </Link> */}
-                        <p className="text-center p-4">
-                            Bạn mới biết đến Fnest?{''}
+                        <div className="text-center my-4 text-sm">
+                            <p> Bạn mới biết đến Fnest?</p>
                             <Link to="/register" className="ml-2 link link-hover link-primary">
                                 Đăng ký ngay!
                             </Link>
-                        </p>
+                        </div>
                     </Form>
                 </section>
             )}

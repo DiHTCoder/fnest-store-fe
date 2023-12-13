@@ -9,6 +9,7 @@ import { BiUser, BiSolidBellRing } from 'react-icons/bi';
 import { PiNewspaperClippingThin } from 'react-icons/pi';
 import { BsCashStack, BsCheck } from 'react-icons/bs';
 import { AiOutlineEdit } from 'react-icons/ai';
+import avatar from '../assets/images/avatar.jpg';
 
 const NavProfile = () => {
     const navigate = useNavigate();
@@ -36,7 +37,11 @@ const NavProfile = () => {
                 <label tabIndex={0} className="flex  items-center space-x-3">
                     <div className="avatar online">
                         <div className="w-14 rounded-full">
-                            <img src="https://cdn5.vectorstock.com/i/1000x1000/51/99/icon-of-user-avatar-for-web-site-or-mobile-app-vector-3125199.jpg" />
+                            {userProfile.gender === 'FEMALE' ? (
+                                <img src="https://cdn5.vectorstock.com/i/1000x1000/51/99/icon-of-user-avatar-for-web-site-or-mobile-app-vector-3125199.jpg" />
+                            ) : (
+                                <img src={avatar} />
+                            )}
                         </div>
                     </div>
                     <div>

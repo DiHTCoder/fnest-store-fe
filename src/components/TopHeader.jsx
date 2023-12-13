@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { BsCart3, BsMoonFill, BsSunFill } from 'react-icons/bs';
 import { useSelector, useDispatch } from 'react-redux';
@@ -10,6 +10,7 @@ import eng from '../assets/flag/en-flag.png';
 import { useTranslation } from 'react-i18next';
 import i18n from 'i18next';
 import { CiUser, CiLocationOn, CiHeadphones } from 'react-icons/ci';
+import avatar from '../assets/images/avatar.jpg';
 
 const TopHeader = () => {
     const dispatch = useDispatch();
@@ -34,11 +35,11 @@ const TopHeader = () => {
         navigate('/');
     };
     return (
-        <div className="bg-[#303036] border-b-[1px]">
-            <section className="flex align-element justify-between items-center ">
+        <div className="bg-[#303036] border-b-[1px] hidden md:block text-sm lg:text-base">
+            <section className="flex align-element justify-between items-center">
                 <div className="items-start text-white">
                     <div className="flex items-center">
-                        <span className="text-sm uppercase font-bold">{currentLanguage}</span>
+                        <span className="uppercase font-bold">{currentLanguage}</span>
                         <div className="btn btn-ghost btn-circle btn-sm" onClick={changeLanguage}>
                             <div className="indicator">
                                 <img src={flagImage} alt="" className="rounded-full" />
@@ -90,10 +91,14 @@ const TopHeader = () => {
                                 <label tabIndex={0} className="flex justify-center items-center space-x-1 ">
                                     <div className="avatar online">
                                         <div className="w-10 rounded-full">
-                                            <img src="https://cdn5.vectorstock.com/i/1000x1000/51/99/icon-of-user-avatar-for-web-site-or-mobile-app-vector-3125199.jpg" />
+                                            {user.gender === 'FEMALE' ? (
+                                                <img src="https://cdn5.vectorstock.com/i/1000x1000/51/99/icon-of-user-avatar-for-web-site-or-mobile-app-vector-3125199.jpg" />
+                                            ) : (
+                                                <img src={avatar} />
+                                            )}
                                         </div>
                                     </div>
-                                    <h1 className="font-bold text-white">Hi,{user?.username}</h1>
+                                    <h1 className="font-bold text-white">Hi,{user?.fullName}</h1>
                                 </label>
                                 <ul
                                     tabIndex={0}

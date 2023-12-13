@@ -9,7 +9,6 @@ import {
     Purpose,
     Collection,
     Inspiration,
-    CollectionsContainer,
 } from '../components';
 import productServices from '../services/productServices';
 import { useEffect } from 'react';
@@ -37,7 +36,7 @@ const Landing = () => {
                 <Title text=" Gợi ý phong cách thiết kế đẹp" />
                 <Stylist />
                 <Contact />
-                <Title text="Đánh giá" />
+                <Title text="Sứ mệnh" />
                 <EvaluateSlider />
                 <Title text="Góc cảm hứng" />
                 <Inspiration />
