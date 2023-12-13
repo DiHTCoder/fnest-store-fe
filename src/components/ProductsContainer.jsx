@@ -57,8 +57,8 @@ const ProductsContainer = () => {
             ) : (
                 <>
                     <Filters />
-                    <div className="flex justify-between items-center my-3 border-b border-base-300 py-5">
-                        <h2 className="text-lg font-bold">Tất cả sản phẩm của cửa hàng</h2>
+                    <div className="flex justify-between items-center text-sm lg:text-lg my-3 border-b border-base-300 py-5">
+                        <h2 className=" font-bold">Tất cả sản phẩm của cửa hàng</h2>
                         <div className="flex items-center gap-3">
                             <div className="flex gap-x-4">
                                 <button
@@ -76,20 +76,22 @@ const ProductsContainer = () => {
                                     <BsList />
                                 </button>
                             </div>
-                            <h2 className="font-medium">
+                            <h2 className="font-medium hidden md:block">
                                 ( Có {data ? data.content.length : 0} sản phẩm được tìm thấy)
                             </h2>
                         </div>
                     </div>
-                    {data ? (
-                        layout === 'grid' ? (
-                            <ProductsGrid products={data} columns="4" />
+                    <div>
+                        {data ? (
+                            layout === 'grid' ? (
+                                <ProductsGrid products={data} columns="4" />
+                            ) : (
+                                <ProductsList products={data} />
+                            )
                         ) : (
-                            <ProductsList products={data} />
-                        )
-                    ) : (
-                        <h2>Không có sản phẩm nào</h2>
-                    )}
+                            <h2>Không có sản phẩm nào</h2>
+                        )}
+                    </div>
                     {data.totalPages > 1 ? (
                         <Pagination
                             totalPages={data.totalPages}

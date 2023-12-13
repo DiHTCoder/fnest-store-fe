@@ -33,7 +33,7 @@ export const Header = () => {
     return (
         <>
             <header
-                className={`sticky transition-all ease-in left-0 right-0 top-0 z-30 flex items-center justify-center bg-base-100 bg-opacity-90 backdrop-blur text-base-content md:h-[74px] lg:h-[80px]
+                className={`sticky transition-all ease-in left-0 right-0 top-0 z-30 flex items-center justify-center bg-base-100 bg-opacity-90 backdrop-blur text-base-content h-[60px] md:h-[74px] lg:h-[80px]
         duration-100 [transform:translate3d(0,0,0)] shadow ${
             scrollY > HEADER_TRANSPARENT_DISTANCE ? 'bg-base-200' : ''
         }`}
@@ -64,7 +64,7 @@ export const Header = () => {
                                         aria-label="close sidebar"
                                         className="drawer-overlay"
                                     ></label>
-                                    <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+                                    <ul className="menu p-4 w-50 min-h-full bg-base-200 text-base-content">
                                         <li>
                                             <NavLink to="/">Trang chủ</NavLink>
                                         </li>
@@ -98,6 +98,9 @@ export const Header = () => {
                                         </li>
                                         <li>
                                             <NavLink to="posts">Góc sáng tạo</NavLink>
+                                        </li>
+                                        <li>
+                                            <NavLink to="login">Đăng nhập/Đăng ký</NavLink>
                                         </li>
                                     </ul>
                                 </div>
