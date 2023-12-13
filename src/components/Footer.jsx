@@ -9,7 +9,7 @@ import { NavLink } from 'react-router-dom';
 import Logo from '../assets/Logo1.png';
 const Footer = () => {
     return (
-        <footer className="footer footer-center p-10 bg-[#303036] text-primary-content">
+        <footer className="footer footer-center py-10 bg-[#303036] text-primary-content">
             <div className="text-white align-element">
                 <img src={Logo} alt="" className="w-1/6" />
                 <p>
@@ -18,7 +18,7 @@ const Footer = () => {
                     không gian sống của bạn thành kiệt tác
                 </p>
             </div>
-            <div className="grid grid-cols-4 gap-3 text-white align-element">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 sm:grid-cols-1  gap-3 text-white align-element">
                 <div className="h-full p-4 rounded w-full">
                     <h2 className="text-xl font-semibold text-left">Đa dạng thanh toán</h2>
                     <div className="mt-3 flex flex-col space-y-2">

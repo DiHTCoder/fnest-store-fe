@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import lamp from '../assets/images/lamp.png';
 import userServices from '../services/userServices';
-import { FormInput, SubmitButton, Loading } from '../components';
-import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { toast } from 'react-toastify';
+import { NavLink } from 'react-router-dom';
 
 const Contact = () => {
     const initialValues = {
@@ -38,12 +37,12 @@ const Contact = () => {
         onSubmit: (values, { resetForm }) => onSubmit(values, { resetForm }),
     });
     return (
-        <section aria-labelledby="contact" class="container mx-auto px-8 overflow-hidden">
+        <section aria-labelledby="contact" class="container mx-auto overflow-hidden">
             <div class="flex flex-wrap justify-center gap-12 md:gap-6 lg:gap-20">
                 <div class="md:flex-1 md:max-w-sm relative">
                     <img src={lamp} alt="Lamp" class="mx-auto mt-[30px]" />
-                    <a
-                        href="#"
+                    <NavLink
+                        to="/about-us"
                         class="
         py-2
         px-6
@@ -69,10 +68,7 @@ const Contact = () => {
         dark:ring-amber-400
         dark:ring-offset-neutral-800
       "
-                    >
-                        <span>VỀ FNEST</span>
-                    </a>
-                    {/* <img src="/assets/app.svg" alt="app" width="240" class="hidden md:block drop-shadow-xl absolute left-1/2 -translate-x-1/2 max-w-16 xl:max-w-xs"/> */}
+                    ></NavLink>
                 </div>
                 <form
                     class="
@@ -94,7 +90,7 @@ const Contact = () => {
   "
                     onSubmit={formik.handleSubmit}
                 >
-                    <h2 id="contact" class="text-3xl font-bold">
+                    <h2 id="contact" class="md:text-3xl sm:text-base font-bold">
                         Thông tin của bạn
                     </h2>
                     <div class="relative">
