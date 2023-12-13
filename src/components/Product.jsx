@@ -26,7 +26,7 @@ const Product = ({ product }) => {
                     <img
                         src={product.thumbnail}
                         alt={product.name}
-                        className="rounded-xl h-64 md:h-48 w-full object-cover"
+                        className="rounded-xl lg:h-64 md:h-48 w-full object-cover"
                     />
                 </figure>
                 <div className="flex">

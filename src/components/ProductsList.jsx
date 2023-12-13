@@ -18,7 +18,7 @@ const ProductsList = ({ products }) => {
     };
 
     return (
-        <div className="my-12 grid gap-y-4">
+        <div className="grid gap-y-4">
             {products.content.map((product) => {
                 return (
                     <div
@@ -29,9 +29,9 @@ const ProductsList = ({ products }) => {
                         <img
                             src={product.thumbnail}
                             alt={product.name}
-                            className="h-24 w-24 rounded-lg sm:h-32 sm:w-32 object-cover group-hover:scale-105 transition duration-300"
+                            className="h-24 w-24 rounded-lg sm:h-32 sm:w-26 object-cover group-hover:scale-105 transition duration-300"
                         />
-                        <div className="ml-0 sm:ml-16 max-w-[700px]">
+                        <div className="ml-0 sm:ml-10 lg:max-w-[700px] max-w-[300px]  text-sm lg:text-base">
                             <div className="flex">
                                 <h3 className="capitalize font-medium text-lg">{product.name}</h3>
                                 <Stars />
@@ -61,9 +61,18 @@ const ProductsList = ({ products }) => {
                         </div>
 
                         <div className="ml-0 sm:ml-auto text-lg">
-                            {' '}
-                            <p className="font-medium my-4 line-through">{formatPrice(product.price)}</p>
-                            <p className="font-medium my-4 text-secondary">Giá:{formatPrice(product.salePrice)}</p>
+                            {product.onSale ? (
+                                <>
+                                    {' '}
+                                    <p className="font-medium my-4 line-through">{formatPrice(product.price)}</p>
+                                    <p className="font-medium my-4 text-secondary">
+                                        Giá:{formatPrice(product.salePrice)}
+                                    </p>
+                                </>
+                            ) : (
+                                <p className="font-medium my-4 text-secondary">Giá:{formatPrice(product.price)}</p>
+                            )}
+
                             <button
                                 className="btn btn-outline btn-info"
                                 onClick={() => {

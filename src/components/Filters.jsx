@@ -39,7 +39,7 @@ const Filters = () => {
     };
 
     return (
-        <div className="items-center py-4 px-4 grid grid-cols-5 gap-x-4 gap-y-8 my-4">
+        <div className="items-center lg:grid grid grid-cols-1 md:grid-cols-4 gap-x-4 gap-y-2 mt-4">
             {/* Ô tìm kiếm */}
             <div>
                 <label className="label">
@@ -50,7 +50,7 @@ const Filters = () => {
                     label="Tìm kiếm sản phẩm"
                     placeholder="Nhập tên sản phẩm..."
                     name="search"
-                    className="input input-bordered w-full max-w-xs"
+                    className="input input-bordered w-full max-w-xs text-sm"
                     value={filters.search}
                     onChange={handleFilterChange}
                 />
@@ -95,14 +95,16 @@ const Filters = () => {
                 <label className="label">
                     <span className="label-text">Áp dụng</span>
                 </label>
-                <button className="btn btn-ghost btn-info" onClick={handleApplyFilters}>
-                    <GrFilter />
-                    Lọc
-                </button>
-                <button className="btn btn-ghost" onClick={handleResetFilters}>
-                    <GrPowerReset />
-                    Đặt lại
-                </button>
+                <div className="flex justify-around">
+                    <button className="btn btn-ghost btn-info" onClick={handleApplyFilters}>
+                        <GrFilter />
+                        Lọc
+                    </button>
+                    <button className="btn btn-ghost" onClick={handleResetFilters}>
+                        <GrPowerReset />
+                        Đặt lại
+                    </button>
+                </div>
             </div>
         </div>
     );

@@ -30,7 +30,7 @@ const Inspiration = () => {
 
     return (
         <section>
-            <div className="px-[20px] gap-2 grid grid-cols-3 mt-4">
+            <div className="gap-2 grid lg:grid-cols-3 sm:grid-cols-1 md:grid-cols-2 mt-4">
                 {filterPosts().map((post) => (
                     <SingleStylist key={post.id} {...post} />
                 ))}
