@@ -55,15 +55,15 @@ const UpdateProfile = () => {
     });
 
     return (
-        <div className="grid grid-cols-4 mt-10 mb-40">
+        <div className="grid md:grid-cols-4 gap-2 md:mt-10 lg:mb-30 mb-10">
             <NavProfile />
             <div className="card col-span-3 bg-white shadow-lg">
                 <div className="mx-4 my-4">
-                    <div className="border-b-2 pb-5">
-                        <div className="text-lg font-bold">Chỉnh sửa hồ sơ</div>
+                    <div className="border-b-2 pb-5 lg:text-lg text-sm">
+                        <div className="font-bold">Chỉnh sửa hồ sơ</div>
                         <div className="">Vui lòng điền thông tin cần thay đổi!</div>
                     </div>
-                    <div className="grid grid-cols-2">
+                    <div className="grid lg:grid-cols-2">
                         <Form method="PATCH" className="" onSubmit={formik.handleSubmit}>
                             <FormInput
                                 type="text"
@@ -97,7 +97,7 @@ const UpdateProfile = () => {
                                 <p className="text-error text-sm p-1"> {formik.errors.birthday}</p>
                             )}
                             <div className="mt-4">
-                                <SubmitButton text="Luu" color="primary" />
+                                <SubmitButton text="Lưu" color="primary" />
                             </div>
                         </Form>
                     </div>

@@ -40,16 +40,16 @@ const Profile = () => {
     const user = useSelector((state) => state.auth.profile?.user);
     const date = formatDate(user?.birthday);
     return (
-        <div className="grid grid-cols-4 mt-10 mb-40">
+        <div className="grid md:grid-cols-4 gap-2 md:mt-10 lg:mb-30 mb-10">
             <NavProfile />
-            <div className="card col-span-3 bg-white shadow-lg">
-                <div className="mx-4 my-4">
-                    <div className="border-b-2 pb-5">
-                        <div className="text-lg font-bold">Hồ Sơ Của Tôi</div>
+            <div className="card md:col-span-3 bg-white shadow-lg">
+                <div className="m-4">
+                    <div className="border-b-2 pb-5 lg:text-lg text-sm">
+                        <div className=" font-bold">Hồ Sơ Của Tôi</div>
                         <div className="text-bold">Quản lý thông tin hồ sơ để bảo mật tài khoản</div>
                     </div>
-                    <div className="mx-20 my-5">
-                        <div className="grid grid-cols-5 space-x-3">
+                    <div className="lg:mx-14 md:mx-10 mx-2 my-5 lg:text-base text-sm">
+                        <div className="grid lg:grid-cols-5 grid-cols-3 space-x-3">
                             <div>
                                 <h2 className="py-2">Tên đăng nhập</h2>
                                 <h2 className="py-2">Email</h2>

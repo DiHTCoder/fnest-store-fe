@@ -51,15 +51,15 @@ const ChangePassword = () => {
     });
 
     return (
-        <div className="grid grid-cols-4 mt-10 mb-40">
+        <div className="grid md:grid-cols-4 gap-2 md:mt-10 lg:mb-30 mb-10">
             <NavProfile />
-            <div className="card col-span-3 bg-white shadow-lg">
-                <div className="mx-4 my-4">
-                    <div className="border-b-2 pb-5">
-                        <div className="text-lg font-bold">Đổi mật khẩu</div>
+            <div className="card md:col-span-3 bg-white shadow-lg">
+                <div className="m-4">
+                    <div className="border-b-2 pb-5 lg:text-lg text-sm">
+                        <div className="font-bold">Đổi mật khẩu</div>
                         <div className="">Vui lòng nhập đầy đủ thông tin!</div>
                     </div>
-                    <div className="grid grid-cols-2">
+                    <div className="grid lg:grid-cols-2">
                         <Form method="PATCH" className="my-2 mx-6" onSubmit={formik.handleSubmit}>
                             <FormInput
                                 type="password"
@@ -96,7 +96,7 @@ const ChangePassword = () => {
                             )}
 
                             <div className="mt-4">
-                                <SubmitButton text="Luu" color="primary" />
+                                <SubmitButton text="Lưu" color="primary" />
                             </div>
                         </Form>
                     </div>
