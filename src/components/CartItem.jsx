@@ -20,7 +20,7 @@ const CartItem = ({ item }) => {
 
     return (
         <div className="flex space-x-3 w-full mb-10 border-b border-base-300 pb-6 last:border-b-0">
-            <img src={item.thumbnail} alt={item.name} className="h-24 w-24 rounded-lg sm:h-32 sm:w-32 object-cover" />
+            <img src={item.thumbnail} alt={item.name} className="lg:h-24 lg:w-24 h-12 w-12 rounded-lg object-cover" />
             <div className="flex-1 flex flex-col">
                 <div className="flex flex-col lg:flex-row lg:items-center lg:space-x-6">
                     <div className="flex-1">
@@ -34,14 +34,15 @@ const CartItem = ({ item }) => {
                             <p className="text-sm">{item.size}</p>
                         </div>
                     </div>
-                    <div className="mt-2 flex items-center space-x-2 flex-col-reverse">
+                    <div className="mt-2 flex lg:items-center space-x-2 flex-col-reverse">
                         {item.salePrice ? (
                             <>
-                                <div className="text-2xl text-secondary font-semibold">
+                                <div className="lg:text-2xl text-base text-secondary font-semibold">
+                                    Tổng:
                                     {formatPrice(item.salePrice * item.cartQuantity)}
                                 </div>
                                 <div className="text-sm flex gap-2">
-                                    <div className="line-through">Giá: {formatPrice(item.price)}</div>
+                                    <div className="line-through hidden md:block">Giá: {formatPrice(item.price)}</div>
                                     <div> {formatPrice(item.salePrice)}</div>
                                 </div>
                             </>
@@ -57,7 +58,7 @@ const CartItem = ({ item }) => {
                         )}
                     </div>
                 </div>
-                <div className="mt-2 flex items-center justify-between">
+                <div className="mt-2 md:flex md:items-center md:justify-between">
                     <div className="sm:ml-12">
                         {/* AMOUNT */}
                         <div class="flex items-center border-gray-100">
