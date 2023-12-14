@@ -1,7 +1,7 @@
 import { formatDate, formatPrice } from '../utils/helpers';
 import { useState } from 'react';
 import { AiOutlineHeart } from 'react-icons/ai';
-import { Stars, ProductsTab, Breadcrumb, Loading } from '../components';
+import { Stars, Breadcrumb, Loading } from '../components';
 import { useParams } from 'react-router-dom';
 import productServices from '../services/productServices';
 import { useEffect } from 'react';
@@ -17,29 +17,12 @@ const SingleProduct = () => {
     const { id } = useParams();
     const [isLoading, setIsLoading] = useState(false);
     const [product, setProduct] = useState([]);
-    console.log('product detail', product);
     const [amount, setAmount] = useState(1);
     const [productReviews, setProductReviews] = useState(null);
-    console.log(productReviews);
     const [selectedImage, setSelectedImage] = useState('');
     const [selectedImageIndex, setSelectedImageIndex] = useState(null);
-    const {
-        name,
-        price,
-        description,
-        size,
-        salePrice,
-        material,
-        reviewAmount,
-        sold,
-        inStock,
-        totalReviewPoint,
-        imageUrls,
-        featured,
-        categoryId,
-        collectionId,
-        thumbnail,
-    } = product;
+    const { name, price, description, size, salePrice, material, reviewAmount, sold, inStock, totalReviewPoint } =
+        product;
 
     const averageRating = Math.round((totalReviewPoint / reviewAmount) * 2) / 2;
 
@@ -49,7 +32,6 @@ const SingleProduct = () => {
             setIsLoading(true);
             try {
                 const respProduct = await productServices.getProductDetail(id);
-                console.log(respProduct);
                 setProduct(respProduct.data);
                 setSelectedImage(respProduct.data.thumbnail);
                 setSelectedImageIndex(null);
@@ -109,10 +91,10 @@ const SingleProduct = () => {
             ) : (
                 <>
                     <Breadcrumb url="products" page="Chi tiết sản phẩm" />
-                    <div className="grid grid-cols-2 gap-10">
+                    <div className="grid lg:grid-cols-2 grid-col-1 gap-10">
                         <div>
                             <img src={selectedImage} alt={name} className="border-solid border-2 rounded-xl" />
-                            <div className="grid grid-cols-6 gap-1 mt-2 ">
+                            <div className="grid md:grid-cols-6 grid-cols-4 gap-1 mt-2 ">
                                 {product.imageUrls?.map((url) => {
                                     return (
                                         <img
@@ -130,11 +112,11 @@ const SingleProduct = () => {
                         </div>
                         <div>
                             <div className="flex justify-between">
-                                <h2 className="text-4xl font-bold">{name}</h2>
+                                <h2 className="lg:text-4xl md:text-2xl text-base font-bold">{name}</h2>
                                 <AiOutlineHeart className="w-[30px] h-[30px] text-primary transition-colors duration-300" />
                             </div>
 
-                            <div className="flex justify-between p-2">
+                            <div className="flex justify-between p-2 lg:text-base text-sm">
                                 <div className="flex items-center">
                                     <Stars />({reviewAmount} đánh giá)
                                 </div>
@@ -144,39 +126,42 @@ const SingleProduct = () => {
                                 </span>
                             </div>
                             {product.onSale ? (
-                                <div className="text-lg">
-                                    <span className="text-primary text-2xl font-bold pr-4">
-                                        {formatPrice(salePrice)}
-                                    </span>
+                                <div className="lg:text-lg text-base">
+                                    <span className="text-primary font-bold pr-4">{formatPrice(salePrice)}</span>
                                     <span className="line-through">{formatPrice(price)}</span>
                                 </div>
                             ) : (
-                                <div className="text-lg">
+                                <div className="lg:text-lg text-base">
                                     <span className="text-primary text-2xl font-bold pr-4">{formatPrice(price)}</span>
                                 </div>
                             )}
-                            <div className="pb-2 border-b-2">
-                                <span className="text-sm tex-base-300">SKU:{product.id}</span>
+                            <div className="lg:text-base text-sm">
+                                <div className="pb-2 border-b-2">
+                                    <span className="text-sm tex-base-300">SKU:{product.id}</span>
+                                </div>
+                                <p className="py-2">
+                                    <b>Chất liệu: </b>
+                                    {material}
+                                </p>
+                                <p className="py-2">
+                                    <b>Kích thước: </b>
+                                    {size}
+                                </p>
+                                <p className="py-2">
+                                    <b>Số lượng còn lại: </b>
+                                    {inStock}
+                                </p>
+                                <p className="py-2 leading-loose">
+                                    <b>Mô tả: </b>
+                                    {description}
+                                </p>
                             </div>
-                            <p className="py-2">
-                                <b>Chất liệu: </b>
-                                {material}
-                            </p>
-                            <p className="py-2">
-                                <b>Kích thước: </b>
-                                {size}
-                            </p>
-                            <p className="py-2">
-                                <b>Số lượng còn lại: </b>
-                                {inStock}
-                            </p>
-                            <p className="py-2 leading-loose">
-                                <b>Mô tả: </b>
-                                {description}
-                            </p>
 
                             <div className="mt-3">
-                                <label htmlFor="count" className="text-paragraph font-semibold text-base-content-300">
+                                <label
+                                    htmlFor="count"
+                                    className="text-paragraph font-semibold lg:text-base-content-300 text-sm"
+                                >
                                     Số lượng
                                 </label>
                                 <div class="flex items-center border-gray-100 my-2">
@@ -206,7 +191,7 @@ const SingleProduct = () => {
                                         +
                                     </button>
                                 </div>
-                                <div className="flex gap-5">
+                                <div className="grid md:grid-cols-2 grid-cols-1 gap-5">
                                     <button
                                         className="btn btn-ghost bg-primary text-white"
                                         onClick={() => handleAddToCart()}
@@ -224,11 +209,11 @@ const SingleProduct = () => {
                         </div>
                     </div>
                     <div className="card w-full bg-base-100 shadow-xl my-4">
-                        <div className="m-10">
+                        <div className="md:m-10 m-4 lg:text-base text-sm">
                             <div className="font-bold">TỔNG QUAN ĐÁNH GIÁ SẢN PHẨM</div>
                             {productReviews && productReviews.content.length > 0 ? (
                                 <>
-                                    <div className="flex gap-2 mb-10">
+                                    <div className="flex gap-2 lg:mb-10 mb-2">
                                         {[...Array(5)].map((_, index) => (
                                             <span key={index}>
                                                 {index + 0.5 === averageRating ? (
@@ -250,7 +235,7 @@ const SingleProduct = () => {
                                         productReviews.content.map((review) => {
                                             return (
                                                 <>
-                                                    <div className=" grid grid-cols-10">
+                                                    <div className=" grid md:grid-cols-10 grid-cols-6">
                                                         <div>
                                                             <img
                                                                 src={avatar}

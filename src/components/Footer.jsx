@@ -18,7 +18,7 @@ const Footer = () => {
                     không gian sống của bạn thành kiệt tác
                 </p>
             </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 sm:grid-cols-1  gap-3 text-white align-element">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 sm:grid-cols-1 gap-3 text-white align-element">
                 <div className="h-full p-4 rounded w-full">
                     <h2 className="text-xl font-semibold text-left">Đa dạng thanh toán</h2>
                     <div className="mt-3 flex flex-col space-y-2">
