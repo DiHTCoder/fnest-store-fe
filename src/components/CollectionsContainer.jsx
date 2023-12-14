@@ -39,16 +39,16 @@ const CollectionsContainer = () => {
                 <Loading />
             ) : (
                 <>
-                    <div className="flex justify-between items-center my-3 border-b border-base-300 py-5">
-                        <h2 className="text-lg font-bold">Tất cả bộ sưu tập của Fnest</h2>
+                    <div className="flex justify-between items-center my-3 border-b border-base-300 py-5 text-sm md:text-base">
+                        <h2 className="font-bold">Tất cả bộ sưu tập của Fnest</h2>
                         <div className="flex items-center gap-3">
-                            <h2 className="font-medium">
+                            <h2 className="">
                                 ( Có {data.currentCollection ? data.currentCollection.length : 0} bộ sưu tập được tìm
                                 thấy)
                             </h2>
                         </div>
                     </div>
-                    <div className=" gap-2 grid grid-cols-3 mt-10">
+                    <div className=" gap-2 grid lg:grid-cols-3 sm:grid-cols-1 md:grid-cols-2 my-5">
                         {collections.map((collection) => {
                             return (
                                 <article className="bg-white border rounded-sm shadow-sm hover:shadow-xl ease-in-out duration-300 relative mb-2">
@@ -58,11 +58,11 @@ const CollectionsContainer = () => {
                                         className="h-[20rem] rounded-tr-sm rounded-tl-sm w-full"
                                     />
                                     <div className="leading-6 m-2 font-think tracking-wide px-5">
-                                        <h5 className="text-center m-2  font-semibold leading-6 text-xl">
+                                        <h5 className="text-center m-2  font-semibold leading-6 lg:text-lg text-base">
                                             {collection.name}
                                         </h5>
 
-                                        <p className="tracking-wide mb-2 text-justify">
+                                        <p className="tracking-wide mb-2 text-justify lg:text-base text-sm">
                                             {readMore
                                                 ? collection.description
                                                 : `${collection.description.substring(0, 150)}[...]`}

@@ -55,7 +55,7 @@ const CollectionDetail = () => {
                     />
                     <Filters />
                     <div className="flex justify-between items-center my-3 border-b border-base-300 py-5">
-                        <h2 className="text-lg font-bold">Tất cả sản phẩm của bộ sưu tập</h2>
+                        <h2 className="lg:text-base text-sm font-bold">Tất cả sản phẩm của bộ sưu tập</h2>
                         <div className="flex items-center gap-3">
                             <div className="flex gap-x-4">
                                 <button
