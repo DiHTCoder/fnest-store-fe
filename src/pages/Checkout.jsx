@@ -1,4 +1,4 @@
-import { SubmitButton, Breadcrumb, Loading } from '../components';
+import { Breadcrumb, Loading } from '../components';
 import addressServices from '../services/addressServices';
 import productServices from '../services/productServices';
 import { toast } from 'react-toastify';
@@ -6,10 +6,10 @@ import { useEffect, useState } from 'react';
 import { SiGooglemaps } from 'react-icons/si';
 import { CiDiscount1, CiShoppingCart } from 'react-icons/ci';
 import { setOrderTotal, applyDiscountCode, clearCart } from '../features/cart/cartSlice';
-import { formatPrice, generateAmountOptions } from '../utils/helpers';
+import { formatPrice } from '../utils/helpers';
 import { useSelector, useDispatch } from 'react-redux';
 import orderServices from '../services/orderServices';
-import { BiTargetLock, BiPlus, BiPurchaseTag } from 'react-icons/bi';
+import { BiTargetLock } from 'react-icons/bi';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Checkout = () => {
@@ -99,11 +99,11 @@ const Checkout = () => {
                     <Breadcrumb url="checkout" page="Thanh toán" />
 
                     {/* Address */}
-                    <div className="card bg-base-100 shadow-sm  my-4">
+                    <div className="card bg-base-100 shadow-sm my-4">
                         <div className="m-5">
                             <div className="flex gap-2 items-center">
                                 <SiGooglemaps />
-                                <span className="text-xl">Địa chỉ nhận hàng</span>
+                                <span className="lg:text-base text-sm">Địa chỉ nhận hàng</span>
                             </div>
                             {address.defaultAddressId === null ? (
                                 <div className="flex items-center">
@@ -114,12 +114,12 @@ const Checkout = () => {
                             ) : (
                                 address.deliveryAddresses.length > 0 &&
                                 address.deliveryAddresses.map((item) => (
-                                    <>
+                                    <div className="lg:text-base text-sm">
                                         {item.id === address.defaultAddressId ? (
-                                            <div className="flex m-4" key={item.id}>
+                                            <div className="md:flex m-4" key={item.id}>
                                                 <span className="font-bold">{item.receiverName}</span>
                                                 <span className="ml-2 font-bold">({item.receiverPhone})</span>
-                                                <div className="mx-10">
+                                                <div className="md:mx-10">
                                                     <p className="">{item.deliveryAddress}</p>
                                                 </div>
                                                 <div className="flex text-center items-center space-x-2">
@@ -132,7 +132,7 @@ const Checkout = () => {
                                         ) : (
                                             <></>
                                         )}
-                                    </>
+                                    </div>
                                 ))
                             )}
                         </div>
@@ -140,12 +140,12 @@ const Checkout = () => {
 
                     {/* Order items */}
                     <div className="card bg-base-100 shadow-sm ">
-                        <div className="m-5">
+                        <div className="m-5 lg:text-base text-sm">
                             <div className="flex gap-2 items-center border-b-[1px] mb-2">
                                 <CiShoppingCart />
-                                <span className="text-xl my-2 ">Sản phẩm</span>
+                                <span className="lg:text-base text-sm my-2">Sản phẩm</span>
                             </div>
-                            <div className="grid grid-cols-5 font-bold items-center text-center">
+                            <div className="grid md:grid-cols-5 grid-cols-2 font-bold items-center text-center">
                                 <div>Hình ảnh</div>
                                 <div>Tên</div>
                                 <div>Kích thước</div>
@@ -154,12 +154,15 @@ const Checkout = () => {
                             </div>
                             {cart.cartItems.map((cartItem) => {
                                 return (
-                                    <div className="grid grid-cols-5 my-4 text-center items-center" key={cartItem.id}>
-                                        <div className="flex justify-center">
+                                    <div
+                                        className="grid md:grid-cols-5 grid-cols-2 my-4 gap-x-10 text-center items-center"
+                                        key={cartItem.id}
+                                    >
+                                        <div className="flex justify-center md:border-b-0 border-b-2">
                                             <img src={cartItem.thumbnail} alt="" className="max-w-[50%]" />
                                         </div>
-                                        <div>{cartItem.name}</div>
-                                        <div>{cartItem.size}</div>
+                                        <div className="md:border-b-0 border-b-2">{cartItem.name}</div>
+                                        <div className="md:border-b-0 border-b-2">{cartItem.size}</div>
                                         <div>{cartItem.cartQuantity}</div>
                                         {cartItem.onSale ? (
                                             <div>{formatPrice(cartItem.cartQuantity * cartItem.salePrice)}</div>
@@ -173,15 +176,15 @@ const Checkout = () => {
                     </div>
 
                     {/*  Coupon */}
-                    <div className="card bg-base-100 shadow-sm  my-4">
+                    <div className="card bg-base-100 lg:text-base text-sm shadow-sm my-4">
                         <div className="m-5">
                             <div className="flex gap-2 items-center">
                                 <CiDiscount1 className="w-6 h-6" />
-                                <span className="text-xl">Mã giảm giá</span>
+                                <span className="">Mã giảm giá</span>
                             </div>
                             <div className="join my-4">
                                 <input
-                                    className="input input-bordered join-item "
+                                    className="input input-bordered join-item"
                                     placeholder="Mã giảm giá"
                                     onBlur={handleCouponCodeChange}
                                 />
@@ -203,10 +206,10 @@ const Checkout = () => {
                     </div>
 
                     {/*  Total */}
-                    <div className="card bg-base-100 shadow-sm  my-4">
+                    <div className="card bg-base-100 lg:text-base text-sm shadow-sm my-4">
                         <div className="m-5">
                             <div className="flex gap-2 items-center justify-between ">
-                                <span className="text-xl">Phương thức thanh toán</span>
+                                <span className="">Phương thức thanh toán</span>
                                 <span>Thanh toán khi nhận hàng̣ (COD)</span>
                             </div>
                             <div className="flex justify-end border-y-[1px] my-4">
