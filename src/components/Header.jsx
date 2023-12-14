@@ -64,7 +64,7 @@ export const Header = () => {
                                         aria-label="close sidebar"
                                         className="drawer-overlay"
                                     ></label>
-                                    <ul className="menu p-4 w-50 min-h-full bg-base-200 text-base-content">
+                                    <ul className="menu p-4 w-2/3 min-h-full bg-base-200 text-base-content">
                                         <li>
                                             <NavLink to="/">Trang chủ</NavLink>
                                         </li>

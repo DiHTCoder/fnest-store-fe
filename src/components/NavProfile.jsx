@@ -32,9 +32,9 @@ const NavProfile = () => {
         }
     }, []);
     return (
-        <div className="my-2">
+        <div className="my-2 lg:mx-0 mx-4 lg:text-base text-sm">
             <Link to="/profile" className="pb-6 border-b-2 hover:cursor-pointer">
-                <label tabIndex={0} className="flex  items-center space-x-3">
+                <label tabIndex={0} className="flex items-center space-x-3">
                     <div className="avatar online">
                         <div className="w-14 rounded-full">
                             {userProfile.gender === 'FEMALE' ? (
