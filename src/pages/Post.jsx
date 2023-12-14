@@ -37,7 +37,7 @@ const Post = () => {
                     <div className="col-span-2 row-span-3">
                         <img src={banner3} alt="" className="w-full h-full object-cover" />
                         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center">
-                            <strong className="text-6xl">Ý tưởng về không gian sống</strong>
+                            <strong className="lg:text-6xl text-2xl">Ý tưởng về không gian sống</strong>
                         </div>
                     </div>
                     <div className="col-span-2 row-span-2">
@@ -49,7 +49,7 @@ const Post = () => {
                 </div>
             </div>
             <section>
-                <div className="px-[20px] gap-2 grid grid-cols-3 mt-4">
+                <div className="gap-2 grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 my-4">
                     {filterPosts().map((post) => (
                         <SingleStylist key={post.id} {...post} />
                     ))}
