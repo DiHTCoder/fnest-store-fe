@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import productServices from '../services/productServices';
 import collectionServices from '../services/collectionServices';
-import { Filters, Loading, Banner, ProductsGrid, ProductsList } from '../components';
+import { Loading, Banner, ProductsGrid, ProductsList, Pagination } from '../components';
 import { BsFillGridFill, BsList } from 'react-icons/bs';
 
 const CollectionDetail = () => {
@@ -42,6 +42,16 @@ const CollectionDetail = () => {
         }`;
     };
 
+    const handlePageChange = async (page) => {
+        setIsLoading(true);
+        try {
+            const products = await productServices.getProductsByCollection(selectedCollection, page, 10, 'name.desc');
+            setIsLoading(false);
+            setProducts(products.data);
+        } catch (error) {
+            console.error('Lỗi khi lấy dữ liệu sản phẩm:', error);
+        }
+    };
     return (
         <>
             {isLoading ? (
@@ -53,7 +63,6 @@ const CollectionDetail = () => {
                         url={`collections/${collection.id}`}
                         image={collection.imageUrl}
                     />
-                    <Filters />
                     <div className="flex justify-between items-center my-3 border-b border-base-300 py-5">
                         <h2 className="lg:text-base text-sm font-bold">Tất cả sản phẩm của bộ sưu tập</h2>
                         <div className="flex items-center gap-3">
@@ -86,6 +95,15 @@ const CollectionDetail = () => {
                         )
                     ) : (
                         <h2>Không có sản phẩm nào</h2>
+                    )}
+                    {products.totalPages > 1 ? (
+                        <Pagination
+                            totalPages={products.totalPages}
+                            currentPage={products.currentPage}
+                            onPageChange={handlePageChange}
+                        />
+                    ) : (
+                        <></>
                     )}
                 </>
             )}
