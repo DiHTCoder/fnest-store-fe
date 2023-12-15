@@ -17,6 +17,7 @@ const Profile = () => {
     const dispatch = useDispatch();
     const token = useSelector((state) => state.auth.login?.token);
     useEffect(() => {
+        scrollTo(0, 0);
         if (!token) {
             navigate('/login');
         }

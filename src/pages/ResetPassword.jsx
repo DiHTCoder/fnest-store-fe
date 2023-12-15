@@ -45,14 +45,14 @@ const ResetPassword = () => {
         <div className="flex justify-center items-center h-screen">
             <Form method="post" className="card w-[500px] p-8 bg-base-100 shadow-xl" onSubmit={formik.handleSubmit}>
                 <div className="text-center mb-6">
-                    <h2 className="text-3xl font-semibold">Lấy lại mật khẩu</h2>
+                    <h2 className="lg:text-3xl text-xl font-semibold">Lấy lại mật khẩu</h2>
                 </div>
                 <FormInput
                     type="text"
-                    label="OTP(*)"
+                    label="Tên đăng nhập(*)"
                     name="username"
                     value={formik.values.username}
-                    placeholder="OTP"
+                    placeholder="Tên đăng nhập"
                     onchange={formik.handleChange}
                 />
                 {formik.errors.username && <p className="text-error text-sm p-1"> {formik.errors.username}</p>}
@@ -66,7 +66,11 @@ const ResetPassword = () => {
                 />
                 {formik.errors.otp && <p className="text-error text-sm p-1"> {formik.errors.otp}</p>}
                 <div className="w-[120px] mt-8 ml-2">
-                    <SubmitButton text={isLoading ? 'Đang tải...' : 'Lấy mã'} color="primary" disabled={isLoading} />
+                    <SubmitButton
+                        text={isLoading ? 'Đang xử lý...' : 'Xác thực'}
+                        color="primary"
+                        disabled={isLoading}
+                    />
                 </div>
             </Form>
         </div>

@@ -24,6 +24,7 @@ const Checkout = () => {
     const cart = useSelector((state) => state.cart);
 
     useEffect(() => {
+        scrollTo(0, 0);
         if (!token) {
             navigateTo('/login');
         } else {

@@ -44,7 +44,7 @@ const ForgotPassword = () => {
         <div className="flex justify-center items-center h-screen">
             <Form method="post" className="card w-[500px] p-8 bg-base-100 shadow-xl" onSubmit={formik.handleSubmit}>
                 <div className="text-center mb-6">
-                    <h2 className="text-3xl font-semibold">Quên mật khẩu</h2>
+                    <h2 className="lg:text-3xl text-xl font-semibold">Quên mật khẩu</h2>
                 </div>
                 <FormInput
                     type="email"
@@ -56,7 +56,7 @@ const ForgotPassword = () => {
                 />
                 {formik.errors.email && <p className="text-error text-sm p-1"> {formik.errors.email}</p>}
                 <div className="w-[120px] mt-8 ml-2">
-                    <SubmitButton text={isLoading ? 'Đang tải...' : 'Lấy mã'} color="primary" disabled={isLoading} />
+                    <SubmitButton text={isLoading ? 'Đang gửi...' : 'Lấy mã'} color="primary" disabled={isLoading} />
                 </div>
             </Form>
         </div>

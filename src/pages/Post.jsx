@@ -19,6 +19,7 @@ const Post = () => {
     };
 
     useEffect(() => {
+        scrollTo(0, 0);
         fetchData();
     }, []);
 

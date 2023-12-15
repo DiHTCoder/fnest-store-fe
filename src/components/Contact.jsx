@@ -40,7 +40,7 @@ const Contact = () => {
         <section aria-labelledby="contact" class="container mx-auto overflow-hidden">
             <div class="flex flex-wrap justify-center gap-12 md:gap-6 lg:gap-20">
                 <div class="md:flex-1 md:max-w-sm relative">
-                    <img src={lamp} alt="Lamp" class="mx-auto mt-[30px]" />
+                    <img src={lamp} alt="Lamp" class="mx-auto lg:mt-[30px]" />
                     <NavLink
                         to="/about-us"
                         class="
