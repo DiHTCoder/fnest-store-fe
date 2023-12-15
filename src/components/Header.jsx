@@ -17,6 +17,7 @@ import { BsPostcardHeart } from 'react-icons/bs';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { AiOutlineLogin } from 'react-icons/ai';
 import { BsCart3 } from 'react-icons/bs';
+import { FiShoppingBag } from 'react-icons/fi';
 
 export const Header = () => {
     const dispatch = useDispatch();
@@ -168,7 +169,12 @@ export const Header = () => {
                                                     Góc sáng tạo
                                                 </NavLink>
                                             </li>
-
+                                            <li>
+                                                <NavLink to="posts">
+                                                    <FiShoppingBag />
+                                                    Đơn mua
+                                                </NavLink>
+                                            </li>
                                             <li>
                                                 {!user ? (
                                                     <NavLink to="login">

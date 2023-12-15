@@ -58,17 +58,13 @@ const TopHeader = () => {
                     </div>
                 </div>
                 <div className="items-end ">
-                    <div className="flex items-center gap-2 ">
+                    <div className="flex items-center gap-2">
                         {user ? (
                             <div className="dropdown dropdown-hover">
                                 <label tabIndex={0} className="flex justify-center items-center space-x-1 ">
                                     <div className="avatar online">
                                         <div className="w-10 rounded-full">
-                                            {user.gender === 'FEMALE' ? (
-                                                <img src="https://cdn5.vectorstock.com/i/1000x1000/51/99/icon-of-user-avatar-for-web-site-or-mobile-app-vector-3125199.jpg" />
-                                            ) : (
-                                                <img src={avatar} />
-                                            )}
+                                            <img src={avatar} />
                                         </div>
                                     </div>
                                     <h1 className="font-bold text-white">Hi,{user?.username}</h1>

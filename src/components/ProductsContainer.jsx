@@ -42,9 +42,8 @@ const ProductsContainer = () => {
     const handlePageChange = async (page) => {
         setIsLoading(true);
         try {
-            const products = await productServices.getAllProducts('', page, 2, 'name.desc');
+            const products = await productServices.getAllProducts('', page, 10, 'name.desc', filters.priceMin);
             setIsLoading(false);
-
             dispatch(setProductsList(products.data));
         } catch (error) {
             console.error('Lỗi khi lấy dữ liệu sản phẩm:', error);
