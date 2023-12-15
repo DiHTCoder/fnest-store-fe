@@ -37,7 +37,7 @@ const CartItem = ({ item }) => {
                     <div className="mt-2 flex lg:items-center space-x-2 flex-col-reverse">
                         {item.salePrice ? (
                             <>
-                                <div className="lg:text-2xl text-base text-secondary font-semibold">
+                                <div className="lg:text-2xl text-sm text-secondary font-semibold">
                                     Tổng:
                                     {formatPrice(item.salePrice * item.cartQuantity)}
                                 </div>

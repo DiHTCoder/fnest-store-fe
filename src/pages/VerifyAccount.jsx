@@ -28,19 +28,19 @@ const VerifyAccount = () => {
     };
     return (
         <div>
-            <div className="grid grid-cols-4 my-5">
+            <div className="grid md:grid-cols-4 gap-2 md:mt-10 lg:mb-30 mb-10">
                 <NavProfile />
-                <div className="card col-span-3 bg-white shadow-lg">
+                <div className="card md:col-span-3 bg-white shadow-lg">
                     <div className="mx-4 my-4">
-                        <div className="border-b-2 pb-5">
+                        <div className="order-b-2 pb-5 lg:text-lg text-sm">
                             <div className="text-lg font-bold">Xác nhận Email</div>
                             <div className="text-bold font-light">
                                 Để đảm bảo xác thực tài khoản, thực hiện đầy đủ các bước bên dưới để xác nhận email của
                                 bạn
                             </div>
                         </div>
-                        <div className="mx-10 my-10">
-                            <ul className="steps w-full">
+                        <div className="md:m-10">
+                            <ul className="steps w-full lg:text-lg text-sm">
                                 <li className="step step-success">Lấy mã OTP</li>
                                 <li className="step ">Xác thực mã OTP</li>
                             </ul>

@@ -128,9 +128,9 @@ const Orders = () => {
         }
     };
     return (
-        <div className="grid grid-cols-4 mt-10 mb-40">
+        <div className="grid md:grid-cols-4 gap-2 md:mt-10 lg:mb-30 mb-10">
             <NavProfile />
-            <div className="card col-span-3 bg-white">
+            <div className="card md:col-span-3 bg-white shadow-lg">
                 <div role="tablist" className="tabs tabs-bordered my-2 border-b-[1px]">
                     <button
                         onClick={() => setActiveTab('all')}
@@ -166,12 +166,12 @@ const Orders = () => {
                 {isLoading ? (
                     <Loading />
                 ) : (
-                    <div className="mx-10 my-4">
+                    <div className="lg:mx-10 mx-3 lg:my-4">
                         {filteredOrders.length === 0 ? (
                             <div className="flex items-center justify-center">
                                 <div>
                                     <img src={image} alt="" />
-                                    <p className=" text-lg text-center font-bold">Bạn chưa có đơn hàng nào</p>
+                                    <p className="lg:text-lg text-sm text-center font-bold">Bạn chưa có đơn hàng nào</p>
                                 </div>
                             </div>
                         ) : (
@@ -478,11 +478,11 @@ const Orders = () => {
                                                 </div>
                                             </div>
                                         </dialog>
-                                        <div className="flex items-center justify-between my-2 ">
+                                        <div className="flex items-center justify-between my-2 text-sm lg:text-base">
                                             <p className="font-bold">Mã đơn hàng: {order.id}</p>
                                             {order.status === 'COMPLETED' ? (
                                                 <div className="flex gap-2">
-                                                    <div className="flex items-center gap-2 text-success">
+                                                    <div className="flex items-center gap-1 text-success">
                                                         <CiDeliveryTruck />
                                                         <p>Đơn hàng đã được giao thành công</p>
                                                     </div>
@@ -501,7 +501,7 @@ const Orders = () => {
                                         {order.responses.map((product) => {
                                             return (
                                                 <div className="my-4" key={product.id}>
-                                                    <div className="flex relative flex-col sm:flex-row gap-y-4 gap-x-2 flex-wrap">
+                                                    <div className="flex relative flex-col sm:flex-row gap-y-2 gap-x-2 flex-wrap">
                                                         <img
                                                             src={product.productThumbnail}
                                                             alt={product.productName}
@@ -509,7 +509,7 @@ const Orders = () => {
                                                         />
                                                         <div className="ml-0">
                                                             <div className="flex">
-                                                                <h3 className="capitalize font-medium text-lg">
+                                                                <h3 className="capitalize font-medium">
                                                                     {product.productName}
                                                                 </h3>
                                                             </div>
@@ -528,7 +528,7 @@ const Orders = () => {
                                                 </div>
                                             );
                                         })}
-                                        <div className="flex my-4 justify-between">
+                                        <div className="flex justify-between">
                                             <p>Tổng tiền: {formatPrice(order.total)}</p>
                                             {order.status == 'PENDING' || order.status === 'CONFIRMED' ? (
                                                 <button

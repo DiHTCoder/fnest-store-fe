@@ -4,15 +4,29 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setSelectedRoom } from '../features/room/roomSilce';
 import Logo from '../assets/Logo1.png';
 import { NavLinks } from '.';
+import { logOutSuccess } from '../features/user/userSlice';
 import { FaBarsStaggered } from 'react-icons/fa6';
+import avatar from '../assets/images/avatar.jpg';
+import { useNavigate } from 'react-router-dom';
+import { IoHomeOutline } from 'react-icons/io5';
+import { PiArmchairLight } from 'react-icons/pi';
+import { LiaWindows } from 'react-icons/lia';
+import { FaObjectGroup } from 'react-icons/fa';
+import { BsPostcardHeart } from 'react-icons/bs';
+import { IoCartOutline } from 'react-icons/io5';
+import { CiHeart } from 'react-icons/ci';
+import { AiOutlineLogout } from 'react-icons/ai';
+import { AiOutlineLogin } from 'react-icons/ai';
 
 export const Header = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const { cartTotalQuantity } = useSelector((state) => state.cart);
     const HEADER_TRANSPARENT_DISTANCE = 250;
     const [scrollY, setScrollY] = useState(0);
     const rooms = useSelector((state) => state.rooms.currentRoom);
+    const user = useSelector((state) => state.auth.login?.currentUser);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -26,6 +40,11 @@ export const Header = () => {
         };
     }, []);
 
+    const handleLogout = () => {
+        dispatch(logOutSuccess());
+        navigate('/');
+    };
+
     const handleRoomClick = (id) => {
         dispatch(setSelectedRoom(id));
     };
@@ -33,7 +52,7 @@ export const Header = () => {
     return (
         <>
             <header
-                className={`sticky transition-all ease-in left-0 right-0 top-0 z-30 flex items-center justify-center bg-base-100 bg-opacity-90 backdrop-blur text-base-content h-[60px] md:h-[74px] lg:h-[80px]
+                className={`sticky transition-all ease-in left-0 right-0 top-0 z-30 flex items-center justify-center bg-base-100 bg-opacity-90 backdrop-blur text-base-content h-[64px] md:h-[74px] lg:h-[80px]
         duration-100 [transform:translate3d(0,0,0)] shadow ${
             scrollY > HEADER_TRANSPARENT_DISTANCE ? 'bg-base-200' : ''
         }`}
@@ -64,16 +83,36 @@ export const Header = () => {
                                         aria-label="close sidebar"
                                         className="drawer-overlay"
                                     ></label>
-                                    <ul className="menu p-4 w-2/3 min-h-full bg-base-200 text-base-content">
+                                    <ul className="menu p-4 w-1/2 min-h-full bg-base-200 text-base-content">
+                                        <>
+                                            {user && (
+                                                <NavLink
+                                                    to="profile"
+                                                    className="w-10 rounded-full flex items-center gap-2 my-2"
+                                                >
+                                                    <img src={avatar} />
+                                                    <h1 className="font-bold text-sm">Hi,{user?.fullName}</h1>
+                                                </NavLink>
+                                            )}
+                                        </>
                                         <li>
-                                            <NavLink to="/">Trang chủ</NavLink>
+                                            <NavLink to="/">
+                                                <IoHomeOutline />
+                                                Trang chủ
+                                            </NavLink>
                                         </li>
                                         <li>
-                                            <NavLink to="products">Sản phẩm</NavLink>
+                                            <NavLink to="products">
+                                                <PiArmchairLight />
+                                                Sản phẩm
+                                            </NavLink>
                                         </li>
                                         <li>
                                             <details open>
-                                                <summary>Phòng</summary>
+                                                <summary>
+                                                    <LiaWindows />
+                                                    Phòng
+                                                </summary>
 
                                                 <ul>
                                                     {rooms ? (
@@ -94,13 +133,41 @@ export const Header = () => {
                                             </details>
                                         </li>
                                         <li>
-                                            <NavLink to="collections">Bộ sưu tập</NavLink>
+                                            <NavLink to="collections">
+                                                <FaObjectGroup />
+                                                Bộ sưu tập
+                                            </NavLink>
                                         </li>
                                         <li>
-                                            <NavLink to="posts">Góc sáng tạo</NavLink>
+                                            <NavLink to="posts">
+                                                <BsPostcardHeart />
+                                                Góc sáng tạo
+                                            </NavLink>
                                         </li>
                                         <li>
-                                            <NavLink to="login">Đăng nhập/Đăng ký</NavLink>
+                                            <NavLink to="cart">
+                                                <IoCartOutline />
+                                                Giỏ hàng
+                                            </NavLink>
+                                        </li>
+                                        <li>
+                                            <NavLink to="favourite">
+                                                <CiHeart />
+                                                Yêu thích
+                                            </NavLink>
+                                        </li>
+                                        <li>
+                                            {!user ? (
+                                                <NavLink to="login">
+                                                    <AiOutlineLogin />
+                                                    Đăng nhập
+                                                </NavLink>
+                                            ) : (
+                                                <p onClick={handleLogout}>
+                                                    <AiOutlineLogout />
+                                                    Đăng xuất
+                                                </p>
+                                            )}
                                         </li>
                                     </ul>
                                 </div>

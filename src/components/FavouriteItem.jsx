@@ -24,18 +24,30 @@ const FavouriteItem = ({ item }) => {
                             <p className="text-sm">{item.description}</p>
                         </div>
                     </div>
-                    <div className="mt-2 flex items-center space-x-2 flex-col-reverse">
-                        <div className="text-2xl text-secondary font-semibold">{formatPrice(item.price)}</div>
-                        <div className="text-sm">Giá: {formatPrice(item.price)}</div>
+                    <div className="mt-2 flex lg:items-center space-x-2 flex-col-reverse">
+                        {item.salePrice ? (
+                            <>
+                                <div className="text-sm flex gap-2">
+                                    <div className="line-through hidden md:block">Giá: {formatPrice(item.price)}</div>
+                                    <div> {formatPrice(item.salePrice)}</div>
+                                </div>
+                            </>
+                        ) : (
+                            <>
+                                <div className="text-sm flex gap-2">
+                                    <div className="">Giá: {formatPrice(item.price)}</div>
+                                </div>
+                            </>
+                        )}
                     </div>
                 </div>
-                <div className="mt-2 flex items-center justify-between">
+                <div className="mt-2 md:flex items-center justify-between">
                     <button className="btn btn-ghost" onClick={() => addItemToTheCart(item)}>
-                        Thêm vào giỏ hàng
+                        <p className="hidden md:block">Thêm vào giỏ hàng</p>
                         <CiCirclePlus className="w-[30px] h-[30px]" />
                     </button>
                     <button className="btn btn-ghost" onClick={() => removeItemFromTheFavourite(item)}>
-                        Xóa
+                        <p className="hidden md:block"> Xóa</p>
                         <CiCircleRemove className="w-[30px] h-[30px]" />
                     </button>
                 </div>

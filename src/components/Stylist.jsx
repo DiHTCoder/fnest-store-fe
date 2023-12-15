@@ -16,7 +16,7 @@ const Stylist = () => {
                     </div>
                     <NavLink
                         to="/posts"
-                        class="btn btn-info text-white
+                        class="btn btn-info btn-ghost 
             "
                     >
                         KHÁM PHÁ NGAY

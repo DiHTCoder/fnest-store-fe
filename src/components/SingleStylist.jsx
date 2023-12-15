@@ -12,7 +12,7 @@ const SingleStylist = ({ id, title, description, banners }) => {
             />
             <span className="absolute  top-0 right-0 p-1 text-white tracking-wide bg-primary rounded-tr-sm">News</span>
             <div className="leading-6 m-2 font-think tracking-wide px-5">
-                <h5 className="text-center m-2  font-semibold leading-6 lg:text-lg text-base">{title}</h5>
+                <h5 className="text-center my-1 font-semibold leading-6 lg:text-lg text-base">{title}</h5>
                 <p className="tracking-wide mb-2 text-justify lg:text-base text-sm">
                     {readMore ? description : `${description.substring(0, 200)}[...]`}
                     <NavLink to={`/posts/${id}`} className=" text-primary uppercase cursor-pointer">
