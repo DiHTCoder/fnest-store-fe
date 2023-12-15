@@ -1,4 +1,4 @@
-import { NavProfile, Loading } from '../components';
+import { NavProfile, Loading, Pagination } from '../components';
 import { useSelector } from 'react-redux';
 import orderServices from '../services/orderServices';
 import productServices from '../services/productServices';
@@ -12,6 +12,7 @@ import { FaRegStar, FaStar } from 'react-icons/fa';
 import { formatDate } from '../utils/helpers';
 
 const Orders = () => {
+    const [resp, setResp] = useState('');
     const [orders, setOrders] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [activeTab, setActiveTab] = useState('all');
@@ -33,15 +34,25 @@ const Orders = () => {
     const fetchOrders = async () => {
         setIsLoading(true);
         try {
-            const resp = await orderServices.getAllOrders(token, 0, 12);
+            const resp = await orderServices.getAllOrders(token, 0, 5);
             setIsLoading(false);
             setOrders(resp.data.content);
+            setResp(resp.data);
         } catch (error) {
             setIsLoading(false);
             console.log(error);
         }
     };
-
+    const handlePageChange = async (page) => {
+        setIsLoading(true);
+        try {
+            const products = await orderServices.getAllOrders(token, page, 5);
+            setIsLoading(false);
+            setOrders(products.data.content);
+        } catch (error) {
+            console.error('Lỗi khi lấy dữ liệu sản phẩm:', error);
+        }
+    };
     const closeDialog = () => {
         document.getElementById('feadback_order_dialog').close();
         setProductReviews([]);
@@ -568,6 +579,15 @@ const Orders = () => {
                                     </div>
                                 ))}
                             </>
+                        )}
+                        {resp.totalPages > 1 ? (
+                            <Pagination
+                                totalPages={resp.totalPages}
+                                currentPage={resp.currentPage}
+                                onPageChange={handlePageChange}
+                            />
+                        ) : (
+                            <></>
                         )}
                     </div>
                 )}
