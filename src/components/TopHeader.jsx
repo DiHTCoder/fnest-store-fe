@@ -85,9 +85,9 @@ const TopHeader = () => {
                                 </ul>
                             </div>
                         ) : (
-                            <div className="flex ">
+                            <div className="">
                                 <NavLink to="/login" className="flex space-x-1 items-center justify-center text-white">
-                                    <CiUser className="w-6 h-6" /> <span>{t('login_register')}</span>
+                                    <CiUser className="w-6 h-6" /> {t('login_register')}
                                 </NavLink>
                             </div>
                         )}

@@ -170,7 +170,7 @@ export const Header = () => {
                                                 </NavLink>
                                             </li>
                                             <li>
-                                                <NavLink to="posts">
+                                                <NavLink to="orders">
                                                     <FiShoppingBag />
                                                     Đơn mua
                                                 </NavLink>
