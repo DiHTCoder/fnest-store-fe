@@ -21,12 +21,14 @@ const Login = () => {
         setIsLoading(true);
         try {
             const resp = await userServices.login(values.email, values.password);
-            if (resp.messages && resp.messages.length > 0) {
+            setIsLoading(false);
+            if (resp.data.user.status) {
                 dispatch(loginSuccess(resp.data.user));
                 dispatch(setToken(resp.data.accessToken));
                 toast.success(resp.messages[0]);
                 navigate('/');
-                setIsLoading(false);
+            } else {
+                toast.warning('Tài khoản của bạn đã bị vô hiệu hóa!');
             }
         } catch (error) {
             setIsLoading(false);

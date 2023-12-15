@@ -34,7 +34,7 @@ const Post = () => {
     return (
         <>
             <div className="carousel w-full h-[700px] relative rounded-lg my-4">
-                <div className="grid grid-rows-3 grid-flow-col gap-2">
+                <div className="grid grid-rows-3 grid-flow-col md:gap-2 gap-1">
                     <div className="col-span-2 row-span-3">
                         <img src={banner3} alt="" className="w-full h-full object-cover" />
                         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center">

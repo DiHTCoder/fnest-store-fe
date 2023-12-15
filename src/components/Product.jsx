@@ -50,8 +50,8 @@ const Product = ({ product }) => {
                     </div>
                     {product.onSale ? (
                         <div className="flex justify-between lg:text-lg md:text-sm text-sm">
-                            <span className="text-secondary text-left">{formatPrice(product.salePrice)}</span>
                             <span className=" text-left line-through">{formatPrice(product.price)}</span>
+                            <span className="text-secondary text-left">{formatPrice(product.salePrice)}</span>
                         </div>
                     ) : (
                         <div className="">
