@@ -48,13 +48,17 @@ const Register = () => {
             email: '',
             fullName: '',
             password: '',
-            gender: 'FEMALE',
+            passwordConfirmation: '',
+            gender: 'MALE',
             birthday: '',
         },
         validationSchema: Yup.object({
             username: Yup.string().required('Vui lòng nhập thông tin!').max(30, 'Tối đa 30 ký tự'),
             email: Yup.string().required('Vui lòng nhập thông tin!').max(35, 'Tối đa 35 ký tự'),
             password: Yup.string().required('Vui lòng nhập thông tin!').min(8, 'Mật khẩu phải chứa ít nhất 8 ký tự'),
+            passwordConfirmation: Yup.string()
+                .oneOf([Yup.ref('password'), null], 'Mật khẩu xác nhận phải trùng khớp với mật khẩu')
+                .required('Vui lòng nhập thông tin'),
             fullName: Yup.string().required('Vui lòng nhập thông tin!').max(30, 'Tối đa 30 ký tự'),
         }),
         onSubmit: handleSubmit,
@@ -97,10 +101,10 @@ const Register = () => {
                         {formik.errors.email && <p className="text-error text-sm p-1"> {formik.errors.email}</p>}
                         <FormInput
                             type="text"
-                            label="Tên(*)"
+                            label="Họ và tên(*)"
                             name="fullName"
                             value={formik.values.fullName}
-                            placeholder="Tên"
+                            placeholder="Họ và tên"
                             onchange={formik.handleChange}
                         />
                         {formik.errors.fullName && <p className="text-error text-sm p-1"> {formik.errors.fullName}</p>}
@@ -113,7 +117,17 @@ const Register = () => {
                             onchange={formik.handleChange}
                         />
                         {formik.errors.password && <p className="text-error text-sm p-1"> {formik.errors.password}</p>}
-
+                        <FormInput
+                            type="password"
+                            label="Xác nhận mật khẩu(*)"
+                            name="passwordConfirmation"
+                            value={formik.values.passwordConfirmation}
+                            placeholder="Xác nhận mật khẩu"
+                            onchange={formik.handleChange}
+                        />
+                        {formik.errors.passwordConfirmation && (
+                            <p className="text-error text-sm p-1"> {formik.errors.passwordConfirmation}</p>
+                        )}
                         <FormInput
                             type="date"
                             label="Ngày sinh(*)"

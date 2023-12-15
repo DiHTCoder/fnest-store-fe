@@ -85,7 +85,7 @@ const Login = () => {
             {isLoading ? (
                 <Loading />
             ) : (
-                <section className="my-14 grid lg:grid-cols-2 grid-cols-1 place-items-center">
+                <section className="my-10 grid lg:grid-cols-2 grid-cols-1 place-items-center">
                     <div className="">
                         <img src={login} alt="Ảnh login" />
                     </div>
