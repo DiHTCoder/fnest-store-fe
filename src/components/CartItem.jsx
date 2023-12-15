@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { formatPrice, generateAmountOptions } from '../utils/helpers';
+import { formatPrice } from '../utils/helpers';
 import { CiCircleRemove } from 'react-icons/ci';
 import { useDispatch } from 'react-redux';
 import { removeFromCart, decreaseCart, addItemToCart } from '../features/cart/cartSlice';
@@ -37,7 +36,7 @@ const CartItem = ({ item }) => {
                     <div className="mt-2 flex lg:items-center space-x-2 flex-col-reverse">
                         {item.salePrice ? (
                             <>
-                                <div className="lg:text-2xl text-sm text-secondary font-semibold">
+                                <div className="lg:text-xl text-sm text-secondary font-semibold">
                                     Tổng:
                                     {formatPrice(item.salePrice * item.cartQuantity)}
                                 </div>
