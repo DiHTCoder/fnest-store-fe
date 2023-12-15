@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { BsCart3, BsMoonFill, BsSunFill } from 'react-icons/bs';
+import { BsMoonFill, BsSunFill } from 'react-icons/bs';
 import { useSelector, useDispatch } from 'react-redux';
 import { logOutSuccess } from '../features/user/userSlice';
 import { useNavigate } from 'react-router-dom';
-import { BsHeart } from 'react-icons/bs';
 import vie from '../assets/flag/vi-flag.png';
 import eng from '../assets/flag/en-flag.png';
 import { useTranslation } from 'react-i18next';
 import i18n from 'i18next';
-import { CiUser, CiLocationOn, CiHeadphones } from 'react-icons/ci';
+import { CiUser, CiHeadphones } from 'react-icons/ci';
 import avatar from '../assets/images/avatar.jpg';
 
 const TopHeader = () => {
@@ -19,7 +18,6 @@ const TopHeader = () => {
 
     const user = useSelector((state) => state.auth.login?.currentUser);
 
-    const { cartTotalQuantity } = useSelector((state) => state.cart);
     const [currentLanguage, setCurrentLanguage] = useState('vie');
     const [flagImage, setFlagImage] = useState(vie);
 
@@ -61,31 +59,6 @@ const TopHeader = () => {
                 </div>
                 <div className="items-end ">
                     <div className="flex items-center gap-2 ">
-                        <NavLink to="/" className="btn btn-ghost btn-circle btn-md text-white">
-                            <div className="indicator">
-                                <CiLocationOn className="h-8 w-8" />
-                            </div>
-                        </NavLink>
-                        <NavLink to="/favourite" className="btn btn-ghost btn-circle btn-md text-white">
-                            <div className="indicator">
-                                <BsHeart className="h-6 w-6" />
-                            </div>
-                        </NavLink>
-                        <NavLink to="/cart" className="btn btn-ghost btn-circle btn-md text-white">
-                            <div className="indicator">
-                                <BsCart3 className="h-6 w-6" />
-                                {cartTotalQuantity > 0 ? (
-                                    <>
-                                        <span className="badge badge-sm badge-primary indicator-item text-white">
-                                            {cartTotalQuantity}
-                                        </span>
-                                    </>
-                                ) : (
-                                    <></>
-                                )}
-                            </div>
-                        </NavLink>
-
                         {user ? (
                             <div className="dropdown dropdown-hover">
                                 <label tabIndex={0} className="flex justify-center items-center space-x-1 ">
@@ -98,7 +71,7 @@ const TopHeader = () => {
                                             )}
                                         </div>
                                     </div>
-                                    <h1 className="font-bold text-white">Hi,{user?.fullName}</h1>
+                                    <h1 className="font-bold text-white">Hi,{user?.username}</h1>
                                 </label>
                                 <ul
                                     tabIndex={0}

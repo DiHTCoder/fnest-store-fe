@@ -27,19 +27,20 @@ const Orders = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        const fetchOrders = async () => {
-            setIsLoading(true);
-            try {
-                const resp = await orderServices.getAllOrders(token, 0, 12);
-                setIsLoading(false);
-                setOrders(resp.data.content);
-            } catch (error) {
-                setIsLoading(false);
-                console.log(error);
-            }
-        };
         fetchOrders();
     }, []);
+
+    const fetchOrders = async () => {
+        setIsLoading(true);
+        try {
+            const resp = await orderServices.getAllOrders(token, 0, 12);
+            setIsLoading(false);
+            setOrders(resp.data.content);
+        } catch (error) {
+            setIsLoading(false);
+            console.log(error);
+        }
+    };
 
     const closeDialog = () => {
         document.getElementById('feadback_order_dialog').close();
@@ -51,6 +52,7 @@ const Orders = () => {
             const resp = await orderServices.cancelOrders(token, id, 'PENDING');
             if (resp.status == 'OK') {
                 toast.success(resp.messages[0]);
+                fetchOrders();
                 document.getElementById('cancel_dialog').close();
             }
         } catch (error) {
@@ -117,10 +119,10 @@ const Orders = () => {
                 const resp = await productServices.reviewProduct(token, id, comment, rating);
                 if (resp.status === 'OK') {
                     toast.success('Gửi đánh giá thành công!');
-                    setIsLoading(true);
+                    setIsLoading(false);
                 } else {
                     toast.error('Gửi đánh giá thất bại!');
-                    setIsLoading(true);
+                    setIsLoading(false);
                 }
             }
         } catch (error) {
@@ -155,6 +157,12 @@ const Orders = () => {
                         className={`tab ${activeTab === 'COMPLETED' ? 'tab-active' : ''}`}
                     >
                         Đã giao
+                    </button>
+                    <button
+                        onClick={() => setActiveTab('REVIEWED')}
+                        className={`tab ${activeTab === 'REVIEWED' ? 'tab-active' : ''}`}
+                    >
+                        Đã hoàn thành
                     </button>
                     <button
                         onClick={() => setActiveTab('CANCELED')}
@@ -364,14 +372,14 @@ const Orders = () => {
                                         </dialog>
                                         {/* review product */}
                                         <dialog id="feadback_order_dialog" className="modal">
-                                            <div className="modal-box w-11/12 max-w-3xl">
+                                            <div className="modal-box w-11/12 lg:max-w-3xl max-w-lg lg:text-lg text-sm">
                                                 <div
                                                     onClick={closeDialog}
                                                     className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                                                 >
                                                     X
                                                 </div>
-                                                <h3 className="font-bold text-lg">Đánh giá sản phẩm</h3>
+                                                <h3 className="font-bold ">Đánh giá sản phẩm</h3>
 
                                                 <div className="my-4">
                                                     <p>Danh sách sản phẩm đánh giá</p>
@@ -391,7 +399,7 @@ const Orders = () => {
                                                             />
                                                             <div className="ml-0">
                                                                 <div className="flex">
-                                                                    <h3 className="capitalize font-medium text-lg">
+                                                                    <h3 className="capitalize font-medium ">
                                                                         {product.productName}
                                                                     </h3>
                                                                 </div>
@@ -437,9 +445,9 @@ const Orders = () => {
                                                                             onClick={() => setRating(index + 1)}
                                                                         >
                                                                             {index < rating ? (
-                                                                                <FaStar className="w-8 h-8 text-amber-500" />
+                                                                                <FaStar className="lg:w-8 lg:h-8 w-4 h-4 text-amber-500" />
                                                                             ) : (
-                                                                                <FaRegStar className="w-8 h-8 text-amber-500" />
+                                                                                <FaRegStar className="lg:w-8 lg:h-8 w-4 h-4 text-amber-500" />
                                                                             )}
                                                                         </span>
                                                                     ))}
@@ -454,12 +462,15 @@ const Orders = () => {
                                                                 <p className="py-3">Nhận xét</p>
                                                                 <input
                                                                     type="text"
-                                                                    placeholder="Type here"
-                                                                    className="input input-bordered input-lg w-full"
+                                                                    placeholder="Viết đánh giá"
+                                                                    className="input input-bordered lg:input-lg w-full"
                                                                     value={comment}
                                                                     onChange={(e) => setComment(e.target.value)}
                                                                 />
-                                                                <button onClick={() => saveReview(product)}>
+                                                                <button
+                                                                    className="btn btn-ghost btn-sm my-2"
+                                                                    onClick={() => saveReview(product)}
+                                                                >
                                                                     Lưu đánh giá
                                                                 </button>
                                                             </>

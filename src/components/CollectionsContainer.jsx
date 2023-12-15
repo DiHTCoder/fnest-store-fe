@@ -51,7 +51,10 @@ const CollectionsContainer = () => {
                     <div className=" gap-2 grid lg:grid-cols-3 sm:grid-cols-1 md:grid-cols-2 my-5">
                         {collections.map((collection) => {
                             return (
-                                <article className="bg-white border rounded-sm shadow-sm hover:shadow-xl ease-in-out duration-300 relative mb-2">
+                                <article
+                                    className="bg-white border rounded-sm shadow-sm hover:shadow-xl ease-in-out duration-300 relative mb-2"
+                                    key={collection.id}
+                                >
                                     <img
                                         src={collection.imageUrl}
                                         alt="Ảnh"

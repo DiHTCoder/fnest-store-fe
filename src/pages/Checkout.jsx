@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
 import { SiGooglemaps } from 'react-icons/si';
 import { CiDiscount1, CiShoppingCart } from 'react-icons/ci';
-import { setOrderTotal, applyDiscountCode, clearCart } from '../features/cart/cartSlice';
+import { setOrderTotal, applyDiscountCode, getTotals, clearCart } from '../features/cart/cartSlice';
 import { formatPrice } from '../utils/helpers';
 import { useSelector, useDispatch } from 'react-redux';
 import orderServices from '../services/orderServices';
@@ -83,6 +83,7 @@ const Checkout = () => {
                 if (resp.data) {
                     toast.success(resp.messages[0]);
                     dispatch(clearCart());
+                    dispatch(getTotals());
                     navigateTo('/orders');
                 }
             } catch (error) {
