@@ -158,6 +158,12 @@ const Orders = () => {
                         Chờ xác nhận
                     </button>
                     <button
+                        onClick={() => setActiveTab('CONFIRMED')}
+                        className={`tab ${activeTab === 'CONFIRMED' ? 'tab-active' : ''}`}
+                    >
+                        Đã xác nhận
+                    </button>
+                    <button
                         onClick={() => setActiveTab('IN_SHIPPING')}
                         className={`tab ${activeTab === 'IN_SHIPPING' ? 'tab-active' : ''}`}
                     >
