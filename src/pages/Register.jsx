@@ -141,7 +141,7 @@ const Register = () => {
                             <SubmitButton text="Đăng ký" color="primary" />
                         </div>
                         <p className="text-left text-sm text-primary p-2">
-                            <Link to="/reset" className="">
+                            <Link to="/forgot-password" className="">
                                 Quên mật khẩu?
                             </Link>
                         </p>

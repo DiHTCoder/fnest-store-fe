@@ -101,8 +101,10 @@ const RoomsContainer = ({ roomId }) => {
                     ) : (
                         <div className="flex items-center justify-center my-20">
                             <div>
-                                <h2 className="text-center text-2xl font-bold">Không tìm thấy sản phẩm!!!</h2>
                                 <img src={noProduct} alt="" className="w-[400px]" />
+                                <h2 className="text-center md:text-2xl text-sm font-bold">
+                                    Không tìm thấy sản phẩm!!!
+                                </h2>
                             </div>
                         </div>
                     )}

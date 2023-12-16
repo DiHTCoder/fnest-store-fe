@@ -12,10 +12,10 @@ const Footer = () => {
         <footer className="footer footer-center py-10 bg-[#303036] text-primary-content">
             <div className="text-white align-element">
                 <img src={Logo} alt="" className="w-1/6" />
-                <p>
+                <p className="md:text-md text-sm">
                     Khám phá sự đẳng cấp và sự sang trọng tận cùng với những tinh hoa nghệ thuật nội thất tại trang web
                     của chúng tôi. Chúng tôi không chỉ cung cấp sản phẩm nội thất, mà còn là nguồn cảm hứng để biến
-                    không gian sống của bạn thành kiệt tác
+                    không gian sống của bạn thành kiệt tác.
                 </p>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 sm:grid-cols-1 gap-3 text-white align-element">
@@ -24,19 +24,19 @@ const Footer = () => {
                     <div className="mt-3 flex flex-col space-y-2">
                         <div className="flex items-center space-x-3">
                             <PiSwapFill className="w-4 h-4 i-semi-sync text-primary" />
-                            <span className="text-md ">Chuyển khoản</span>
+                            <span className="md:text-md text-sm ">Chuyển khoản</span>
                         </div>
                     </div>
                     <div className="mt-3 flex flex-col space-y-2">
                         <div className="flex items-center space-x-3">
                             <BsCashCoin className="w-4 h-4 i-semi-sync text-primary" />
-                            <span className="text-md">Tiền mặt</span>
+                            <span className="md:text-md text-sm">Tiền mặt</span>
                         </div>
                     </div>
                     <div className="mt-3 flex flex-col space-y-2">
                         <div className="flex items-center space-x-3">
                             <BsPersonVcard className="w-4 h-4 i-semi-sync text-primary" />
-                            <span className="text-md">VN Pay</span>
+                            <span className="md:text-md text-sm">VN Pay</span>
                         </div>
                     </div>
                 </div>
@@ -46,37 +46,37 @@ const Footer = () => {
                     <div className="mt-3 flex flex-col space-y-2">
                         <div className="flex items-center space-x-3">
                             <TbSettingsCheck className="w-4 h-4 i-semi-sync text-primary" />
-                            <span className="text-md">Chính sách bảo hành</span>
+                            <span className="md:text-md text-sm">Chính sách bảo hành</span>
                         </div>
                     </div>
                     <div className="mt-3 flex flex-col space-y-2">
                         <div className="flex items-center space-x-3">
                             <PiSwapFill className="w-4 h-4 i-semi-sync text-primary" />
-                            <span className="text-md">Chính sách đổi trả</span>
+                            <span className="md:text-md text-sm">Chính sách đổi trả</span>
                         </div>
                     </div>
                     <div className="mt-3 flex flex-col space-y-2">
                         <div className="flex items-center space-x-3">
                             <LiaShippingFastSolid className="w-4 h-4 i-semi-sync text-primary" />
-                            <span className="text-md">Chính sách vận chuyển</span>
+                            <span className="md:text-md text-sm">Chính sách vận chuyển</span>
                         </div>
                     </div>
                     <div className="mt-3 flex flex-col space-y-2">
                         <div className="flex items-center space-x-3">
                             <BsCashCoin className="w-4 h-4 i-semi-sync text-primary" />
-                            <span className="text-md">Chính sách thanh toán</span>
+                            <span className="md:text-md text-sm">Chính sách thanh toán</span>
                         </div>
                     </div>
                     <div className="mt-3 flex flex-col space-y-2">
                         <div className="flex items-center space-x-3">
                             <AiOutlineScan className="w-4 h-4 i-semi-sync text-primary" />
-                            <span className="text-md">Chính sách kiểm hàng</span>
+                            <span className="md:text-md text-sm">Chính sách kiểm hàng</span>
                         </div>
                     </div>
                     <div className="mt-3 flex flex-col space-y-2">
                         <div className="flex items-center space-x-3">
                             <SiAboutdotme className="w-4 h-4 i-semi-sync text-primary" />
-                            <span className="text-md">Về chúng tôi</span>
+                            <span className="md:text-md text-sm">Về chúng tôi</span>
                         </div>
                     </div>
                 </div>
@@ -85,19 +85,19 @@ const Footer = () => {
                     <div className="mt-3 flex flex-col space-y-2">
                         <div className="flex items-center space-x-3">
                             <AiFillFacebook className="w-4 h-4 i-semi-sync text-primary" />
-                            <span className="text-md">Facebook</span>
+                            <span className="md:text-md text-sm">Facebook</span>
                         </div>
                     </div>
                     <div className="mt-3 flex flex-col space-y-2">
                         <div className="flex items-center space-x-3">
                             <SiTiktok className="w-4 h-4 i-semi-sync text-primary" />
-                            <span className="text-md">Tiktok</span>
+                            <span className="md:text-md text-sm">Tiktok</span>
                         </div>
                     </div>
                     <div className="mt-3 flex flex-col space-y-2">
                         <div className="flex items-center space-x-3">
                             <BsInstagram className="w-4 h-4 i-semi-sync text-primary" />
-                            <span className="text-md">Instagram</span>
+                            <span className="md:text-md text-sm">Instagram</span>
                         </div>
                     </div>
                 </div>
@@ -108,7 +108,7 @@ const Footer = () => {
                         sàng lắng nghe quý khách.
                     </p>
                     <div className="mt-4">
-                        <NavLink to="/contact">
+                        <NavLink to="/">
                             <button className="btn btn-ghost bg-primary text-white">Gửi phản hồi ngay</button>
                         </NavLink>
                     </div>

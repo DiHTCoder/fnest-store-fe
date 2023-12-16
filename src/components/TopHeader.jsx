@@ -45,11 +45,11 @@ const TopHeader = () => {
                         </div>
                         <div className="ml-4">
                             {/* THEME SETUP */}
-                            <label className="swap swap-rotate">
+                            {/* <label className="swap swap-rotate">
                                 <input type="checkbox" />
                                 <BsSunFill className="swap-on h-4 w-4" />
                                 <BsMoonFill className="swap-off h-4 w-4" />
-                            </label>
+                            </label> */}
                         </div>
                         <div className="ml-4 flex items-center">
                             <CiHeadphones className="w-6 h-6" />
@@ -58,7 +58,7 @@ const TopHeader = () => {
                     </div>
                 </div>
                 <div className="items-end ">
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 my-1">
                         {user ? (
                             <div className="dropdown dropdown-hover">
                                 <label tabIndex={0} className="flex justify-center items-center space-x-1 ">
@@ -86,7 +86,7 @@ const TopHeader = () => {
                             </div>
                         ) : (
                             <div className="">
-                                <NavLink to="/login" className="flex space-x-1 items-center justify-center text-white">
+                                <NavLink to="/login" className="flex gap-1 items-center justify-center text-white">
                                     <CiUser className="w-6 h-6" /> {t('login_register')}
                                 </NavLink>
                             </div>

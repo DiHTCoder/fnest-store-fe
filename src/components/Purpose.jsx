@@ -10,10 +10,10 @@ const Purpose = () => {
                     </div>
                 </div>
                 <div className="flex w-full flex-col md:w-1/2 justify-center">
-                    <h2 className="my-2 bg-gradient-to-b from-pink-600 to-blue-500 bg-clip-text text-center text-2xl font-extrabold leading-normal text-transparent md:my-5 lg:my-7 lg:text-5xl">
+                    <h2 className="py-2 bg-gradient-to-b from-pink-600 to-blue-500 bg-clip-text text-center text-2xl font-extrabold leading-normal text-transparent md:my-5 lg:my-7 lg:text-5xl">
                         Nội thất đẹp, cuộc sống hoàn hảo
                     </h2>
-                    <p className="mb-8 text-slate-700 md:mb-0 md:pl-5 text-justify lg:text-xl">
+                    <p className="mb-8 text-slate-700 md:mb-0 md:pl-5 text-justify lg:text-lg text-base">
                         Hãy khám phá không gian sống mới, hãy tạo nên câu chuyện riêng của bạn với những chiếc nội thất
                         tinh tế từ chúng tôi. Chúng tôi tin rằng, mỗi ngôi nhà đều là một tác phẩm nghệ thuật, và chúng
                         tôi là đối tác lý tưởng để bạn bắt đầu hành trình sáng tạo của mình. Chào mừng bạn đến với thế

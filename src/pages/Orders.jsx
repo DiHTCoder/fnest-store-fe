@@ -247,13 +247,15 @@ const Orders = () => {
                                                                     />
                                                                     <div className="ml-0">
                                                                         <div className="flex">
-                                                                            <h3 className="capitalize font-medium text-lg">
+                                                                            <h3 className="capitalize font-medium lg:text-lg md:text-md text-sm">
                                                                                 {product.productName}
                                                                             </h3>
                                                                         </div>
                                                                         <p> {product.material}</p>
-                                                                        <h4 className="capitalize my-1 text-md text-neutral-content">
-                                                                            <span className="text-sm">Số lượng: </span>
+                                                                        <h4 className="capitalize my-1 lg:text-lg md:text-md text-sm text-neutral-content">
+                                                                            <span className="lg:text-lg md:text-md text-sm">
+                                                                                Số lượng:{' '}
+                                                                            </span>
                                                                             {product.quantity}
                                                                         </h4>
                                                                     </div>
@@ -270,10 +272,10 @@ const Orders = () => {
                                                             </>
                                                         );
                                                     })}
-                                                    <div className="my-4">
+                                                    <div className="lg:my-4 my-2">
                                                         <p>Thông tin chi tiết</p>
                                                     </div>
-                                                    <ul className="steps w-full">
+                                                    <ul className="steps w-full md:text-base text-sm">
                                                         <li
                                                             className={`step ${
                                                                 selectedOrderDetails.status === 'PENDING' ||
@@ -345,7 +347,7 @@ const Orders = () => {
 
                                                     <div className="divider"></div>
                                                     <p>Địa chỉ nhận hàng</p>
-                                                    <div className="flex mx-2 justify-between">
+                                                    <div className="flex mx-2 justify-between text-sm md:text-base">
                                                         <div>
                                                             <p className="text-gray-400">
                                                                 {selectedOrderDetails.deliveryAddress.receiverName}
@@ -363,7 +365,7 @@ const Orders = () => {
                                                                 {formatPrice(selectedOrderDetails.shippingCharge)}
                                                             </p>
                                                             <p>
-                                                                Giảm giá:-{' '}
+                                                                Giảm giá:{' '}
                                                                 {formatPrice(selectedOrderDetails.codeDiscount)}
                                                             </p>
                                                             <p className="text-primary font-bold text-xl">
@@ -502,23 +504,12 @@ const Orders = () => {
                                         </dialog>
                                         <div className="flex items-center justify-between my-2 text-sm lg:text-base">
                                             <p className="font-bold">Mã đơn hàng: {order.id}</p>
-                                            {order.status === 'COMPLETED' ? (
-                                                <div className="flex gap-2">
-                                                    <div className="flex items-center gap-1 text-success">
-                                                        <CiDeliveryTruck />
-                                                        <p>Đơn hàng đã được giao thành công</p>
-                                                    </div>
-                                                    <button onClick={() => handleGetOrderDetailById(order.id)}>
-                                                        Xem chi tiết
-                                                    </button>
-                                                </div>
-                                            ) : (
-                                                <>
-                                                    <button onClick={() => handleGetOrderDetailById(order.id)}>
-                                                        Xem chi tiết
-                                                    </button>
-                                                </>
-                                            )}
+
+                                            <>
+                                                <button onClick={() => handleGetOrderDetailById(order.id)}>
+                                                    Xem chi tiết
+                                                </button>
+                                            </>
                                         </div>
                                         {order.responses.map((product) => {
                                             return (
@@ -550,8 +541,20 @@ const Orders = () => {
                                                 </div>
                                             );
                                         })}
+                                        {order.status === 'COMPLETED' ? (
+                                            <div className="">
+                                                <p>Tổng tiền: {formatPrice(order.total)}</p>
+                                                <div className="flex items-center gap-1 text-success">
+                                                    <CiDeliveryTruck />
+                                                    <p>Đơn hàng đã được giao thành công</p>
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            <>
+                                                <p>Tổng tiền: {formatPrice(order.total)}</p>
+                                            </>
+                                        )}
                                         <div className="flex justify-between">
-                                            <p>Tổng tiền: {formatPrice(order.total)}</p>
                                             {order.status == 'PENDING' || order.status === 'CONFIRMED' ? (
                                                 <button
                                                     className="text-error"

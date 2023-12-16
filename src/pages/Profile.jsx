@@ -49,44 +49,30 @@ const Profile = () => {
                         <div className=" font-bold">Hồ Sơ Của Tôi</div>
                         <div className="text-bold">Quản lý thông tin hồ sơ để bảo mật tài khoản</div>
                     </div>
-                    <div className="lg:mx-14 md:mx-10 mx-2 my-5 lg:text-base text-sm">
-                        <div className="grid lg:grid-cols-5 grid-cols-3 space-x-3">
-                            <div>
+                    <div className="md:mx-14 mx-2 my-5 lg:text-base text-sm">
+                        <div className="grid md:grid-cols-5 grid-cols-2 md:gap-2 gap-1">
+                            <div className="flex flex-col">
                                 <h2 className="py-2">Tên đăng nhập</h2>
                                 <h2 className="py-2">Email</h2>
-                                <h2 className="py-2">Xác nhận email</h2>
-                                <h2 className="py-2">Tên</h2>
-                                <h2 className="py-2">Số điện thoại</h2>
-                                <h2 className="py-2">Giới tính</h2>
+                                <h2 className="py-2">Trạng thái email</h2>
+                                <h2 className="py-2">Họ và Tên</h2>
                                 <h2 className="py-2">Ngày sinh</h2>
                             </div>
-                            <div className="col-span-2 font-bold">
+                            <div className="md:col-span-2 font-bold flex flex-col">
                                 <h2 className="py-2">{user?.username}</h2>
                                 <div className="flex">
                                     <h2 className="py-2">{user?.email}</h2>
                                 </div>
-                                <div className="py-1">
+                                <div className="py-2">
                                     {user?.emailConfirmed ? (
                                         <BsCheck2Circle className="text-success w-8 h-8" />
                                     ) : (
-                                        <div className="flex py-2 space-x-2">
-                                            <h2>Vui lòng xác nhận !</h2>
-                                            <NavLink
-                                                to="/verify-email"
-                                                className="underline decoration-solid text-primary"
-                                            >
-                                                Xác nhận
-                                            </NavLink>
-                                        </div>
+                                        <NavLink to="/verify-email" className="underline decoration-solid text-primary">
+                                            Xác nhận
+                                        </NavLink>
                                     )}
                                 </div>
                                 <h2 className="py-2">{user?.fullName}</h2>
-                                <h2 className="py-2">Chưa xác định</h2>
-                                {user?.gender ? (
-                                    <h2 className="py-2">{user?.gender}</h2>
-                                ) : (
-                                    <h2 className="py-2">Chưa xác định</h2>
-                                )}
                                 <h2 className="py-2">{date}</h2>
                             </div>
                         </div>

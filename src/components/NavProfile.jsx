@@ -41,7 +41,7 @@ const NavProfile = () => {
                         </div>
                     </div>
                     <div>
-                        <h1 className="font-bold">Hi, {userProfile?.username}</h1>
+                        <h1 className="font-bold">Hi, {user?.username}</h1>
                         <div className="flex items-center space-x-2">
                             <AiOutlineEdit />
                             <NavLink className="" to="/update-profile">

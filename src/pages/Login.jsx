@@ -135,12 +135,6 @@ const Login = () => {
                                 <p className="hidden md:block lg:block"> Đăng nhập bằng Google</p>
                             </div>
                         </Link>
-                        {/* <Link to="http://localhost:/oauth2/authorization/google">
-                            <div className="btn btn-ghost flex justify-center w-full items-center">
-                                <FcGoogle className="w-12 h-12 text-primary" />
-                                <span className="ml-2">Đăng nhập bằng Google</span>
-                            </div>
-                        </Link> */}
                         <div className="text-center my-4 text-sm">
                             <p> Bạn mới biết đến Fnest?</p>
                             <Link to="/register" className="ml-2 link link-hover link-primary">
