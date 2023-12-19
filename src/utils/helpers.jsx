@@ -24,3 +24,19 @@ export const generateAmountOptions = (number) => {
         );
     });
 };
+
+export const isTokenExpired = (token) => {
+    if (!token) {
+        return true;
+    }
+
+    try {
+        const decodedToken = JSON.parse(atob(token.split('.')[1])); // Giải mã phần payload
+        const expirationTime = decodedToken.exp * 1000; // Chuyển đổi giây thành mili-giây
+
+        return Date.now() >= expirationTime; // Kiểm tra xem thời gian hiện tại có lớn hơn thời gian hết hạn không
+    } catch (error) {
+        console.error('Error decoding or parsing token:', error);
+        return true; // Nếu có lỗi, coi như token đã hết hạn
+    }
+};

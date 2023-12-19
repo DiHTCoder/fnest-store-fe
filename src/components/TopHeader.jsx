@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { BsMoonFill, BsSunFill } from 'react-icons/bs';
 import { useSelector, useDispatch } from 'react-redux';
 import { logOutSuccess } from '../features/user/userSlice';
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 import i18n from 'i18next';
 import { CiUser, CiHeadphones } from 'react-icons/ci';
 import avatar from '../assets/images/avatar.jpg';
+import { toast } from 'react-toastify';
 
 const TopHeader = () => {
     const dispatch = useDispatch();
@@ -30,6 +30,7 @@ const TopHeader = () => {
 
     const handleLogout = () => {
         dispatch(logOutSuccess());
+        toast.success('Đăng xuất tài khoản thành công!');
         navigate('/');
     };
     return (
@@ -85,9 +86,9 @@ const TopHeader = () => {
                                 </ul>
                             </div>
                         ) : (
-                            <div className="">
+                            <div className="my-2">
                                 <NavLink to="/login" className="flex gap-1 items-center justify-center text-white">
-                                    <CiUser className="w-6 h-6" /> {t('login_register')}
+                                    <CiUser className="w-6 h-6" /> <button>{t('login_register')}</button>
                                 </NavLink>
                             </div>
                         )}

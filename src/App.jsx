@@ -1,4 +1,6 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { logOutSuccess } from './features/user/userSlice';
 import {
     About,
     Cart,
@@ -29,6 +31,8 @@ import {
 } from './pages/index';
 import { loader as landingLoader } from './pages/Landing';
 import { ErrorElement } from './components';
+import { isTokenExpired } from './utils/helpers';
+import { useEffect } from 'react';
 
 const router = createBrowserRouter([
     {
@@ -161,6 +165,16 @@ const router = createBrowserRouter([
     },
 ]);
 const App = () => {
+    const dispatch = useDispatch();
+    const token = useSelector((state) => state.auth.login?.token);
+    useEffect(() => {
+        if (token) {
+            const expire = isTokenExpired(token);
+            if (expire) {
+                dispatch(logOutSuccess());
+            }
+        }
+    }, []);
     return <RouterProvider router={router} />;
 };
 export default App;
