@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { toast } from 'react-toastify';
 import { NavLink } from 'react-router-dom';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 const Contact = () => {
     const initialValues = {
@@ -268,6 +269,7 @@ const Contact = () => {
                     >
                         Gửi
                     </button>
+                    <ReCAPTCHA sitekey="6LdmlDYpAAAAAI0V5aEUClT_vxxPn5tBJB4WGIQF" onChange={onSubmit} />
                 </form>
             </div>
         </section>
