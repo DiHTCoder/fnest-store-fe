@@ -52,8 +52,13 @@ const userServices = {
         return axiosClient.post(url, { email });
     },
     getNewPassword(username, otpCode) {
-        const url = '/restore-password';
-        return axiosClient.post(url, { username, otpCode });
+        const url = `/restore-password?username=${username}&otpCode=${otpCode}`;
+        return axiosClient.post(url, {
+            headers: {
+                accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        });
     },
     verifyOTP(accessToken, otpCode) {
         const url = '/buyer/profile/email-confirm';

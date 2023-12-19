@@ -9,15 +9,14 @@ import { useState } from 'react';
 
 const ResetPassword = () => {
     const [isLoading, setIsLoading] = useState(false);
-
+    const [newPassword, setNewPassword] = useState('');
     //handle submitting
     const handleSubmit = async (values) => {
-        console.log(values);
         setIsLoading(true);
         try {
             const resp = await userServices.getNewPassword(values.username, values.otp);
             setIsLoading(false);
-            console.log(resp);
+            setNewPassword(resp.data.password);
             toast.success(resp.messages[0]);
         } catch (error) {
             setIsLoading(false);
@@ -42,7 +41,7 @@ const ResetPassword = () => {
         onSubmit: handleSubmit,
     });
     return (
-        <div className="flex justify-center items-center h-screen">
+        <div className="flex justify-center items-center lg:h-screen lg:my-0 my-10">
             <Form method="post" className="card w-[500px] p-8 bg-base-100 shadow-xl" onSubmit={formik.handleSubmit}>
                 <div className="text-center mb-6">
                     <h2 className="lg:text-3xl text-xl font-semibold">Lấy lại mật khẩu</h2>
@@ -65,6 +64,9 @@ const ResetPassword = () => {
                     onchange={formik.handleChange}
                 />
                 {formik.errors.otp && <p className="text-error text-sm p-1"> {formik.errors.otp}</p>}
+                {newPassword && (
+                    <p className="text-center text-success font-bold">Mật khẩu mới của bạn là:{newPassword}</p>
+                )}
                 <div className="w-[120px] mt-8 ml-2">
                     <SubmitButton
                         text={isLoading ? 'Đang xử lý...' : 'Xác thực'}
