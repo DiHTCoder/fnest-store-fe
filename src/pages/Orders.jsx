@@ -16,6 +16,8 @@ const Orders = () => {
     const [orders, setOrders] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [activeTab, setActiveTab] = useState('all');
+    const [orderId, setOrderId] = useState(null);
+    const [status, setStatus] = useState(null);
     const [rating, setRating] = useState(5);
     const [comment, setComment] = useState('');
     const [selectedOrderDetails, setSelectedOrderDetails] = useState(null);
@@ -58,15 +60,21 @@ const Orders = () => {
         setProductReviews([]);
         setReviewedProducts([]);
     };
-    const handleCancelOrder = async (id) => {
+    const openCancelOrderDialog = (id, status) => {
+        document.getElementById('cancel_dialog').showModal();
+        setOrderId(id);
+        setStatus(status);
+    };
+    const handleCancelOrder = async () => {
         setIsLoading(true);
         try {
-            const resp = await orderServices.cancelOrders(token, id, 'CANCELED');
-            toast.success(resp.messages[0]);
-            fetchOrders();
-            document.getElementById('cancel_dialog').close();
-            setIsLoading(false);
-            fetchOrders();
+            const resp = await orderServices.cancelOrders(token, orderId, status);
+            if (resp.status === 'OK') {
+                toast.success(resp.messages[0]);
+                fetchOrders();
+                document.getElementById('cancel_dialog').close();
+                setIsLoading(false);
+            }
         } catch (error) {
             setIsLoading(false);
             if (error.response && error.response.data && error.response.data.messages) {
@@ -228,7 +236,7 @@ const Orders = () => {
                                                 <div className="flex items-center justify-center">
                                                     <button
                                                         className="btn btn-ghost bg-primary text-white"
-                                                        onClick={() => handleCancelOrder(order.id)}
+                                                        onClick={() => handleCancelOrder(order.id, order.status)}
                                                     >
                                                         Xác nhận
                                                     </button>
@@ -571,7 +579,7 @@ const Orders = () => {
                                             {order.status == 'PENDING' || order.status === 'CONFIRMED' ? (
                                                 <button
                                                     className="text-error"
-                                                    onClick={() => document.getElementById('cancel_dialog').showModal()}
+                                                    onClick={() => openCancelOrderDialog(order.id, order.status)}
                                                 >
                                                     Hủy đơn hàng
                                                 </button>
