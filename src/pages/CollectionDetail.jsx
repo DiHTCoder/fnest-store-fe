@@ -63,6 +63,10 @@ const CollectionDetail = () => {
                         url={`collections/${collection.id}`}
                         image={collection.imageUrl}
                     />
+                    <div className="my-2 font-thin">
+                        <p className="font-bold lg:text-lg">{collection.name}</p>
+                        <p>{collection.description}</p>
+                    </div>
                     <div className="flex justify-between items-center my-3 border-b border-base-300 py-5">
                         <h2 className="lg:text-base text-sm font-bold">Tất cả sản phẩm của bộ sưu tập</h2>
                         <div className="flex items-center gap-3">

@@ -10,6 +10,7 @@ import i18n from 'i18next';
 import { CiUser, CiHeadphones } from 'react-icons/ci';
 import avatar from '../assets/images/avatar.jpg';
 import { toast } from 'react-toastify';
+import { MdOutlineDiscount } from 'react-icons/md';
 
 const TopHeader = () => {
     const dispatch = useDispatch();
@@ -44,13 +45,11 @@ const TopHeader = () => {
                                 <img src={flagImage} alt="" className="rounded-full" />
                             </div>
                         </div>
-                        <div className="ml-4">
-                            {/* THEME SETUP */}
-                            {/* <label className="swap swap-rotate">
-                                <input type="checkbox" />
-                                <BsSunFill className="swap-on h-4 w-4" />
-                                <BsMoonFill className="swap-off h-4 w-4" />
-                            </label> */}
+                        <div className="ml-4 flex items-center">
+                            <MdOutlineDiscount className="w-6 h-6" />
+                            <NavLink to="discounts" className="ml-2">
+                                Mã giảm giá
+                            </NavLink>
                         </div>
                         <div className="ml-4 flex items-center">
                             <CiHeadphones className="w-6 h-6" />

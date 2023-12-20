@@ -28,6 +28,7 @@ import {
     CollectionDetail,
     Post,
     PostDetail,
+    Discounts,
 } from './pages/index';
 import { loader as landingLoader } from './pages/Landing';
 import { ErrorElement } from './components';
@@ -49,6 +50,11 @@ const router = createBrowserRouter([
             {
                 path: '/products',
                 element: <Products />,
+                errorElement: <ErrorElement />,
+            },
+            {
+                path: '/discounts',
+                element: <Discounts />,
                 errorElement: <ErrorElement />,
             },
             {

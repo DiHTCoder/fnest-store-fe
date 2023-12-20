@@ -25,3 +25,4 @@ export { default as Collections } from './Collections';
 export { default as CollectionDetail } from './CollectionDetail';
 export { default as Post } from './Post';
 export { default as PostDetail } from './PostDetail';
+export { default as Discounts } from './Discounts';

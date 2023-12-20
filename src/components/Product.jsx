@@ -40,7 +40,7 @@ const Product = ({ product }) => {
                     </button>
                     {product.featured && (
                         <span className="absolute top-2 left-2 badge badge-error text-white tracking-wide text-lg">
-                            NEW
+                            HOT
                         </span>
                     )}
                 </div>
