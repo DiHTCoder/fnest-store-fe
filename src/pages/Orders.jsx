@@ -60,7 +60,7 @@ const Orders = () => {
     };
     const handleCancelOrder = async (id) => {
         try {
-            const resp = await orderServices.cancelOrders(token, id, 'PENDING');
+            const resp = await orderServices.cancelOrders(token, id, 'CANCELED');
             if (resp.status == 'OK') {
                 toast.success(resp.messages[0]);
                 fetchOrders();
