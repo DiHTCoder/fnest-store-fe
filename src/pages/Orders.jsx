@@ -59,15 +59,22 @@ const Orders = () => {
         setReviewedProducts([]);
     };
     const handleCancelOrder = async (id) => {
+        setIsLoading(true);
         try {
             const resp = await orderServices.cancelOrders(token, id, 'CANCELED');
-            if (resp.status == 'OK') {
-                toast.success(resp.messages[0]);
-                fetchOrders();
-                document.getElementById('cancel_dialog').close();
-            }
+            toast.success(resp.messages[0]);
+            fetchOrders();
+            document.getElementById('cancel_dialog').close();
+            setIsLoading(false);
+            fetchOrders();
         } catch (error) {
-            console.error('Lỗi khi hủy đơn hàng:', error);
+            setIsLoading(false);
+            if (error.response && error.response.data && error.response.data.messages) {
+                const errorMessages = error.response.data.messages;
+                toast.error(errorMessages.join(', ')); // Display error messages from the response
+            } else {
+                toast.error('Có lỗi xảy ra.'); // Fallback error message
+            }
         }
     };
 
