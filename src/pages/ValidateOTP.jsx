@@ -36,7 +36,7 @@ const ValidateOTP = () => {
     });
     return (
         <div>
-            <div className="grid md:grid-cols-4 gap-2 md:mt-10 lg:mb-30 mb-10">
+            <div className="grid md:grid-cols-4 grid-cols-1 gap-2 md:mt-10 lg:mb-30 mb-10">
                 <NavProfile />
                 <div className="card md:col-span-3 bg-white shadow-lg">
                     <div className="mx-4 my-4">
@@ -47,7 +47,7 @@ const ValidateOTP = () => {
                                 bạn
                             </div>
                         </div>
-                        <div className="mx-10 my-10">
+                        <div className="md:mx-10 my-10">
                             <ul className="steps w-full">
                                 <li className="step step-success">Lấy mã OTP</li>
                                 <li className="step step-success">Xác thực mã OTP</li>

@@ -108,10 +108,10 @@ const UserAddress = () => {
                         selectedProvince,
                         selectedDistrict,
                     );
+                    toast.success(resp.messages[0]);
                     fetchData();
                     resetForm();
                     setIsLoading(false);
-                    toast.success(resp.messages[0]);
                 } catch (error) {
                     setIsLoading(false);
                     toast.error('Có lỗi xảy ra.');
@@ -130,8 +130,8 @@ const UserAddress = () => {
                 );
                 toast.success(resp.messages[0]);
                 fetchData();
-                setIsLoading(false);
                 resetForm();
+                setIsLoading(false);
             } catch (error) {
                 setIsLoading(false);
                 closeDialog();

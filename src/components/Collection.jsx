@@ -13,25 +13,25 @@ const Collection = () => {
                 <div className="grid grid-cols-2 gap-4">
                     <div className="relative h-0 w-full overflow-hidden rounded-3xl pb-[100%] shadow-lg">
                         <div className="absolute inset-0 z-10 flex cursor-pointer items-center justify-center bg-black/40 opacity-0 transition-opacity ease-linear hover:opacity-100">
-                            <span className="text-center font-bold text-white xl:text-2xl">Maxine</span>
+                            <span className="text-center font-bold text-white xl:text-2xl">Mây</span>
                         </div>
                         <img src={banner2} alt="fmp" fill className="object-cover object-top hover:-m-10" />
                     </div>
                     <div className="relative h-0 w-full overflow-hidden rounded-3xl pb-[100%] shadow-lg">
                         <div className="absolute inset-0 z-10 flex cursor-pointer items-center justify-center bg-black/40 opacity-0 transition-opacity ease-linear hover:opacity-100">
-                            <span className="text-center font-bold text-white xl:text-2xl">Dubai</span>
+                            <span className="text-center font-bold text-white xl:text-2xl">Coastal</span>
                         </div>
                         <img src={banner3} alt="fmp" fill className="object-cover object-top" />
                     </div>
                     <div className="relative h-0 w-full overflow-hidden rounded-3xl pb-[100%] shadow-lg">
                         <div className="absolute inset-0 z-10 flex cursor-pointer items-center justify-center bg-black/40 opacity-0 transition-opacity ease-linear hover:opacity-100">
-                            <span className="text-center font-bold text-white xl:text-2xl">Victoria</span>
+                            <span className="text-center font-bold text-white xl:text-2xl">Osaka</span>
                         </div>
                         <img src={banner4} alt="fmp" fill className="object-cover object-top" />
                     </div>
                     <div className="relative h-0 w-full overflow-hidden rounded-3xl pb-[100%] shadow-lg">
                         <div className="absolute inset-0 z-10 flex cursor-pointer items-center justify-center bg-black/40 opacity-0 transition-opacity ease-linear hover:opacity-100">
-                            <span className="text-center font-bold text-white xl:text-2xl">Bridge</span>
+                            <span className="text-center font-bold text-white xl:text-2xl">Elegance</span>
                         </div>
                         <img src={banner5} alt="fmp" fill className="object-cover object-top" />
                     </div>

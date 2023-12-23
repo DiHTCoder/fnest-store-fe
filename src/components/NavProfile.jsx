@@ -58,10 +58,10 @@ const NavProfile = () => {
                 </div>
                 <div className="pl-6">
                     <ul className={isListVisible ? 'block' : 'hidden'}>
-                        <li className="py-1 flex items-center">
+                        {/* <li className="py-1 flex items-center">
                             <BsCheck className="text-green" />
                             Ngân Hàng
-                        </li>
+                        </li> */}
                         <li className="py-1 flex items-center">
                             <BsCheck className="text-green" />
                             <NavLink to="/address">Địa Chỉ</NavLink>
@@ -76,14 +76,14 @@ const NavProfile = () => {
                     <PiNewspaperClippingThin className="text-primary" />
                     <span>Đơn mua</span>
                 </NavLink>
-                <div className="flex items-center space-x-2 pb-2">
+                {/* <div className="flex items-center space-x-2 pb-2">
                     <BiSolidBellRing className="text-primary" />
                     <span>Thông báo</span>
-                </div>
-                <div className="flex items-center space-x-2 pb-2">
+                </div> */}
+                <NavLink to="/discounts" className="flex items-center space-x-2 pb-2">
                     <BsCashStack className="text-primary" />
                     <span>Voucher</span>
-                </div>
+                </NavLink>
             </div>
         </div>
     );

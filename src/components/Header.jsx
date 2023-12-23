@@ -18,6 +18,7 @@ import { AiOutlineLogout } from 'react-icons/ai';
 import { AiOutlineLogin } from 'react-icons/ai';
 import { BsCart3 } from 'react-icons/bs';
 import { FiShoppingBag } from 'react-icons/fi';
+import { toast } from 'react-toastify';
 
 export const Header = () => {
     const dispatch = useDispatch();
@@ -43,7 +44,7 @@ export const Header = () => {
 
     const handleLogout = () => {
         dispatch(logOutSuccess());
-        navigate('/');
+        toast.success('Đăng xuất tài khoản thành công!');
     };
 
     const handleRoomClick = (id) => {
@@ -182,13 +183,38 @@ export const Header = () => {
                                                         Đăng nhập
                                                     </NavLink>
                                                 ) : (
-                                                    <p onClick={handleLogout}>
+                                                    <p
+                                                        onClick={() => {
+                                                            document.getElementById('dialog_logout').showModal();
+                                                        }}
+                                                    >
                                                         <AiOutlineLogout />
                                                         Đăng xuất
                                                     </p>
                                                 )}
                                             </li>
                                         </ul>
+                                        <dialog id="dialog_logout" className="modal">
+                                            <div className="modal-box max-w-lg">
+                                                <h3 className="font-bold text-2xl text-center">ĐĂNG XUẤT TÀI KHOẢN</h3>
+                                                <form className="my-2" onSubmit={handleLogout}>
+                                                    <div
+                                                        onClick={() => document.getElementById('dialog_logout').close()}
+                                                        className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                                                    >
+                                                        X
+                                                    </div>
+                                                    <div className="text-center">
+                                                        <p className="my-10">Bạn chắc chắn đăng xuất?</p>
+                                                        <div className="flex items-center mt-3 text-center justify-center">
+                                                            <button className="btn btn-primary text-white">
+                                                                Xác nhận
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </dialog>
                                     </div>
                                 </div>
                             </div>

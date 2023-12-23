@@ -32,7 +32,6 @@ const TopHeader = () => {
     const handleLogout = () => {
         dispatch(logOutSuccess());
         toast.success('Đăng xuất tài khoản thành công!');
-        navigate('/');
     };
     return (
         <div className="bg-[#303036] border-b-[1px] hidden md:block text-sm lg:text-base">
@@ -80,7 +79,13 @@ const TopHeader = () => {
                                         <NavLink to="/orders">{t('purchase_orders')}</NavLink>
                                     </li>
                                     <li>
-                                        <p onClick={handleLogout}>{t('logout')}</p>
+                                        <p
+                                            onClick={() => {
+                                                document.getElementById('dialog_logout').showModal();
+                                            }}
+                                        >
+                                            {t('logout')}
+                                        </p>
                                     </li>
                                 </ul>
                             </div>
@@ -94,6 +99,25 @@ const TopHeader = () => {
                     </div>
                 </div>
             </section>
+            <dialog id="dialog_logout" className="modal">
+                <div className="modal-box max-w-lg">
+                    <h3 className="font-bold text-2xl text-center">ĐĂNG XUẤT TÀI KHOẢN</h3>
+                    <form className="my-2" onSubmit={handleLogout}>
+                        <div
+                            onClick={() => document.getElementById('dialog_logout').close()}
+                            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                        >
+                            X
+                        </div>
+                        <div className="text-center">
+                            <p className="my-10">Bạn chắc chắn đăng xuất?</p>
+                            <div className="flex items-center mt-3 text-center justify-center">
+                                <button className="btn btn-primary text-white">Xác nhận</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </dialog>
         </div>
     );
 };

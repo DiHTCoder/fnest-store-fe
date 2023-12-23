@@ -68,11 +68,11 @@ const Orders = () => {
     const handleCancelOrder = async () => {
         setIsLoading(true);
         try {
+            document.getElementById('cancel_dialog').close();
             const resp = await orderServices.cancelOrders(token, orderId, status);
             if (resp.status === 'OK') {
                 toast.success(resp.messages[0]);
                 fetchOrders();
-                document.getElementById('cancel_dialog').close();
                 setIsLoading(false);
             }
         } catch (error) {
@@ -145,6 +145,7 @@ const Orders = () => {
                 const resp = await productServices.reviewProduct(token, id, comment, rating);
                 if (resp.status === 'OK') {
                     toast.success('Gửi đánh giá thành công!');
+                    fetchOrders();
                     setIsLoading(false);
                 } else {
                     toast.error('Gửi đánh giá thất bại!');
