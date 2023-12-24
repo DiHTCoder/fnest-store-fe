@@ -22,7 +22,6 @@ import { toast } from 'react-toastify';
 
 export const Header = () => {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const { cartTotalQuantity } = useSelector((state) => state.cart);
     const HEADER_TRANSPARENT_DISTANCE = 250;
@@ -78,7 +77,6 @@ export const Header = () => {
                                         <BsHeart className="md:h-6 md:w-6 w-5 h-5" />
                                     </div>
                                 </NavLink>
-
                                 <NavLink to="/cart" className="btn btn-ghost btn-circle md:btn-md btn-sm ">
                                     <div className="indicator">
                                         <BsCart3 className="md:h-6 md:w-6 w-5 h-5" />
@@ -103,118 +101,124 @@ export const Header = () => {
                                             <FaBarsStaggered className="md:h-6 md:w-6 w-5 h-5 order-last" />
                                         </label>
                                     </div>
-                                    <div className="drawer-side" style={{ zIndex: 1000 }}>
+                                    <div className="drawer-side z-[100]">
                                         <label
                                             htmlFor="my-drawer"
                                             aria-label="close sidebar"
                                             className="drawer-overlay"
                                         ></label>
-                                        <ul className="menu p-4 w-1/2 min-h-full bg-base-200 text-base-content">
-                                            <>
-                                                {user && (
-                                                    <NavLink
-                                                        to="profile"
-                                                        className="w-10 rounded-full flex items-center gap-2 my-2"
-                                                    >
-                                                        <img src={avatar} />
-                                                        <h1 className="font-bold text-sm">Hi,{user?.fullName}</h1>
+                                        <aside className="min-h-screen menu p-4 w-1/2 bg-base-200 text-base-content">
+                                            <ul className="">
+                                                <>
+                                                    {user && (
+                                                        <NavLink
+                                                            to="profile"
+                                                            className="w-10 rounded-full flex items-center gap-2 my-2"
+                                                        >
+                                                            <img src={avatar} />
+                                                            <h1 className="font-bold text-sm">Hi,{user?.fullName}</h1>
+                                                        </NavLink>
+                                                    )}
+                                                </>
+                                                <li>
+                                                    <NavLink to="/">
+                                                        <IoHomeOutline />
+                                                        Trang chủ
                                                     </NavLink>
-                                                )}
-                                            </>
-                                            <li>
-                                                <NavLink to="/">
-                                                    <IoHomeOutline />
-                                                    Trang chủ
-                                                </NavLink>
-                                            </li>
-                                            <li>
-                                                <NavLink to="products">
-                                                    <PiArmchairLight />
-                                                    Sản phẩm
-                                                </NavLink>
-                                            </li>
-                                            <li>
-                                                <details open>
-                                                    <summary>
-                                                        <LiaWindows />
-                                                        Phòng
-                                                    </summary>
+                                                </li>
+                                                <li>
+                                                    <NavLink to="products">
+                                                        <PiArmchairLight />
+                                                        Sản phẩm
+                                                    </NavLink>
+                                                </li>
+                                                <li>
+                                                    <details open>
+                                                        <summary>
+                                                            <LiaWindows />
+                                                            Phòng
+                                                        </summary>
 
-                                                    <ul>
-                                                        {rooms ? (
-                                                            rooms.map((room) => (
-                                                                <li key={room.id}>
-                                                                    <NavLink
-                                                                        to={`/rooms/${room.id}`}
-                                                                        onClick={() => handleRoomClick(room.id)}
-                                                                    >
-                                                                        {room.name}
-                                                                    </NavLink>
-                                                                </li>
-                                                            ))
-                                                        ) : (
-                                                            <></>
-                                                        )}
-                                                    </ul>
-                                                </details>
-                                            </li>
-                                            <li>
-                                                <NavLink to="collections">
-                                                    <FaObjectGroup />
-                                                    Bộ sưu tập
-                                                </NavLink>
-                                            </li>
-                                            <li>
-                                                <NavLink to="posts">
-                                                    <BsPostcardHeart />
-                                                    Góc sáng tạo
-                                                </NavLink>
-                                            </li>
-                                            <li>
-                                                <NavLink to="orders">
-                                                    <FiShoppingBag />
-                                                    Đơn mua
-                                                </NavLink>
-                                            </li>
-                                            <li>
-                                                {!user ? (
-                                                    <NavLink to="login">
-                                                        <AiOutlineLogin />
-                                                        Đăng nhập
+                                                        <ul>
+                                                            {rooms ? (
+                                                                rooms.map((room) => (
+                                                                    <li key={room.id}>
+                                                                        <NavLink
+                                                                            to={`/rooms/${room.id}`}
+                                                                            onClick={() => handleRoomClick(room.id)}
+                                                                        >
+                                                                            {room.name}
+                                                                        </NavLink>
+                                                                    </li>
+                                                                ))
+                                                            ) : (
+                                                                <></>
+                                                            )}
+                                                        </ul>
+                                                    </details>
+                                                </li>
+                                                <li>
+                                                    <NavLink to="collections">
+                                                        <FaObjectGroup />
+                                                        Bộ sưu tập
                                                     </NavLink>
-                                                ) : (
-                                                    <p
-                                                        onClick={() => {
-                                                            document.getElementById('dialog_logout').showModal();
-                                                        }}
-                                                    >
-                                                        <AiOutlineLogout />
-                                                        Đăng xuất
-                                                    </p>
-                                                )}
-                                            </li>
-                                        </ul>
-                                        <dialog id="dialog_logout" className="modal">
-                                            <div className="modal-box max-w-lg">
-                                                <h3 className="font-bold text-2xl text-center">ĐĂNG XUẤT TÀI KHOẢN</h3>
-                                                <form className="my-2" onSubmit={handleLogout}>
-                                                    <div
-                                                        onClick={() => document.getElementById('dialog_logout').close()}
-                                                        className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-                                                    >
-                                                        X
-                                                    </div>
-                                                    <div className="text-center">
-                                                        <p className="my-10">Bạn chắc chắn đăng xuất?</p>
-                                                        <div className="flex items-center mt-3 text-center justify-center">
-                                                            <button className="btn btn-primary text-white">
-                                                                Xác nhận
-                                                            </button>
+                                                </li>
+                                                <li>
+                                                    <NavLink to="posts">
+                                                        <BsPostcardHeart />
+                                                        Góc sáng tạo
+                                                    </NavLink>
+                                                </li>
+                                                <li>
+                                                    <NavLink to="orders">
+                                                        <FiShoppingBag />
+                                                        Đơn mua
+                                                    </NavLink>
+                                                </li>
+                                                <li>
+                                                    {!user ? (
+                                                        <NavLink to="login">
+                                                            <AiOutlineLogin />
+                                                            Đăng nhập
+                                                        </NavLink>
+                                                    ) : (
+                                                        <p
+                                                            onClick={() => {
+                                                                document.getElementById('dialog_logout').showModal();
+                                                            }}
+                                                        >
+                                                            <AiOutlineLogout />
+                                                            Đăng xuất
+                                                        </p>
+                                                    )}
+                                                </li>
+                                            </ul>
+                                            <dialog id="dialog_logout" className="modal">
+                                                <div className="modal-box max-w-lg">
+                                                    <h3 className="font-bold text-2xl text-center">
+                                                        ĐĂNG XUẤT TÀI KHOẢN
+                                                    </h3>
+                                                    <form className="my-2" onSubmit={handleLogout}>
+                                                        <div
+                                                            onClick={() =>
+                                                                document.getElementById('dialog_logout').close()
+                                                            }
+                                                            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                                                        >
+                                                            X
                                                         </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </dialog>
+                                                        <div className="text-center">
+                                                            <p className="my-10">Bạn chắc chắn đăng xuất?</p>
+                                                            <div className="flex items-center mt-3 text-center justify-center">
+                                                                <button className="btn btn-primary text-white">
+                                                                    Xác nhận
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </dialog>
+                                        </aside>
                                     </div>
                                 </div>
                             </div>

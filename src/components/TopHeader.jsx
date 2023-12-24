@@ -34,7 +34,7 @@ const TopHeader = () => {
         toast.success('Đăng xuất tài khoản thành công!');
     };
     return (
-        <div className="bg-[#303036] border-b-[1px] hidden md:block text-sm lg:text-base">
+        <header className="bg-[#303036] border-b-[1px] hidden md:block text-sm lg:text-base">
             <section className="flex align-element justify-between items-center">
                 <div className="items-start text-white">
                     <div className="flex items-center">
@@ -118,7 +118,7 @@ const TopHeader = () => {
                     </form>
                 </div>
             </dialog>
-        </div>
+        </header>
     );
 };
 

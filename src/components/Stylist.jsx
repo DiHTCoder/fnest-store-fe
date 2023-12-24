@@ -33,7 +33,8 @@ const Stylist = () => {
             aspect-square
             md:border-8
             border-amber-400
-            rounded-full
+            hidden
+            lg:block
             md:w-64
             lg:w-96       
         "

@@ -12,7 +12,7 @@ const HomeLayout = () => {
             {isPageLoading ? (
                 <Loading />
             ) : (
-                <section className="align-element">
+                <section className="align-element min-h-screen">
                     <Outlet />
                 </section>
             )}
