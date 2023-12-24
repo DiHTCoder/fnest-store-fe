@@ -64,15 +64,19 @@ const Product = ({ product }) => {
                     </div>
                 </div>
             </Link>
-            <div
-                onClick={() => {
-                    handleAddToCart();
-                }}
-                class="flex items-center justify-center rounded-md bg-info px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-500 focus:outline-none focus:ring-4 focus:ring-blue-300"
-            >
-                <IoMdAddCircleOutline className="w-6 h-6" />
-                Thêm vào giỏ hàng
-            </div>
+            {product.inStock === 0 || product.inStock < 0 ? (
+                <p className="text-warning">Sản phẩm tạm hết hàng!</p>
+            ) : (
+                <div
+                    onClick={() => {
+                        handleAddToCart();
+                    }}
+                    class="flex items-center justify-center rounded-md bg-info px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-500 focus:outline-none focus:ring-4 focus:ring-blue-300"
+                >
+                    <IoMdAddCircleOutline className="w-6 h-6" />
+                    Thêm vào giỏ hàng
+                </div>
+            )}
         </div>
     );
 };

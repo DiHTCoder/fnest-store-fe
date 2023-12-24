@@ -157,55 +157,61 @@ const SingleProduct = () => {
                                 </p>
                             </div>
 
-                            <div className="mt-3">
-                                <label
-                                    htmlFor="count"
-                                    className="text-paragraph font-semibold lg:text-base-content-300 text-sm"
-                                >
-                                    Số lượng
-                                </label>
-                                <div class="flex items-center border-gray-100 my-2">
-                                    <button
-                                        class="btn btn-ghost"
-                                        onClick={() => {
-                                            handleDecrease(amount);
-                                        }}
+                            {inStock === 0 || inStock < 0 ? (
+                                <>
+                                    <p className="text-warning">Sản phẩm tạm hết hàng!</p>
+                                </>
+                            ) : (
+                                <div className="mt-3">
+                                    <label
+                                        htmlFor="count"
+                                        className="text-paragraph font-semibold lg:text-base-content-300 text-sm"
                                     >
-                                        -
-                                    </button>
-                                    <input
-                                        class="h-10 w-10 border bg-white text-center text-xs outline-none rounded-lg"
-                                        type="text"
-                                        value={amount}
-                                        min="1"
-                                        max={inStock}
-                                        inputmode="decimal"
-                                        onChange={handleAmountChange}
-                                    />
-                                    <button
-                                        class="btn btn-ghost"
-                                        onClick={() => {
-                                            handleIncrease(amount);
-                                        }}
-                                    >
-                                        +
-                                    </button>
+                                        Số lượng
+                                    </label>
+                                    <div class="flex items-center border-gray-100 my-2">
+                                        <button
+                                            class="btn btn-ghost"
+                                            onClick={() => {
+                                                handleDecrease(amount);
+                                            }}
+                                        >
+                                            -
+                                        </button>
+                                        <input
+                                            class="h-10 w-10 border bg-white text-center text-xs outline-none rounded-lg"
+                                            type="text"
+                                            value={amount}
+                                            min="1"
+                                            max={inStock}
+                                            inputmode="decimal"
+                                            onChange={handleAmountChange}
+                                        />
+                                        <button
+                                            class="btn btn-ghost"
+                                            onClick={() => {
+                                                handleIncrease(amount);
+                                            }}
+                                        >
+                                            +
+                                        </button>
+                                    </div>
+                                    <div className="grid md:grid-cols-2 grid-cols-1 gap-5">
+                                        <button
+                                            className="btn btn-ghost bg-primary text-white"
+                                            onClick={() => handleAddToCart()}
+                                        >
+                                            Thêm vào giỏ hàng
+                                        </button>
+                                        <button
+                                            className="btn btn-ghost bg-accent-focus text-white"
+                                            onClick={() => handleAddToFavourite()}
+                                        >
+                                            Thêm vào wishlist
+                                        </button>
+                                    </div>
                                 </div>
-                                <div className="grid md:grid-cols-2 grid-cols-1 gap-5">
-                                    <button
-                                        className="btn btn-ghost bg-primary text-white"
-                                        onClick={() => handleAddToCart()}
-                                    >
-                                        Thêm vào giỏ hàng
-                                    </button>
-                                    <button
-                                        className="btn btn-ghost bg-accent-focus text-white"
-                                        onClick={() => handleAddToFavourite()}
-                                    >
-                                        Thêm vào wishlist
-                                    </button>
-                                </div>
-                            </div>
+                            )}
                         </div>
                     </div>
                     <div className="card w-full bg-base-100 shadow-xl my-4">
