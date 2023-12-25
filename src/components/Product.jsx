@@ -65,7 +65,7 @@ const Product = ({ product }) => {
                 </div>
             </Link>
             {product.inStock === 0 || product.inStock < 0 ? (
-                <p className="text-warning">Sản phẩm tạm hết hàng!</p>
+                <p className="text-warning text-center">Sản phẩm tạm hết hàng!</p>
             ) : (
                 <div
                     onClick={() => {
