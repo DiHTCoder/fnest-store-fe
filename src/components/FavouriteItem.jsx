@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { formatPrice, generateAmountOptions } from '../utils/helpers';
 import { CiCircleRemove, CiCirclePlus } from 'react-icons/ci';
 import { removeFromFavourite } from '../features/favourite/favouriteSlice';
-import { addItemToCart } from '../features/cart/cartSlice';
+import { addItemToCart, getTotals } from '../features/cart/cartSlice';
 
 const FavouriteItem = ({ item }) => {
     const dispatch = useDispatch();
@@ -12,6 +12,7 @@ const FavouriteItem = ({ item }) => {
     };
     const addItemToTheCart = (item) => {
         dispatch(addItemToCart(item));
+        dispatch(getTotals());
     };
     return (
         <div className="flex space-x-3 w-full mb-10 border-b border-base-300 pb-6 last:border-b-0">

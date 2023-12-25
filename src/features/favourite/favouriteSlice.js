@@ -20,7 +20,7 @@ const favouriteSlice = createSlice({
             } else {
                 let tempProductItem = { ...action.payload, favouriteTotalQuantity: 1 };
                 state.favouriteItems.push(tempProductItem);
-                toast.success('Đã thêm vào whishlist!');
+                toast.success('Đã thêm vào mục yêu thích!');
             }
             localStorage.setItem('favouriteItems', JSON.stringify(state.favouriteItems));
         },

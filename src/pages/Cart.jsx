@@ -1,7 +1,11 @@
 import { CartItemsList, CartTotal } from '../components';
 import { Breadcrumb } from '../components';
+import { useEffect } from 'react';
 
 const Cart = () => {
+    useEffect(() => {
+        scrollTo(0, 0);
+    }, []);
     return (
         <>
             <Breadcrumb url="cart" page="Giỏ hàng" />

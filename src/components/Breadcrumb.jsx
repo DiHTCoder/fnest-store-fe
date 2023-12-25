@@ -5,7 +5,7 @@ const Breadcrumb = ({ url, page }) => {
     const toUrl = url.startsWith('/');
 
     return (
-        <div className="text-sm pb-6 breadcrumbs flex justify-center">
+        <div className="text-sm pb-6 breadcrumbs flex">
             <ul>
                 <li>
                     <Link to="/">Trang chủ</Link>

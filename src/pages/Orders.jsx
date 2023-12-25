@@ -14,8 +14,10 @@ import { formatDate } from '../utils/helpers';
 const Orders = () => {
     const [resp, setResp] = useState('');
     const [orders, setOrders] = useState([]);
+    const [orderNumber, setOrderNumber] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [activeTab, setActiveTab] = useState('all');
+    const [orderStatusCounts, setOrderStatusCounts] = useState({});
     const [orderId, setOrderId] = useState(null);
     const [status, setStatus] = useState(null);
     const [rating, setRating] = useState(5);
@@ -24,7 +26,7 @@ const Orders = () => {
     const [selectedProductsForReview, setSelectedProductsForReview] = useState([]);
     const [productReviews, setProductReviews] = useState([]);
     const [reviewedProducts, setReviewedProducts] = useState([]);
-    const filteredOrders = activeTab === 'all' ? orders : orders.filter((order) => order.status === activeTab);
+    const filteredOrders = activeTab === 'all' ? orders : orderNumber.filter((order) => order.status === activeTab);
 
     const token = useSelector((state) => state.auth.login?.token);
 
@@ -37,6 +39,24 @@ const Orders = () => {
         setIsLoading(true);
         try {
             const resp = await orderServices.getAllOrders(token, 0, 5);
+            const orderNum = await orderServices.getAllOrders(token, 0, 100);
+            setOrderNumber(orderNum.data.content);
+
+            const countStatusNum = {
+                PENDING: 0,
+                CONFIRMED: 0,
+                IN_SHIPPING: 0,
+                COMPLETED: 0,
+                REVIEWED: 0,
+                CANCELED: 0,
+            };
+
+            for (const order of orderNum.data.content) {
+                const status = order.status;
+                countStatusNum[status] += 1;
+            }
+
+            setOrderStatusCounts(countStatusNum);
             setIsLoading(false);
             setOrders(resp.data.content);
             setResp(resp.data);
@@ -162,46 +182,46 @@ const Orders = () => {
             <div className="card md:col-span-3 bg-white shadow-lg">
                 <div role="tablist" className="tabs tabs-bordered my-2 border-b-[1px]">
                     <button
-                        onClick={() => setActiveTab('all')}
-                        className={`tab ${activeTab === 'all' ? 'tab-active' : ''}`}
-                    >
-                        Tất cả ({orders.length})
-                    </button>
-                    <button
                         onClick={() => setActiveTab('PENDING')}
                         className={`tab ${activeTab === 'PENDING' ? 'tab-active' : ''}`}
                     >
-                        Chờ xác nhận
+                        Chờ xác nhận ({orderStatusCounts['PENDING']})
                     </button>
                     <button
                         onClick={() => setActiveTab('CONFIRMED')}
                         className={`tab ${activeTab === 'CONFIRMED' ? 'tab-active' : ''}`}
                     >
-                        Đã xác nhận
+                        Đã xác nhận ({orderStatusCounts['CONFIRMED']})
                     </button>
                     <button
                         onClick={() => setActiveTab('IN_SHIPPING')}
                         className={`tab ${activeTab === 'IN_SHIPPING' ? 'tab-active' : ''}`}
                     >
-                        Đang giao
+                        Đang giao ({orderStatusCounts['IN_SHIPPING']})
                     </button>
                     <button
                         onClick={() => setActiveTab('COMPLETED')}
                         className={`tab ${activeTab === 'COMPLETED' ? 'tab-active' : ''}`}
                     >
-                        Đã giao
+                        Đã giao ({orderStatusCounts['COMPLETED']})
                     </button>
                     <button
                         onClick={() => setActiveTab('REVIEWED')}
                         className={`tab ${activeTab === 'REVIEWED' ? 'tab-active' : ''}`}
                     >
-                        Đã hoàn thành
+                        Đã hoàn thành ({orderStatusCounts['REVIEWED']})
                     </button>
                     <button
                         onClick={() => setActiveTab('CANCELED')}
                         className={`tab ${activeTab === 'CANCELED' ? 'tab-active' : ''}`}
                     >
-                        Đã hủy
+                        Đã hủy ({orderStatusCounts['CANCELED']})
+                    </button>
+                    <button
+                        onClick={() => setActiveTab('all')}
+                        className={`tab ${activeTab === 'all' ? 'tab-active' : ''}`}
+                    >
+                        Tất cả ({orderNumber.length})
                     </button>
                 </div>
                 {isLoading ? (
@@ -605,7 +625,7 @@ const Orders = () => {
                                 ))}
                             </>
                         )}
-                        {resp.totalPages > 1 ? (
+                        {resp.totalPages > 1 && activeTab === 'all' ? (
                             <Pagination
                                 totalPages={resp.totalPages}
                                 currentPage={resp.currentPage}

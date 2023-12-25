@@ -114,28 +114,39 @@ const Checkout = () => {
                                     </Link>
                                 </div>
                             ) : (
-                                address.deliveryAddresses.length > 0 &&
-                                address.deliveryAddresses.map((item) => (
-                                    <div className="lg:text-base text-sm">
-                                        {item.id === address.defaultAddressId ? (
-                                            <div className="md:flex m-4" key={item.id}>
-                                                <span className="font-bold">{item.receiverName}</span>
-                                                <span className="ml-2 font-bold">({item.receiverPhone})</span>
-                                                <div className="md:mx-10">
-                                                    <p className="">{item.deliveryAddress}</p>
+                                <div className="md:flex justify-between">
+                                    <div>
+                                        {address.deliveryAddresses.length > 0 &&
+                                            address.deliveryAddresses.map((item) => (
+                                                <div className="lg:text-base text-sm">
+                                                    {item.id === address.defaultAddressId ? (
+                                                        <div className="md:flex m-4" key={item.id}>
+                                                            <span className="font-bold">{item.receiverName}</span>
+                                                            <span className="ml-2 font-bold">
+                                                                ({item.receiverPhone})
+                                                            </span>
+                                                            <div className="md:mx-10">
+                                                                <p className="">{item.deliveryAddress}</p>
+                                                            </div>
+                                                            <div className="flex text-center items-center space-x-2">
+                                                                <div className="text-primary flex items-center">
+                                                                    <BiTargetLock />
+                                                                    <span> Mặc định</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    ) : (
+                                                        <></>
+                                                    )}
                                                 </div>
-                                                <div className="flex text-center items-center space-x-2">
-                                                    <div className="text-primary flex items-center">
-                                                        <BiTargetLock />
-                                                        <span> Mặc định</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        ) : (
-                                            <></>
-                                        )}
+                                            ))}
                                     </div>
-                                ))
+                                    <div className="flex items-center">
+                                        <Link to="/address">
+                                            <div className="lg:text-base text-sm text-blue-500">Đổi địa chỉ</div>
+                                        </Link>
+                                    </div>
+                                </div>
                             )}
                         </div>
                     </div>
